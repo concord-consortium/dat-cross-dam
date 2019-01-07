@@ -11,6 +11,8 @@ export const ChartDataModel = types
     get chartLabels() {
       if (self.labels && self.labels.length > 0) {
         return self.labels;
+      } else if (self.dataSets && self.dataSets.length > 0) {
+        return self.dataSets[0].dataLabels;
       } else return [];
     },
     // labels for a data point - essential for a bar graph, optional for a line
