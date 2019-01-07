@@ -117,7 +117,6 @@ export class LineChart extends BaseComponent<ILineProps, ILineState> {
 
   public render() {
     const { chartData, width, height, isPlaying } = this.props;
-    console.log(chartData);
     const chartDisplay = lineData(chartData);
     const graphs: JSX.Element[] = [];
     const minMaxValues = chartData.minMaxAll;
