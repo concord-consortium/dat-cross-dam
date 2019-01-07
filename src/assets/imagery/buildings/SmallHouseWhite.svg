@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="298.654 259.235 10.48 9.998" width="10.48" height="9.998" xmlns="http://www.w3.org/2000/svg">
+  <g>
+    <title>Small House - White</title>
+    <polyline style="stroke: rgb(0, 0, 0); stroke-width: 0.5px; fill: none; stroke-linecap: round; stroke-opacity: 0.38;" points="300.008 269.233 302.764 266.481 308.381 266.424" transform="matrix(-1, 0, 0, -1, 608.389008, 535.657013)"/>
+    <polygon style="stroke: rgb(0, 0, 0); stroke-width: 0.3px; fill: rgb(255, 255, 255); stroke-linejoin: round;" points="299.607 263.841 305.573 263.728 305.573 268.727 299.607 268.896" transform="matrix(-1, 0, 0, -1, 605.179993, 532.623993)"/>
+    <polygon style="stroke: rgb(0, 0, 0); stroke-width: 0.3px; fill: rgb(137, 137, 183); stroke-linejoin: round;" points="305.524 262.608 308.531 259.797 308.48 264.703 306.646 268.783 305.473 266.412" transform="matrix(-1, 0, 0, -1, 614.003998, 528.579987)"/>
+    <polygon style="stroke: rgb(0, 0, 0); stroke-width: 0.3px; fill: rgb(209, 209, 209); stroke-linejoin: round;" points="298.654 264.066 300.458 259.292 307.629 259.235 305.874 264.066" transform="matrix(-1, 0, 0, -1, 606.28299, 523.300995)"/>
+    <polygon style="stroke: rgb(0, 0, 0); stroke-width: 0.3px; fill: rgb(153, 153, 153); stroke-linejoin: round;" points="307.931 259.348 307.429 259.348 308.933 262.212 309.134 261.482" transform="matrix(-1, 0, 0, -1, 616.562988, 521.559998)"/>
+  </g>
+</svg>

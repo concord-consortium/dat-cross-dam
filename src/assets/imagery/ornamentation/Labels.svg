@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="7.053 8.39 579.278 319.568" width="579.278" height="319.568" xmlns="http://www.w3.org/2000/svg">
+  <g>
+    <title>Labels</title>
+    <g>
+      <rect x="272.7" y="8.39" width="52.437" height="14.346" style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0);"/>
+      <text style="fill: rgb(51, 51, 51); font-size: 10px; white-space: pre; text-anchor: middle;" x="298.921" y="19.019">Mt. Farm</text>
+      <line style="stroke: rgb(0, 0, 0);" x1="255.386" y1="21.252" x2="273.194" y2="14.326"/>
+    </g>
+    <g>
+      <rect x="340.967" y="21.252" width="57.878" height="15.335" style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0);"/>
+      <text style="fill: rgb(51, 51, 51); font-size: 10px; white-space: pre;" x="345.126" y="32.378">Farm River</text>
+      <line style="stroke: rgb(0, 0, 0);" x1="340.472" y1="28.177" x2="274.184" y2="82.098"/>
+    </g>
+    <g>
+      <rect x="416.159" y="30.156" width="59.362" height="14.841" style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0);"/>
+      <text style="fill: rgb(51, 51, 51); font-size: 10px; white-space: pre;" x="421.956" y="41.037">Farm Lake</text>
+      <line style="stroke: rgb(0, 0, 0);" x1="431" y1="45.491" x2="404.781" y2="135.525"/>
+    </g>
+    <g>
+      <rect x="500.256" y="46.481" width="47.49" height="15.336" style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0);"/>
+      <text style="fill: rgb(51, 51, 51); font-size: 10px; white-space: pre;" x="503.732" y="57.612">Farmville</text>
+      <line style="stroke: rgb(0, 0, 0);" x1="512.623" y1="61.816" x2="482.942" y2="97.928"/>
+    </g>
+    <g>
+      <rect x="64.931" y="23.23" width="72.224" height="17.314" style="fill: rgb(255, 252, 252); stroke: rgb(0, 0, 0);"/>
+      <text style="fill: rgb(51, 51, 51); font-size: 10px; white-space: pre;" x="69.036" y="35.345">Agriburg River</text>
+      <line style="stroke: rgb(0, 0, 0);" x1="99.559" y1="40.05" x2="117.368" y2="129.094"/>
+    </g>
+    <g>
+      <rect x="7.053" y="311.633" width="126.145" height="16.325" style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0);"/>
+      <text style="fill: rgb(51, 51, 51); font-size: 10px; white-space: pre;" x="14.851" y="323.25">Map Not Drawn To Scale</text>
+    </g>
+    <g>
+      <rect x="449.798" y="196.866" width="52.437" height="16.819" style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0);"/>
+      <text style="fill: rgb(51, 51, 51); font-size: 10px; white-space: pre;" transform="matrix(1, 0, 0, 1, -6.655371, -0.005753)"><tspan x="460.186" y="208.738">Cornfields</tspan><tspan x="460.186" dy="1em">​</tspan></text>
+    </g>
+    <g>
+      <rect x="387.962" y="298.771" width="52.437" height="16.819" style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0);"/>
+      <text style="fill: rgb(51, 51, 51); font-size: 10px; white-space: pre;" transform="matrix(1, 0, 0, 1, -68.491646, 101.89975)"><tspan x="460.186" y="208.738">Cornfields</tspan><tspan x="460.186" dy="1em">​</tspan></text>
+    </g>
+    <g>
+      <rect x="547.251" y="206.759" width="39.08" height="15.335" style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0);"/>
+      <text x="551.216" y="218.264" style="white-space: pre; fill: rgb(51, 51, 51); font-size: 11px;">Farms</text>
+    </g>
+    <g>
+      <rect x="238.814" y="312.375" width="39.08" height="15.335" style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0);"/>
+      <text x="242.779" y="323.88" style="white-space: pre; fill: rgb(51, 51, 51); font-size: 11px;">Farms</text>
+    </g>
+    <g>
+      <rect x="109.453" y="255.734" width="47.985" height="15.335" style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0);"/>
+      <text x="112.682" y="267.195" style="white-space: pre; fill: rgb(51, 51, 51); font-size: 11px;">Agriburg</text>
+      <line style="stroke: rgb(0, 0, 0);" x1="157.932" y1="265.133" x2="216.8" y2="251.281"/>
+    </g>
+  </g>
+</svg>

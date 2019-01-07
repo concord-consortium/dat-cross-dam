@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="320.524 315.774 68.306 34.718" width="68.306" height="34.718" xmlns="http://www.w3.org/2000/svg">
+  <g transform="matrix(1, 0, 0, 1, -49.646011, 28.431362)">
+    <title>Field 01</title>
+    <path style="fill: rgb(102, 204, 51); stroke: rgb(87, 138, 67); stroke-linejoin: round;" d="M 400.985 287.343 L 438.476 291.092 L 417.647 320.668 C 415.418 322.061 370.17 312.069 376.407 308.171 L 400.985 287.343 Z"/>
+    <line x1="377.893" y1="310.422" x2="403.211" y2="287.889" style="stroke: rgb(87, 138, 67); stroke-linecap: round; stroke-linejoin: round;"/>
+    <line x1="380.484" y1="311.753" x2="405.367" y2="288.052" style="stroke: rgb(87, 138, 67); stroke-linecap: round; stroke-linejoin: round;"/>
+    <line x1="394.317" y1="315.97" x2="415.581" y2="288.871" style="stroke: rgb(87, 138, 67); stroke-linecap: round; stroke-linejoin: round;"/>
+    <line x1="397.474" y1="317.139" x2="418.651" y2="289.301" style="stroke: rgb(87, 138, 67); stroke-linecap: round; stroke-linejoin: round;"/>
+    <line x1="401.042" y1="318.034" x2="421.811" y2="289.586" style="stroke: rgb(87, 138, 67); stroke-linecap: round; stroke-linejoin: round;"/>
+    <line x1="404.753" y1="318.786" x2="425.03" y2="289.967" style="stroke: rgb(87, 138, 67); stroke-linecap: round; stroke-linejoin: round;"/>
+    <line x1="408.321" y1="319.332" x2="428.487" y2="290.278" style="stroke: rgb(87, 138, 67); stroke-linecap: round; stroke-linejoin: round;"/>
+    <line x1="411.237" y1="319.979" x2="431.714" y2="290.57" style="stroke: rgb(87, 138, 67); stroke-linecap: round; stroke-linejoin: round;"/>
+    <line x1="434.965" y1="290.657" x2="414.34" y2="320.414" style="stroke: rgb(87, 138, 67); stroke-linecap: round; stroke-linejoin: round;"/>
+    <line x1="386.842" y1="314.094" x2="409.923" y2="288.587" style="stroke: rgb(87, 138, 67); stroke-linecap: round; stroke-linejoin: round;"/>
+    <line x1="390.512" y1="315.401" x2="412.349" y2="288.774" style="stroke: rgb(87, 138, 67); stroke-linecap: round; stroke-linejoin: round;"/>
+    <line x1="383.296" y1="313.286" x2="407.559" y2="288.214" style="stroke: rgb(87, 138, 67); stroke-linecap: round; stroke-linejoin: round;"/>
+  </g>
+</svg>

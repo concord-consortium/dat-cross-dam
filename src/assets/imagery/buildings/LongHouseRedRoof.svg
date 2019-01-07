@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="321.202 290.007 26.212 12.915" width="26.212" height="12.915" xmlns="http://www.w3.org/2000/svg">
+  <g>
+    <title>Long House - Red Roof</title>
+    <polyline style="stroke: rgb(0, 0, 0); stroke-linecap: round; fill: none; stroke-width: 0.5px; stroke-opacity: 0.56;" points="322.243 301.47 341.999 302.922 346.677 299.454" transform=""/>
+    <path d="M 321.859 294.863 L 322.039 301.15 L 341.917 302.578 L 342.169 295.927 L 321.859 294.863 Z" style="stroke-width: 0.25px; stroke: rgb(0, 0, 0); fill: rgb(153, 153, 153);"/>
+    <path d="M 346.909 298.99 L 346.995 293.262 L 342.062 295.924 L 341.844 302.647 L 346.909 298.99 Z" style="stroke-width: 0.25px; stroke: rgb(0, 0, 0); fill: rgb(153, 153, 153);"/>
+    <path d="M 347.427 293.468 L 343.839 290.655 L 342.185 295.944 L 347.427 293.468 Z" style="stroke-width: 0.25px; fill: rgb(140, 50, 6); stroke: rgb(0, 0, 0);"/>
+    <line style="stroke: rgb(0, 0, 0); stroke-width: 0.5px;" x1="343.739" y1="291.018" x2="347.109" y2="293.537"/>
+    <path d="M 343.82 290.591 L 323.424 290.007 L 321.202 295.15 L 342.571 296.294 L 343.82 290.591 Z" style="stroke-width: 0.25px; stroke: rgb(0, 0, 0); fill: rgb(140, 50, 6);"/>
+  </g>
+</svg>

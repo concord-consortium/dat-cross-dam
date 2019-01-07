@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="608.178 215.239 27.764 21.4" width="27.764" height="21.4" xmlns="http://www.w3.org/2000/svg">
+  <g>
+    <title>Barn</title>
+    <path style="stroke: rgb(0, 0, 0); fill: rgb(213, 53, 53); stroke-opacity: 0.16;" d="M 630.152 220.241 L 630.043 233.797 C 630.772 235.802 634.615 234.839 634.197 233.688 L 633.978 220.132 C 634.232 218.948 630.743 217.483 630.152 220.241 Z"/>
+    <path style="stroke: rgb(0, 0, 0); fill: rgb(204, 204, 204); stroke-opacity: 0.43;" d="M 628.718 220.015 C 628 219.656 631.153 215.625 632.265 215.749 C 632.908 215.588 635.942 219.641 635.421 219.771 C 635.146 222.149 628.504 221.823 628.718 220.015 Z"/>
+    <polygon style="stroke: rgb(0, 0, 0); stroke-opacity: 0.25; fill: rgb(213, 53, 53);" points="611.895 235.874 628.403 235.109 627.857 228.987 611.567 228.659"/>
+    <polygon style="stroke: rgb(0, 0, 0); fill: rgb(130, 36, 36); stroke-opacity: 0.42; stroke-width: 0.5px;" points="610.123 223.616 608.178 225.489 608.288 231.829 611.677 235.655 611.567 230.08"/>
+    <polygon style="stroke: rgb(0, 0, 0); fill: rgb(169, 31, 31); stroke-width: 0.4px; stroke-opacity: 0.57;" points="618.455 235.875 618.126 230.298 622.828 230.08 623.155 235.765"/>
+    <polygon style="stroke: rgb(0, 0, 0); stroke-opacity: 0.39; fill: rgb(204, 204, 204);" points="609.709 223.411 611.021 230.189 628.512 229.424 626.654 222.865"/>
+    <line style="stroke-linecap: round; stroke: rgba(0, 0, 0, 0.28);" x1="609.272" y1="233.688" x2="612.005" y2="236.53"/>
+    <line style="stroke-linecap: round; stroke: rgba(0, 0, 0, 0.28);" x1="612.661" y1="236.639" x2="618.236" y2="236.421"/>
+    <line style="stroke-linecap: round; stroke: rgba(0, 0, 0, 0.28);" x1="623.811" y1="235.984" x2="628.84" y2="235.765"/>
+  </g>
+</svg>
