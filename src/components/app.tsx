@@ -17,6 +17,8 @@ export class AppComponent extends BaseComponent<IProps, IState> {
     return (
       <div className="app">
         <Text text={ui.sampleText} />
+        <canvas id="canvas_for_cartoon" width="600" height="340">
+        </canvas>
       </div>
     );
   }

@@ -104,6 +104,7 @@
     "webpack-dev-server": "^3.1.14"
   },
   "dependencies": {
+    "@svgr/webpack": "^4.1.0",
     "immutable": "^3.8.2",
     "lodash": "^4.17.11",
     "mobx": "^5.8.0",
