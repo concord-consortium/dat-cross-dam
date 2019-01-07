@@ -71,7 +71,7 @@ const barData = (chartData: ChartDataModelType) => {
       // One color for all bars
       dset.backgroundColor = hexToRGBValue(d.color, seriesOpacity);
       dset.borderColor = hexToRGBValue(d.color, 1.0);
-    } else if (d.pointColors) {
+    } else if (d.pointColors.length > 0) {
       // If we have specified point colors, use those first to color each bar,
       // then if we run out of defined colors we fall back to the defaults
       const colors = d.pointColors.concat(ChartColors.map(c => c.hex));

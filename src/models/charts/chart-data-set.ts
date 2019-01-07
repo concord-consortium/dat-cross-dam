@@ -64,7 +64,7 @@ export const ChartDataSetModel = types
     color: types.maybe(types.string),
     // An array will vary each point's color
     // useful for bar charts with different color bars or scatter plots with each point a different color
-    pointColors: types.maybe(types.array(types.string)),
+    pointColors: types.optional(types.array(types.string), []),
     // For bars, can vary opacity of the bar by dataset to show a second dataset with less opacity
     backgroundOpacity: types.maybe(types.number),
     // If maxPoints is 0 we will always work with the entire data set

@@ -85,7 +85,7 @@ const lineData = (chartData: ChartDataModelType) => {
       dset.pointHoverBackgroundColor = hexToRGBValue(d.color, 1);
       dset.pointHoverBorderColor = hexToRGBValue(d.color, 1);
     }
-    if (d.pointColors) {
+    if (d.pointColors.length > 0) {
       // If we have specified point colors, use those first,
       // then if we run out of colors we fall back to the defaults
       const colors = d.pointColors.concat(ChartColors.map(c => c.hex));

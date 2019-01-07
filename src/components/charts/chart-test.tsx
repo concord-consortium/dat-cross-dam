@@ -2,7 +2,7 @@ import { inject, observer } from "mobx-react";
 import * as React from "react";
 import { BaseComponent, IBaseProps } from "../base";
 import { Chart, ChartType } from "./chart";
-import { ChartDataSetModel, DataPoint, ChartColors } from "../../models/charts/chart-data-set";
+import { ChartDataSetModel, DataPoint, ChartColors, ChartDataSetModelType } from "../../models/charts/chart-data-set";
 import { ChartDataModel, ChartDataModelType } from "../../models/charts/chart-data";
 
 interface IProps extends IBaseProps {}
@@ -16,14 +16,17 @@ let _interval;
 export class ChartTest extends BaseComponent<IProps, IState> {
   constructor(props: IProps) {
     super(props);
-    const chartDataSets = [];
+    const chartDataSets: ChartDataSetModelType[] = [];
     chartDataSets.push(ChartDataSetModel.create({
       name: "Sample Dataset1",
       dataPoints: this.addTestDataPoints(),
-      backgroundOpacity: 0.9,
       // color: ChartColors[3].hex,
       // pointColors: ["#00ff00", "#ff0000", "#0000ff"],
-      maxPoints: 100
+      backgroundOpacity: 0.9,
+      maxPoints: 100,
+      fixedMaxA2: 200,
+      fixedMaxA1: 200,
+      stack: "1"
     }));
     chartDataSets.push(ChartDataSetModel.create({
       name: "Sample Dataset2",
@@ -31,11 +34,15 @@ export class ChartTest extends BaseComponent<IProps, IState> {
       // color: "#00ffcc",
       // pointColors: ["#00ff00", "#ff0000", "#0000ff"],
       backgroundOpacity: 0.3,
-      maxPoints: 100
+      maxPoints: 100,
+      fixedMaxA2: 200,
+      fixedMaxA1: 200,
+      stack: "2"
     }));
     const chartData: ChartDataModelType = ChartDataModel.create({
       name: "Samples",
-      dataSets: chartDataSets
+      dataSets: chartDataSets,
+      labels: []
     });
     this.state = { chartType: "bar", chartData };
   }
