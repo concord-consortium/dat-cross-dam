@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="473.349 134.569 15.662 23.836" width="15.662" height="23.836" xmlns="http://www.w3.org/2000/svg">
+  <g>
+    <title>Tree 01</title>
+    <ellipse cx="481.18" cy="155.698" rx="7.831" ry="2.707" style="fill: rgb(107, 153, 19); stroke-width: 0px;"/>
+    <path style="fill: rgb(155, 99, 0); stroke-width: 0px;" d="M 479.823 149.45 L 479.823 154.284 C 479.598 156.236 483.162 155.707 483.304 154.477 L 483.304 149.256 L 479.823 149.45 Z"/>
+    <path style="fill: rgb(51, 102, 51); stroke: rgb(77, 125, 7); stroke-opacity: 0.6;" d="M 481.44 134.569 L 475.407 148.955 C 475.852 151.626 487.847 151.34 487.426 148.815 L 481.44 134.569 Z"/>
+  </g>
+</svg>
