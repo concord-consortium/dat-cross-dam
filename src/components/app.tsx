@@ -9,6 +9,7 @@ import "./app.sass";
 
 export interface IPictureParams {
   showLabels: boolean;
+  showDam: boolean;
   populationAgriburg: number;
   populationFarmVille: number;
 }
@@ -27,8 +28,9 @@ export class AppComponent extends BaseComponent<IProps, IState> {
     this.state = {
       pictureParams: {
         showLabels: false,
+        showDam: false,
         populationAgriburg: 0,
-        populationFarmVille: 3
+        populationFarmVille: 0
       }
     };
   }

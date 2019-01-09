@@ -20,6 +20,13 @@ export class ControlArea extends BaseComponent<IProps, {}> {
       this.props.onChange(pp);
     };
 
+    const toggleDam = (isChecked: boolean) => {
+      // console.log("--------- in toggleLabels " + isChecked);
+      const pp = this.props.pictureParams;
+      pp.showDam = isChecked;
+      this.props.onChange(pp);
+    };
+
     const dragAP = (value: number) => {
       // console.log("drag of slider: " + value);
       const pp = this.props.pictureParams;
@@ -62,6 +69,9 @@ export class ControlArea extends BaseComponent<IProps, {}> {
       <div>
         <div>
           <CheckBox label="Show Map Labels" isChecked={this.props.pictureParams.showLabels} onChange={toggleLabels} />
+        </div>
+        <div>
+          <CheckBox label="Show Dam" isChecked={this.props.pictureParams.showLabels} onChange={toggleDam} />
         </div>
         <div>
           Agriburg Propulation (TBD): <Slider style={sliderStyle} min={0} max={9} onChange={dragAP}

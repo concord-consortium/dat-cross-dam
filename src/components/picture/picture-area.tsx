@@ -58,7 +58,7 @@ export class PictureArea extends BaseComponent<IProps, IState> {
       );
     };
 
-    const { showLabels } = this.props.pictureParams;
+    const { showLabels, showDam } = this.props.pictureParams;
 
     // console.log("---- this.props.showLabels " + this.props.showLabels === "true");
     // console.log("---- " + JSON.stringify(this.props))
@@ -72,7 +72,7 @@ export class PictureArea extends BaseComponent<IProps, IState> {
           <Water transform="translate(167, 124)"/>
         </div>
         <div style={innerStyle}>
-          <Dam transform="translate(176, 181)"/>
+          { showDam === true ? <Dam transform="translate(176, 181)"/> : "" }
         </div>
         { this.renderFarmVille(this.props.pictureParams.populationFarmVille) }
         { showLabels === true ? renderLabels() : ""}
