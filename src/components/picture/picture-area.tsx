@@ -74,6 +74,7 @@ export class PictureArea extends BaseComponent<IProps, IState> {
         <div style={innerStyle}>
           { showDam === true ? <Dam transform="translate(176, 181)"/> : "" }
         </div>
+        { this.renderAgriburg(this.props.pictureParams.populationAgriburg) }
         { this.renderFarmVille(this.props.pictureParams.populationFarmVille) }
         { showLabels === true ? renderLabels() : ""}
         <div style={innerStyle}>
@@ -85,6 +86,14 @@ export class PictureArea extends BaseComponent<IProps, IState> {
 
   private renderFarmVille(population: number) {
     // Generate one building per unit of population.
+
+    const divStyle = {
+      position: "absolute",
+      width: "100%",
+      height: "100%",
+      top: 0,
+      left: 0
+    } as React.CSSProperties;
 
     const town = [
       { svgBuilding: <SmallHouseBlue2DRoof transform="translate(755, 195) scale(1, 1)" /> },
@@ -102,7 +111,7 @@ export class PictureArea extends BaseComponent<IProps, IState> {
       const list = [];
       for (let i = 0; i < population; i++) {
         list.push(
-          <div>
+          <div style={divStyle}>
             {town[i].svgBuilding}
           </div>
         );
@@ -111,7 +120,56 @@ export class PictureArea extends BaseComponent<IProps, IState> {
     };
 
     return (
-      <div>
+      <div style={divStyle}>
+        {buildings()}
+      </div>
+    );
+  }
+
+  private renderAgriburg(population: number) {
+    // Generate one building per unit of population.
+
+    const x = 400;
+    const y = 395;
+    const xScale = 1.4;
+    const yScale = 1.4;
+    const transformBase = `translate(${x}, ${y}) scale(${xScale}, ${yScale})`;
+
+    const town = [
+      { svgBuilding: <LongHouseRedRoof transform={transformBase} /> },
+      { svgBuilding: <SmallHouseBlue2DRoof transform="translate(355, 395) scale(1.4, 1.4)" /> },
+      { svgBuilding: <SmallHouseBlue transform="translate(380, 400) scale(1.4, 1.4)" /> },
+      { svgBuilding: <SmallHousePink transform="translate(355, 390) scale(1.4, 1.4)" /> },
+      { svgBuilding: <SmallHouseWhite transform="translate(360, 385) scale(1.4, 1.4)" /> },
+      { svgBuilding: <LongHouseGrayRoof transform="translate(350, 400) scale(-1.4, 1.4)" /> },
+      { svgBuilding: <SmallHouseBlue2DRoof transform="translate(355, 395) scale(1.4, 1.4)" /> },
+      { svgBuilding: <SmallHouseBlue transform="translate(380, 400) scale(1.4, 1.4)" /> },
+      { svgBuilding: <SmallHousePink transform="translate(355, 390) scale(1.4, 1.4)" /> },
+      { svgBuilding: <SmallHouseWhite transform="translate(360, 385) scale(1.4, 1.4)" /> }
+    ];
+
+    const divStyle = {
+      position: "absolute",
+      width: "100%",
+      height: "100%",
+      top: 0,
+      left: 0
+    } as React.CSSProperties;
+
+    const buildings = () => {
+      const list = [];
+      for (let i = 0; i < population; i++) {
+        list.push(
+          <div style={divStyle}>
+            {town[i].svgBuilding}
+          </div>
+        );
+      }
+      return list;
+    };
+
+    return (
+      <div style={divStyle}>
         {buildings()}
       </div>
     );

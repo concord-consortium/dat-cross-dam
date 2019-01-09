@@ -67,6 +67,9 @@ export class ControlArea extends BaseComponent<IProps, {}> {
 
     return (
       <div>
+        <span>Temporary Display Controls</span>
+        <span> <i>(To be removed when engine is in place.)</i></span>
+        <hr />
         <div>
           <CheckBox label="Show Map Labels" isChecked={this.props.pictureParams.showLabels} onChange={toggleLabels} />
         </div>
@@ -74,7 +77,7 @@ export class ControlArea extends BaseComponent<IProps, {}> {
           <CheckBox label="Show Dam" isChecked={this.props.pictureParams.showLabels} onChange={toggleDam} />
         </div>
         <div>
-          Agriburg Propulation (TBD): <Slider style={sliderStyle} min={0} max={9} onChange={dragAP}
+          Agriburg Propulation: <Slider style={sliderStyle} min={0} max={9} onChange={dragAP}
           value={this.props.pictureParams.populationAgriburg} />
         </div>
         <div>
