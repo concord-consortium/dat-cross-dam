@@ -1,10 +1,11 @@
 import { inject, observer } from "mobx-react";
 import * as React from "react";
 import { BaseComponent, IBaseProps } from "./base";
-// import { Text } from "./text";
 import { ControlArea } from "./controls/control-area";
-import { ChartTest } from "./charts/chart-test";
+// import { ChartTest } from "./charts/chart-test";
 import { PictureArea } from "./picture/picture-area";
+// import { Text } from "./text";
+import { ChartTestDisplay } from "./charts/chart-test-display";
 import "./app.sass";
 
 export interface IPictureParams {
@@ -72,12 +73,15 @@ export class AppComponent extends BaseComponent<IProps, IState> {
             <ControlArea pictureParams={this.state.pictureParams} onChange={onChangePictureParams} />
           </div>
           <div style={chartAreaStyle}>
-            <ChartTest />
+            <ChartTestDisplay />
           </div>
           <div style={pictureAreaStyle}>
             <PictureArea pictureParams={this.state.pictureParams} />
           </div>
         </div>
+        {/* <Text text={ui.sampleText} /> */}
+        {/* <canvas id="canvas_for_cartoon" width="600" height="340" /> */}
+        {/* <ChartTestDisplay /> */}
       </div>
     );
   }
