@@ -64,7 +64,7 @@ const barData = (chartData: ChartDataModelType) => {
   for (const d of chartData.dataSets) {
     const dset = Object.assign({}, barDatasetDefaults, {
       label: d.name,
-      data: d.dataA1,
+      data: d.dataA2,
     });
     const seriesOpacity = d.backgroundOpacity ? d.backgroundOpacity : 0.4;
     if (d.color) {
@@ -108,14 +108,14 @@ export class BarChart extends React.Component<IBarProps> {
         xAxes: [{
           ticks: {
             min: 0,
-            max: chartData.minMaxAll.maxA1
+            max: chartData.minMaxAll.maxA2
           },
           stacked: true
         }],
         yAxes: [{
           ticks: {
             min: 0,
-            max: chartData.minMaxAll.maxA1
+            max: chartData.minMaxAll.maxA2
           },
           stacked: true
         }]
