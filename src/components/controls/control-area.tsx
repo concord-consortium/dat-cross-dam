@@ -64,7 +64,7 @@ export class ControlArea extends BaseComponent<IProps, {}> {
           <CheckBox label="Show Map Labels" isChecked={this.props.pictureParams.showLabels} onChange={toggleLabels} />
         </div>
         <div>
-          Agriburg Propulation: <Slider style={sliderStyle} min={0} max={9} onChange={dragAP}
+          Agriburg Propulation (TBD): <Slider style={sliderStyle} min={0} max={9} onChange={dragAP}
           value={this.props.pictureParams.populationAgriburg} />
         </div>
         <div>
@@ -72,19 +72,19 @@ export class ControlArea extends BaseComponent<IProps, {}> {
           value={this.props.pictureParams.populationFarmVille } />
         </div>
         <div>
-          Agriburg River Volume: <Slider style={sliderStyle} min={0} max={9} onChange={dragARV} />
+          Agriburg River Volume (TBD): <Slider style={sliderStyle} min={0} max={9} onChange={dragARV} />
         </div>
         <div>
-          Farm River Volume: <Slider style={sliderStyle} min={0} max={9} onChange={dragFRV} />
+          Farm River Volume (TBD): <Slider style={sliderStyle} min={0} max={9} onChange={dragFRV} />
         </div>
         <div>
-          Farm Lake Acreage: <Slider style={sliderStyle} min={0} max={9} onChange={dragFLA} />
+          Farm Lake Acreage (TBD): <Slider style={sliderStyle} min={0} max={9} onChange={dragFLA} />
         </div>
         <div>
-          Agriburg Farm Acreage: <Slider style={sliderStyle} min={0} max={9} onChange={dragAFA} />
+          Agriburg Farm Acreage (TBD): <Slider style={sliderStyle} min={0} max={9} onChange={dragAFA} />
         </div>
         <div>
-          Farmville Farm Acreage: <Slider style={sliderStyle} min={0} max={9} onChange={dragFFA} />
+          Farmville Farm Acreage (TBD): <Slider style={sliderStyle} min={0} max={9} onChange={dragFFA} />
         </div>
       </div>
     );
