@@ -7,12 +7,31 @@ import { ChartTest } from "./charts/chart-test";
 import { PictureArea } from "./picture/picture-area";
 import "./app.sass";
 
+export interface IPictureParams {
+  showLabels: boolean;
+  populationAgriburg: number;
+  populationFarmVille: number;
+}
+
 interface IProps extends IBaseProps {}
-interface IState {}
+interface IState {
+  pictureParams: IPictureParams;
+}
 
 @inject("stores")
 @observer
 export class AppComponent extends BaseComponent<IProps, IState> {
+
+  constructor(props: IProps) {
+    super(props);
+    this.state = {
+      pictureParams: {
+        showLabels: false,
+        populationAgriburg: 0,
+        populationFarmVille: 3
+      }
+    };
+  }
 
   public render() {
 
@@ -39,17 +58,22 @@ export class AppComponent extends BaseComponent<IProps, IState> {
       gridRow: "1 / 3"
     };
 
+    const onChangePictureParams = (newPictureParams: IPictureParams) => {
+      this.setState({pictureParams: newPictureParams});
+      // console.log(" - - - - - -  " + JSON.stringify(this.state.pictureParams));
+    };
+
     return (
       <div className="app">
         <div style={containerStyle}>
           <div style={controlAreaStyle}>
-            <ControlArea />
+            <ControlArea pictureParams={this.state.pictureParams} onChange={onChangePictureParams} />
           </div>
           <div style={chartAreaStyle}>
             <ChartTest />
           </div>
           <div style={pictureAreaStyle}>
-            <PictureArea />
+            <PictureArea pictureParams={this.state.pictureParams} />
           </div>
         </div>
       </div>
