@@ -135,6 +135,10 @@ export class PictureArea extends BaseComponent<IProps, IState> {
     const yScale = 1.4;
     const transformBase = `translate(${x}, ${y}) scale(${xScale}, ${yScale})`;
 
+    const createTransform = (x: number, y: number, scale: number) => {
+      return      `translate(${x}, ${y}) scale(${scale}, ${scale})`;
+    } 
+
     const town = [
       { svgBuilding: <LongHouseRedRoof transform={transformBase} /> },
       { svgBuilding: <SmallHouseBlue2DRoof transform="translate(355, 395) scale(1.4, 1.4)" /> },
@@ -142,6 +146,7 @@ export class PictureArea extends BaseComponent<IProps, IState> {
       { svgBuilding: <SmallHousePink transform="translate(355, 390) scale(1.4, 1.4)" /> },
       { svgBuilding: <SmallHouseWhite transform="translate(360, 385) scale(1.4, 1.4)" /> },
       { svgBuilding: <LongHouseGrayRoof transform="translate(350, 400) scale(-1.4, 1.4)" /> },
+      { svgBuilding: <LongHouseRedRoof transform={createTransform(350, 380, 1.9)} /> },
       { svgBuilding: <SmallHouseBlue2DRoof transform="translate(355, 395) scale(1.4, 1.4)" /> },
       { svgBuilding: <SmallHouseBlue transform="translate(380, 400) scale(1.4, 1.4)" /> },
       { svgBuilding: <SmallHousePink transform="translate(355, 390) scale(1.4, 1.4)" /> },
