@@ -39,7 +39,6 @@ export interface SeasonData {
 
 export const DamModel = types
   .model("Dam", {
-    isPlaying: false,
     flowPercentage: 0,
     currentYear: 1,
     currentSeason: "Spring"
@@ -74,6 +73,17 @@ export const DamModel = types
           allData = dam0 as SeasonData[];
       }
       return allData.filter(d => d.Year === self.currentYear && d.Season === self.currentSeason);
+    }
+  }))
+  .actions(self => ({
+    setFlowPercentage(flow: number) {
+      self.flowPercentage = flow;
+    },
+    setYear(year: number) {
+      self.currentYear = year;
+    },
+    setSeason(season: string) {
+      self.currentSeason = season;
     }
   }))
   ;

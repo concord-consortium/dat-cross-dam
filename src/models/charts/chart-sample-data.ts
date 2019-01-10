@@ -1,9 +1,5 @@
 
-import { ChartDataSetModel, DataPoint, ChartDataSetModelType, DataPointType, ChartColors } from "./chart-data-set";
-import * as dam0 from "../../data/dam0.json";
-import * as dam25 from "../../data/dam25.json";
-import * as dam50 from "../../data/dam50.json";
-import * as dam75 from "../../data/dam75.json";
+import { ChartDataSetModel, DataPoint, ChartDataSetModelType, ChartColors } from "./chart-data-set";
 
 function addTestDataPoints() {
   const points = [];
@@ -28,8 +24,7 @@ export function rngData() {
   const chartDataSets: ChartDataSetModelType[] = [];
   chartDataSets.push(ChartDataSetModel.create({
     name: "Spring",
-    dataPoints: addDataPoints(75, "Spring"),
-    // dataPoints: addTestDataPoints(),
+    dataPoints: addTestDataPoints(),
     color: ChartColors[0].hex,
     // pointColors: ["#00ff00", "#ff0000", "#0000ff"],
     backgroundOpacity: 0.9,
@@ -37,8 +32,7 @@ export function rngData() {
   }));
   chartDataSets.push(ChartDataSetModel.create({
     name: "Summer",
-    dataPoints: addDataPoints(75, "Summer"),
-    // dataPoints: addTestDataPoints(),
+    dataPoints: addTestDataPoints(),
     color: ChartColors[1].hex,
     // pointColors: ["#00ff00", "#ff0000", "#0000ff"],
     backgroundOpacity: 0.3,
@@ -50,28 +44,3 @@ export function rngData() {
 const rand = () => {
   return Math.round(Math.random() * 100);
 };
-
-function addDataPoints(diversionPercentage: number, season: string) {
-  const points: DataPointType[] = [];
-  let damData = dam0;
-  switch (diversionPercentage) {
-    case 25:
-      damData = dam25;
-      break;
-    case 50:
-      damData = dam50;
-      break;
-    case 75:
-      damData = dam75;
-      break;
-  }
-  damData.forEach((d) => {
-    if (d.Year && d.Year < 11) {
-      if (d.Season === season) {
-        const area = d.EndSeasonSurfaceArea ? d.EndSeasonSurfaceArea : 0;
-        points.push(DataPoint.create({ a1: d.Year, a2: area, label: d.Year.toString() }));
-      }
-    }
-  });
-  return points;
-}

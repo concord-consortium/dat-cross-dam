@@ -2,7 +2,7 @@ import { inject, observer } from "mobx-react";
 import * as React from "react";
 import { BaseComponent, IBaseProps } from "./base";
 import { Text } from "./text";
-import { ChartTestDisplay } from "./charts/chart-test-display";
+import { ChartDisplay } from "./charts/chart-display";
 import "./app.sass";
 
 interface IProps extends IBaseProps {}
@@ -18,7 +18,7 @@ export class AppComponent extends BaseComponent<IProps, IState> {
       <div className="app">
         <Text text={ui.sampleText} />
         <canvas id="canvas_for_cartoon" width="600" height="340" />
-        <ChartTestDisplay />
+        <ChartDisplay />
       </div>
     );
   }
