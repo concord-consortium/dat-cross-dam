@@ -3,6 +3,7 @@ import * as React from "react";
 import { BaseComponent, IBaseProps } from "./base";
 import { Text } from "./text";
 import { ChartDisplay } from "./charts/chart-display";
+import { SimulationControls } from "./simulation-controls";
 import "./app.sass";
 
 interface IProps extends IBaseProps {}
@@ -19,6 +20,7 @@ export class AppComponent extends BaseComponent<IProps, IState> {
         <Text text={ui.sampleText} />
         <canvas id="canvas_for_cartoon" width="600" height="340" />
         <ChartDisplay />
+        <SimulationControls />
       </div>
     );
   }
