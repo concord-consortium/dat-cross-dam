@@ -11,7 +11,7 @@ interface IState {}
 @observer
 export class SimulationControls extends BaseComponent<IProps, IState> {
   public render() {
-    const { riverData } = this.stores;
+    const { riverData, ui } = this.stores;
     return (
       <div className="simulation-controls">
         <div>Diversion percentage: {riverData.flowPercentage}</div>
@@ -34,6 +34,13 @@ export class SimulationControls extends BaseComponent<IProps, IState> {
           <option value="Summer">Summer</option>
         </select>
         <div>End of Season Area: {riverData.currentYearData[0].EndSeasonSurfaceArea}</div>
+        <div className="display-mode">Display Mode</div>
+        <div><input type="radio" id="displayModeSim" name="displayMode" value="Simulation"
+          checked={ui.displayMode === "Simulation"} onChange={this.handleDisplayModeChange}/>Simulation</div>
+        <div><input type="radio" id="displayModeGraph" name="displayMode" value="Graph"
+          checked={ui.displayMode === "Graph"} onChange={this.handleDisplayModeChange}/>Graph</div>
+        <div><input type="radio" id="displayModeTable" name="displayMode" value="Table"
+          checked={ui.displayMode === "Table"} onChange={this.handleDisplayModeChange}/>Table</div>
       </div>
     );
   }
@@ -49,5 +56,9 @@ export class SimulationControls extends BaseComponent<IProps, IState> {
     const { riverData } = this.stores;
     const flowPercentage = parseInt(e.currentTarget.value, 10);
     riverData.setFlowPercentage(isNaN(flowPercentage) ? 0 : flowPercentage);
+  }
+  private handleDisplayModeChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const { ui } = this.stores;
+    ui.setDisplayMode(e.currentTarget.value);
   }
 }
