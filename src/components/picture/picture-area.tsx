@@ -70,7 +70,7 @@ export class PictureArea extends BaseComponent<IProps, IState> {
 
     const renderRivers = (index: number) => {
 
-      const selectRivers = (index: number) => {
+      const selectRivers = (i: number) => {
         /*
          * The rivers and canal have 4 possible display versions which are
          * drawn (in the associated SVG file) according to this scheme:
@@ -84,7 +84,7 @@ export class PictureArea extends BaseComponent<IProps, IState> {
          * |   2   |    50%   | Low      | Wide      | Wide      |
          * |   3   |    75%   | Trickle  | Very Wide | Very Wide |
          */
-        switch (index) {
+        switch (i) {
           case 0: return (<Rivers0 />);
           case 1: return (<Rivers25 />);
           case 2: return (<Rivers50 />);
@@ -96,8 +96,6 @@ export class PictureArea extends BaseComponent<IProps, IState> {
             return (<Rivers0 />);
         }
       };
-
-      console.log(" ----------------- " + index)
 
       return (
         <div style={innerStyle}>
