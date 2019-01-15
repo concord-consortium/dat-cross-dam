@@ -1,9 +1,10 @@
 import { inject, observer } from "mobx-react";
 import * as React from "react";
 import { BaseComponent, IBaseProps } from "./base";
-import { Text } from "./text";
 import { ChartDisplay } from "./charts/chart-display";
 import { SimulationControls } from "./simulation-controls";
+import { DamData } from "./dam-data";
+
 import "./app.sass";
 
 interface IProps extends IBaseProps {}
@@ -17,10 +18,24 @@ export class AppComponent extends BaseComponent<IProps, IState> {
     const {ui} = this.stores;
     return (
       <div className="app">
-        <Text text={ui.sampleText} />
-        <canvas id="canvas_for_cartoon" width="600" height="340" />
-        <ChartDisplay />
-        <SimulationControls />
+        <div className="controls">
+          <SimulationControls />
+        </div>
+        {ui.displayMode === "Simulation" &&
+          <div className="section simulation">
+            <canvas id="canvas_for_cartoon" width="600" height="340" />
+          </div>
+        }
+        {ui.displayMode === "Graph" &&
+          <div className="section chart">
+            <ChartDisplay />
+          </div>
+        }
+        {ui.displayMode === "Table" &&
+          <div className="section table">
+            <DamData />
+          </div>
+        }
       </div>
     );
   }

@@ -2,12 +2,12 @@ import { types } from "mobx-state-tree";
 
 export const UIModel = types
   .model("UI", {
-    sampleText: "Hello World"
+    displayMode: "Graph"
   })
   .actions((self) => {
     return {
-      setSampleText(text: string) {
-        self.sampleText = text;
+      setDisplayMode(text: string) {
+        self.displayMode = text;
       }
     };
   });

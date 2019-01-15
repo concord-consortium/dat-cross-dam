@@ -4,6 +4,23 @@ import * as dam25 from "../data/dam25.json";
 import * as dam50 from "../data/dam50.json";
 import * as dam75 from "../data/dam75.json";
 
+const dataByFlow = (flowPercentage: number): SeasonData[] => {
+  let allData: SeasonData[];
+  switch (flowPercentage) {
+    case 0:
+      allData = dam0 as SeasonData[];
+    case 25:
+      allData = dam25 as SeasonData[];
+    case 50:
+      allData = dam50 as SeasonData[];
+    case 75:
+      allData = dam75 as SeasonData[];
+    default:
+      allData = dam0 as SeasonData[];
+  }
+  return allData;
+};
+
 export interface SeasonData {
     Year: number;
     Season: string;
@@ -45,33 +62,10 @@ export const DamModel = types
   })
   .views(self => ({
     get allCurrentData(): SeasonData[] {
-      switch (self.flowPercentage) {
-        case 0:
-          return dam0 as SeasonData[];
-        case 25:
-          return dam25 as SeasonData[];
-        case 50:
-          return dam50 as SeasonData[];
-        case 75:
-          return dam75 as SeasonData[];
-        default:
-          return dam0 as SeasonData[];
-      }
+      return dataByFlow(self.flowPercentage);
     },
     get currentYearData(): SeasonData[] {
-      let allData: SeasonData[];
-      switch (self.flowPercentage) {
-        case 0:
-          allData = dam0 as SeasonData[];
-        case 25:
-          allData = dam25 as SeasonData[];
-        case 50:
-          allData = dam50 as SeasonData[];
-        case 75:
-          allData = dam75 as SeasonData[];
-        default:
-          allData = dam0 as SeasonData[];
-      }
+      const allData = dataByFlow(self.flowPercentage);
       return allData.filter(d => d.Year === self.currentYear && d.Season === self.currentSeason);
     }
   }))
