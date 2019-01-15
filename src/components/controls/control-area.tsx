@@ -4,61 +4,70 @@ import { CheckBox } from "./check-box";
 import { BaseComponent, IBaseProps } from "../base";
 import { IPictureParams } from "../app";
 
-export interface IProps extends IBaseProps {
+interface IProps extends IBaseProps {
   pictureParams: IPictureParams;
   onChange: (newPictureParams: IPictureParams) => void;
 }
 
-export class ControlArea extends BaseComponent<IProps, {}> {
+interface IState {
+}
+
+/*
+ * The entire purpose of this "control-area" is temporary. It's just a quick
+ * way of adjusting the display parameters before the display (that is, the
+ * "picture-area" is wired-up to the simulation.)
+ */
+
+export class ControlArea extends BaseComponent<IProps, IState> {
 
   public render() {
 
     const toggleLabels = (isChecked: boolean) => {
-      // console.log("--------- in toggleLabels " + isChecked);
       const pp = this.props.pictureParams;
       pp.showLabels = isChecked;
       this.props.onChange(pp);
     };
 
     const toggleDam = (isChecked: boolean) => {
-      // console.log("--------- in toggleLabels " + isChecked);
       const pp = this.props.pictureParams;
       pp.showDam = isChecked;
       this.props.onChange(pp);
     };
 
     const dragAP = (value: number) => {
-      // console.log("drag of slider: " + value);
       const pp = this.props.pictureParams;
       pp.populationAgriburg = value;
       this.props.onChange(pp);
     };
 
     const dragFP = (value: number) => {
-      // console.log("drag of slider: " + value);
       const pp = this.props.pictureParams;
-      pp.populationFarmVille = value;
+      pp.populationFarmville = value;
       this.props.onChange(pp);
     };
 
-    const dragARV = (value: number) => {
-      // console.log("drag of slider: " + value);
+    const dragDivert = (value: number) => {
+      const pp = this.props.pictureParams;
+      pp.waterDivertedToFarmRiver = value;
+      this.props.onChange(pp);
     };
 
-    const dragFRV = (value: number) => {
-      // console.log("drag of slider: " + value);
+    const dragLakeArea = (value: number) => {
+      const pp = this.props.pictureParams;
+      pp.lakeArea = value;
+      this.props.onChange(pp);
     };
 
-    const dragFLA = (value: number) => {
-      // console.log("drag of slider: " + value);
+    const dragAgriburgCrops = (value: number) => {
+      const pp = this.props.pictureParams;
+      pp.cropsArgiburg = value;
+      this.props.onChange(pp);
     };
 
-    const dragAFA = (value: number) => {
-      // console.log("drag of slider: " + value);
-    };
-
-    const dragFFA = (value: number) => {
-      // console.log("drag of slider: " + value);
+    const dragFarmvilleCrops = (value: number) => {
+      const pp = this.props.pictureParams;
+      pp.cropsFarmville = value;
+      this.props.onChange(pp);
     };
 
     const sliderStyle = {
@@ -68,37 +77,35 @@ export class ControlArea extends BaseComponent<IProps, {}> {
     return (
       <div>
         <span>Temporary Display Controls</span>
-        <span> <i>(To be removed when engine is in place.)</i></span>
+        <span><i>(To be removed when engine is in place.)</i></span>
         <hr />
-        <div>
-          <CheckBox label="Show Map Labels" isChecked={this.props.pictureParams.showLabels} onChange={toggleLabels} />
-        </div>
-        <div>
-          <CheckBox label="Show Dam" isChecked={this.props.pictureParams.showLabels} onChange={toggleDam} />
-        </div>
-        <div>
-          Agriburg Propulation: <Slider style={sliderStyle} min={0} max={9} onChange={dragAP}
+        <CheckBox label="Map Labels" isChecked={this.props.pictureParams.showLabels} onChange={toggleLabels} />
+        <br />
+        <CheckBox label="Show Dam" isChecked={this.props.pictureParams.showDam} onChange={toggleDam} />
+        <br />
+        Agriburg Population ({this.props.pictureParams.populationAgriburg}):
+          <Slider style={sliderStyle} min={0} max={9} onChange={dragAP}
           value={this.props.pictureParams.populationAgriburg} />
-        </div>
-        <div>
-          Farmville Propulation: <Slider style={sliderStyle} min={0} max={9} onChange={dragFP}
-          value={this.props.pictureParams.populationFarmVille } />
-        </div>
-        <div>
-          Agriburg River Volume (TBD): <Slider style={sliderStyle} min={0} max={9} onChange={dragARV} />
-        </div>
-        <div>
-          Farm River Volume (TBD): <Slider style={sliderStyle} min={0} max={9} onChange={dragFRV} />
-        </div>
-        <div>
-          Farm Lake Acreage (TBD): <Slider style={sliderStyle} min={0} max={9} onChange={dragFLA} />
-        </div>
-        <div>
-          Agriburg Farm Acreage (TBD): <Slider style={sliderStyle} min={0} max={9} onChange={dragAFA} />
-        </div>
-        <div>
-          Farmville Farm Acreage (TBD): <Slider style={sliderStyle} min={0} max={9} onChange={dragFFA} />
-        </div>
+        <br />
+        Farmville Population ({this.props.pictureParams.populationFarmville}):
+          <Slider style={sliderStyle} min={0} max={9} onChange={dragFP}
+          value={this.props.pictureParams.populationFarmville} />
+        <br />
+        ({this.props.pictureParams.waterDivertedToFarmRiver * 25})% Water diverted to Farmville:
+          <Slider style={sliderStyle} min={0} max={3} onChange={dragDivert}
+          value={this.props.pictureParams.waterDivertedToFarmRiver} />
+        <br />
+        ({this.props.pictureParams.lakeArea}) Farm Lake Acreage (TBD):
+          <Slider style={sliderStyle} min={0} max={99} onChange={dragLakeArea}
+          value={this.props.pictureParams.lakeArea} />
+        <br />
+        ({this.props.pictureParams.cropsArgiburg}) Agriburg Farm Acreage (TBD):
+          <Slider style={sliderStyle} min={0} max={99} onChange={dragAgriburgCrops}
+          value={this.props.pictureParams.cropsArgiburg} />
+        <br />
+        ({this.props.pictureParams.cropsFarmville}) Farmville Farm Acreage (TBD):
+          <Slider style={sliderStyle} min={0} max={99} onChange={dragFarmvilleCrops}
+          value={this.props.pictureParams.cropsFarmville} />
       </div>
     );
   }

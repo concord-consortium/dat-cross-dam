@@ -1,23 +1,37 @@
 import { inject, observer } from "mobx-react";
 import * as React from "react";
+import { SizeMe } from "react-sizeme";
+
 import { BaseComponent, IBaseProps } from "./base";
 import { ControlArea } from "./controls/control-area";
 // import { ChartTest } from "./charts/chart-test";
 import { PictureArea } from "./picture/picture-area";
-// import { Text } from "./text";
 import { ChartTestDisplay } from "./charts/chart-test-display";
 import "./app.sass";
+
+import { CheckBox } from "./controls/check-box";
 
 export interface IPictureParams {
   showLabels: boolean;
   showDam: boolean;
-  populationAgriburg: number;
-  populationFarmVille: number;
+  populationAgriburg: number;         // 0..9
+  populationFarmville: number;        // 0..9
+  cropsArgiburg: number;              // 0..99
+  cropsFarmville: number;             // 0..99
+  waterDivertedToFarmRiver: number;   // 0..3 for 0%, 25%, 50%, & 75%.
+  lakeArea: number;                   // 0..99
 }
 
 interface IProps extends IBaseProps {}
+
 interface IState {
   pictureParams: IPictureParams;
+}
+
+interface ISize {     // Used by SizeMe to pass the resized parent's details
+  size: {             // to it's children.
+    width?: number;
+  };
 }
 
 @inject("stores")
@@ -28,60 +42,83 @@ export class AppComponent extends BaseComponent<IProps, IState> {
     super(props);
     this.state = {
       pictureParams: {
-        showLabels: false,
-        showDam: false,
-        populationAgriburg: 0,
-        populationFarmVille: 0
+        showLabels: true,
+        showDam: true,
+        populationAgriburg: 3,
+        populationFarmville: 8,
+        cropsArgiburg: 20,
+        cropsFarmville: 70,
+        waterDivertedToFarmRiver: 1,
+        lakeArea: 50
       }
     };
   }
 
   public render() {
 
+    // DAL: ui "store" is unused at the moment, but eventually, I think it will
+    // house the UI settings that are application wide. Perhaps, "show labels"
+    // will belong in there.
+
     const {ui} = this.stores;
 
-    // For the moment, the styles are defined "inline". This is likely to be
-    // replaced as the final styles are defined and implemented.
-    const containerStyle = {
-      width: "100%",
-      height: "100%",
+    // DAL: For the moment, the styles are defined "inline". This is likely to
+    // be replaced as the final styles are defined and implemented -- and
+    // probably using SASS.
+
+    const gridStyle = {
       display: "grid",
-      gridTemplateColumns: "2fr 1fr",
-      gridTemplateRows: "1fr 2fr"
+      gridTemplateColumns: "1fr",
+      gridTemplateRows: "1fr 1fr 1fr"
     };
+
     const controlAreaStyle = {
+      margin: 5,
       border: "2px solid green",
+      gridColumn: "1 / 2",
+      gridRow: "2 / 3"
     };
-    const pictureAreaStyle = {
-      border: "2px solid blue",
-    };
+
     const chartAreaStyle = {
+      margin: 5,
       border: "2px solid yellow",
-      gridColumn: "2 / 3",
-      gridRow: "1 / 3"
+      gridColumn: "1 / 2",
+      gridRow: "3 / 4"
+    };
+
+    const pictureAreaStyle = {
+      margin: 5,
+      border: "2px solid purple",
+      gridColumn: "1 / 2",
+      gridRow: "1 / 2"
     };
 
     const onChangePictureParams = (newPictureParams: IPictureParams) => {
+      // tslint:disable no-console
+      console.log("*** OnChangePictureParams:  " + JSON.stringify(newPictureParams));
+      // tslint:enable no-console
       this.setState({pictureParams: newPictureParams});
-      // console.log(" - - - - - -  " + JSON.stringify(this.state.pictureParams));
     };
 
     return (
       <div className="app">
-        <div style={containerStyle}>
+        <div style={gridStyle}>
+          <div style={pictureAreaStyle}>
+            <SizeMe>
+              { ( {size}: ISize ) =>
+                <PictureArea width={size.width ? size.width : 600} pictureParams={this.state.pictureParams} />
+              }
+            </SizeMe>
+            {/* <PictureArea width={600} pictureParams={this.state.pictureParams} /> */}
+          </div>
           <div style={controlAreaStyle}>
             <ControlArea pictureParams={this.state.pictureParams} onChange={onChangePictureParams} />
           </div>
           <div style={chartAreaStyle}>
             <ChartTestDisplay />
           </div>
-          <div style={pictureAreaStyle}>
-            <PictureArea pictureParams={this.state.pictureParams} />
-          </div>
+          {/* <ChartTestDisplay /> */}
         </div>
-        {/* <Text text={ui.sampleText} /> */}
-        {/* <canvas id="canvas_for_cartoon" width="600" height="340" /> */}
-        {/* <ChartTestDisplay /> */}
       </div>
     );
   }
