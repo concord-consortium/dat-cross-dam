@@ -91,7 +91,7 @@ export class ControlArea extends BaseComponent<IProps, IState> {
           <Slider style={sliderStyle} min={0} max={9} onChange={dragFP}
           value={this.props.pictureParams.populationFarmville} />
         <br />
-        ({this.props.pictureParams.waterDivertedToFarmRiver * 25})% Water diverted to Farmville:
+        ({this.props.pictureParams.waterDivertedToFarmRiver * 25}%) Water diverted to Farmville:
           <Slider style={sliderStyle} min={0} max={3} onChange={dragDivert}
           value={this.props.pictureParams.waterDivertedToFarmRiver} />
         <br />

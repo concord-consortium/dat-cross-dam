@@ -104,24 +104,52 @@ export class PictureArea extends BaseComponent<IProps, IState> {
       );
     };
 
-    const renderLake = () => {
-      const factor = width / 600.0;
-      const x = 366 * factor;
-      const y = 126 * factor;
+    const renderLake = (lakeArea: number) => {
+
+      const factor = width / 600.0;       // Factor determined by the actual display width.
+
+      const minLakeScale = 0.7;           // Limits of scaling factor lake -- used with
+      const maxLakeScale = 1.5;           // lakeArea to compute the final size.
+      const scale = (maxLakeScale - minLakeScale) * ((lakeArea + 1) / 100) + minLakeScale;
+
+      const lakeWidth = 96;               // Design size of lake SVG graphic.
+      const lakeHeight = 28;
+      const w = lakeWidth * scale;
+      const h = lakeHeight * scale;
+      const x = 410;                      // Design location (top-left) of lake.
+      const y = 135;
+
+      const lake = Lake({
+        width: w * factor,
+        height: h * factor,
+        transform: `translate(${(x - (w / 2)) * factor},
+                              ${(y - (h / 2)) * factor})`
+      });
+
       return(
         <div style={innerStyle}>
-          <Lake transform={`translate(${x}, ${y}) scale(${factor}, ${factor})`} />
+          {lake}
         </div>
       );
     };
 
     const renderDamn = () => {
       const factor = width / 600.0;
-      const x = 125 * factor;
-      const y = 122 * factor;
+      const scale = 1.15;
+      const w = 22 * scale;
+      const h = 18 * scale;
+      const x = 137;
+      const y = 134;
+      const dam = Dam({
+        width: w * factor,
+        height: h * factor,
+        transform: `translate(${(x - (w / 2)) * factor},
+                              ${(y - (h / 2)) * factor})`
+
+      });
       return(
         <div style={innerStyle}>
-          <Dam transform={`translate(${x}, ${y}) scale(${factor}, ${factor})`} />
+          {dam}
         </div>
       );
     };
@@ -147,7 +175,7 @@ export class PictureArea extends BaseComponent<IProps, IState> {
         { renderScenery() }
         { renderTrees() }
         { renderRivers(this.props.pictureParams.waterDivertedToFarmRiver) }
-        { renderLake() }
+        { renderLake(this.props.pictureParams.lakeArea) }
         { showDam === true ? renderDamn() : "" }
         {/* { this.renderAgriburg(this.props.pictureParams.populationAgriburg) } */}
         {/* { this.renderFarmVille(this.props.pictureParams.populationFarmVille) } */}
