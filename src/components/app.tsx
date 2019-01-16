@@ -12,9 +12,10 @@ import { ControlArea } from "./controls/control-area";
 
 import "./app.sass";
 
-interface ISize {     // Used by SizeMe to pass the resized parent's details
-  size: {             // to it's children.
+interface ISize {     // Used by SizeMe to pass the resized parent details
+  size: {             // to its children.
     width?: number;
+    height?: number;
   };
 }
 
@@ -26,10 +27,6 @@ export class AppComponent extends BaseComponent<{}, {}> {
 
     const {ui, appMode} = this.stores;
 
-    const pictureAreaStyle: React.CSSProperties = {
-      position: "relative",
-      margin: 5,
-    };
     return (
       <div className="app-container">
         {appMode !== "embed" &&
@@ -46,12 +43,12 @@ export class AppComponent extends BaseComponent<{}, {}> {
             </div>
           }
         <div className="main-content">
-          <div className="section simulation">
-            <div style={pictureAreaStyle}>
-            <SizeMe>
-              { ({size}: ISize ) => <PictureArea width={size.width ? size.width : 600} /> }
-            </SizeMe>
-          </div>
+            <div className="section simulation">
+              <SizeMe monitorHeight={true}>
+                {({ size }: ISize) =>
+                  <PictureArea width={size.width ? size.width : 0} />
+                }
+              </SizeMe>
           </div>
           {ui.displayMode === "Graph" &&
             <div className="section chart">
