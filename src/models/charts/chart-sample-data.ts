@@ -1,5 +1,5 @@
 
-import { ChartDataSetModel, DataPoint, ChartDataSetModelType } from "./chart-data-set";
+import { ChartDataSetModel, DataPoint, ChartDataSetModelType, ChartColors } from "./chart-data-set";
 
 function addTestDataPoints() {
   const points = [];
@@ -23,26 +23,20 @@ function addTestDataPoints() {
 export function rngData() {
   const chartDataSets: ChartDataSetModelType[] = [];
   chartDataSets.push(ChartDataSetModel.create({
-    name: "Sample Dataset1",
+    name: "Spring",
     dataPoints: addTestDataPoints(),
-    // color: ChartColors[3].hex,
+    color: ChartColors[0].hex,
     // pointColors: ["#00ff00", "#ff0000", "#0000ff"],
     backgroundOpacity: 0.9,
-    maxPoints: 100,
-    fixedMaxA2: 200,
-    fixedMaxA1: 200,
-    stack: "1"
+    stack: "Spring"
   }));
   chartDataSets.push(ChartDataSetModel.create({
-    name: "Sample Dataset2",
+    name: "Summer",
     dataPoints: addTestDataPoints(),
-    // color: "#00ffcc",
+    color: ChartColors[1].hex,
     // pointColors: ["#00ff00", "#ff0000", "#0000ff"],
     backgroundOpacity: 0.3,
-    maxPoints: 100,
-    fixedMaxA2: 200,
-    fixedMaxA1: 200,
-    stack: "2"
+    stack: "Summer"
   }));
   return chartDataSets;
 }

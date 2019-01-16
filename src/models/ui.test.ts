@@ -8,19 +8,19 @@ describe("ui model", () => {
   });
 
   it("has default values", () => {
-    expect(ui.sampleText).toBe("Hello World");
+    expect(ui.displayMode).toBe("Graph");
   });
 
   it("uses override values", () => {
     ui = UIModel.create({
-      sampleText: "foo"
+      displayMode: "Chart"
     });
-    expect(ui.sampleText).toBe("foo");
+    expect(ui.displayMode).toBe("Chart");
   });
 
   it("sets new values", () => {
-    ui.setSampleText("bar");
-    expect(ui.sampleText).toBe("bar");
+    ui.setDisplayMode("Simulation");
+    expect(ui.displayMode).toBe("Simulation");
   });
 
 });

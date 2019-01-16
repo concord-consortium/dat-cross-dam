@@ -3,10 +3,11 @@ import * as React from "react";
 import { SizeMe } from "react-sizeme";
 
 import { BaseComponent, IBaseProps } from "./base";
-import { ControlArea } from "./controls/control-area";
-// import { ChartTest } from "./charts/chart-test";
+import { ChartDisplay } from "./charts/chart-display";
+import { SimulationControls } from "./simulation-controls";
+import { DamData } from "./dam-data";
 import { PictureArea } from "./picture/picture-area";
-import { ChartTestDisplay } from "./charts/chart-test-display";
+
 import "./app.sass";
 
 import { CheckBox } from "./controls/check-box";
@@ -109,16 +110,29 @@ export class AppComponent extends BaseComponent<IProps, IState> {
                 <PictureArea width={size.width ? size.width : 600} pictureParams={this.state.pictureParams} />
               }
             </SizeMe>
-            {/* <PictureArea width={600} pictureParams={this.state.pictureParams} /> */}
           </div>
-          <div style={controlAreaStyle}>
+          {/* <div style={controlAreaStyle}>
             <ControlArea pictureParams={this.state.pictureParams} onChange={onChangePictureParams} />
-          </div>
-          <div style={chartAreaStyle}>
-            <ChartTestDisplay />
-          </div>
-          {/* <ChartTestDisplay /> */}
+          </div> */}
         </div>
+        <div className="controls">
+          <SimulationControls />
+        </div>
+        {ui.displayMode === "Simulation" &&
+          <div className="section simulation">
+            <canvas id="canvas_for_cartoon" width="600" height="340" />
+          </div>
+        }
+        {ui.displayMode === "Graph" &&
+          <div className="section chart">
+            <ChartDisplay />
+          </div>
+        }
+        {ui.displayMode === "Table" &&
+          <div className="section table">
+            <DamData />
+          </div>
+        }
       </div>
     );
   }
