@@ -3,6 +3,7 @@ import * as React from "react";
 import { BaseComponent, IBaseProps } from "./base";
 import { AgGridReact } from "ag-grid-react";
 import { ColDef, ValueFormatterParams, AgGridEvent } from "ag-grid-community";
+import { dataByFlow } from "../data/dam-data-utility";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-balham.css";
 import "./dam-data.sass";
@@ -28,9 +29,10 @@ export class DamData extends BaseComponent<IProps, IState> {
   public render() {
     const { riverData } = this.stores;
     const cols = this.getDataColumns();
+    console.log(riverData.flowPercentage);
     return (
       <div className="dam-data-grid">
-        <AgGridReact columnDefs={cols} rowData={riverData.allCurrentData} headerHeight={48}
+        <AgGridReact columnDefs={cols} rowData={dataByFlow(riverData.flowPercentage)} headerHeight={48}
           onGridReady={this.onGridReady} />
       </div>
     );
@@ -38,7 +40,7 @@ export class DamData extends BaseComponent<IProps, IState> {
 
   private getDataColumns = (): ColDef[] => {
     const { riverData } = this.stores;
-    const allData = riverData.allCurrentData;
+    const allData = dataByFlow(riverData.flowPercentage);
 
     const cols: ColDef[] = [];
     Object.keys(allData[0]).map(d => {
