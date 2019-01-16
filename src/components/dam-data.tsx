@@ -29,7 +29,6 @@ export class DamData extends BaseComponent<IProps, IState> {
   public render() {
     const { riverData } = this.stores;
     const cols = this.getDataColumns();
-    console.log(riverData.flowPercentage);
     return (
       <div className="dam-data-grid">
         <AgGridReact columnDefs={cols} rowData={dataByFlow(riverData.flowPercentage)} headerHeight={48}
