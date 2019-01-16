@@ -1,5 +1,5 @@
 import * as React from "react";
-import { inject, observer } from "mobx-react";
+import { inject, observer, propTypes } from "mobx-react";
 import { BaseComponent } from "./base";
 import Slider from "rc-slider";
 
@@ -41,6 +41,7 @@ export class SimulationControls extends BaseComponent<IProps, IState> {
           checked={ui.displayMode === "Graph"} onChange={this.handleDisplayModeChange}/>Graph</div>
         <div><input type="radio" id="displayModeTable" name="displayMode" value="Table"
           checked={ui.displayMode === "Table"} onChange={this.handleDisplayModeChange}/>Table</div>
+        {this.props.children}
       </div>
     );
   }

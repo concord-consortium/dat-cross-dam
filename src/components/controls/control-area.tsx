@@ -76,36 +76,28 @@ export class ControlArea extends BaseComponent<IProps, IState> {
 
     return (
       <div>
-        <span>Temporary Display Controls</span>
-        <span><i>(To be removed when engine is in place.)</i></span>
         <hr />
+        <span><b>Temp. Display Controls <i>(To Be Removed!!!)</i></b></span>
         <CheckBox label="Map Labels" isChecked={this.props.pictureParams.showLabels} onChange={toggleLabels} />
-        <br />
         <CheckBox label="Show Dam" isChecked={this.props.pictureParams.showDam} onChange={toggleDam} />
-        <br />
         Agriburg Population ({this.props.pictureParams.populationAgriburg}):
           <Slider style={sliderStyle} min={0} max={99} onChange={dragAP}
           value={this.props.pictureParams.populationAgriburg} />
-        <br />
         Farmville Population ({this.props.pictureParams.populationFarmville}):
           <Slider style={sliderStyle} min={0} max={99} onChange={dragFP}
           value={this.props.pictureParams.populationFarmville} />
-        <br />
         ({this.props.pictureParams.waterDivertedToFarmRiver * 25}%) Water diverted to Farmville:
           <Slider style={sliderStyle} min={0} max={3} onChange={dragDivert}
           value={this.props.pictureParams.waterDivertedToFarmRiver} />
-        <br />
-        ({this.props.pictureParams.lakeArea}) Farm Lake Acreage (TBD):
+        ({this.props.pictureParams.lakeArea}) Farm Lake Acreage:
           <Slider style={sliderStyle} min={0} max={99} onChange={dragLakeArea}
           value={this.props.pictureParams.lakeArea} />
-        <br />
-        ({this.props.pictureParams.cropsArgiburg}) Agriburg Farm Acreage (TBD):
+        {/* ({this.props.pictureParams.cropsArgiburg}) Agriburg Farm Acreage:
           <Slider style={sliderStyle} min={0} max={99} onChange={dragAgriburgCrops}
           value={this.props.pictureParams.cropsArgiburg} />
-        <br />
-        ({this.props.pictureParams.cropsFarmville}) Farmville Farm Acreage (TBD):
+        ({this.props.pictureParams.cropsFarmville}) Farmville Farm Acreage:
           <Slider style={sliderStyle} min={0} max={99} onChange={dragFarmvilleCrops}
-          value={this.props.pictureParams.cropsFarmville} />
+          value={this.props.pictureParams.cropsFarmville} /> */}
       </div>
     );
   }

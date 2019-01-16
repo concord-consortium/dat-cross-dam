@@ -7,6 +7,7 @@ import { ChartDisplay } from "./charts/chart-display";
 import { SimulationControls } from "./simulation-controls";
 import { DamData } from "./dam-data";
 import { PictureArea } from "./picture/picture-area";
+import { ControlArea } from "./controls/control-area";
 
 import "./app.sass";
 
@@ -45,9 +46,9 @@ export class AppComponent extends BaseComponent<IProps, IState> {
     this.state = {
       pictureParams: {
         showLabels: false,
-        showDam: true,
-        populationAgriburg: 99,
-        populationFarmville: 99,
+        showDam: false,
+        populationAgriburg: 0,
+        populationFarmville: 0,
         cropsArgiburg: 20,
         cropsFarmville: 70,
         waterDivertedToFarmRiver: 1,
@@ -78,7 +79,9 @@ export class AppComponent extends BaseComponent<IProps, IState> {
             <ControlArea pictureParams={this.state.pictureParams} onChange={onChangePictureParams} />
           </div> */}
         <div className="controls">
-          <SimulationControls />
+          <SimulationControls>
+            <ControlArea pictureParams={this.state.pictureParams} onChange={onChangePictureParams} />
+          </SimulationControls>
         </div>
         {ui.displayMode === "Simulation" &&
           <div className="section simulation">
