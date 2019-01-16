@@ -32,7 +32,9 @@ export class AppComponent extends BaseComponent<{}, {}> {
     };
     return (
       <div className="app-container">
-        <div className="top-bar">DAT Cross Dam</div>
+        {appMode !== "embed" &&
+          <div className="top-bar">DAT Cross Dam</div>
+        }
         <div className="controls-and-content-container">
           {appMode === "dev" &&
             <div className="left-panel">
@@ -53,11 +55,13 @@ export class AppComponent extends BaseComponent<{}, {}> {
           </div>
           {ui.displayMode === "Graph" &&
             <div className="section chart">
+              <div className="header">Chart</div>
               <ChartDisplay />
             </div>
           }
           {ui.displayMode === "Table" &&
             <div className="section table">
+              <div className="header">Table</div>
               <DamData />
             </div>
             }
