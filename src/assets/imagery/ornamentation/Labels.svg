@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg viewBox="7.053 8.39 579.278 319.568" width="579.278" height="319.568" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 600 340" xmlns="http://www.w3.org/2000/svg">
   <g>
     <title>Labels</title>
+    <rect x="1.847" y="0.79" width="598.546" height="338.104" style="fill: none;">
+      <title>AlignmentRectangle</title>
+    </rect>
     <g>
       <rect x="272.7" y="8.39" width="52.437" height="14.346" style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0);"/>
       <text style="fill: rgb(51, 51, 51); font-size: 10px; white-space: pre; text-anchor: middle;" x="298.921" y="19.019">Mt. Farm</text>

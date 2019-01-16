@@ -1,29 +1,50 @@
 import { inject, observer } from "mobx-react";
+import { getRelativePath } from "mobx-state-tree";
 import * as React from "react";
+import { SizeMe } from "react-sizeme";
+
 import { BaseComponent, IBaseProps } from "./base";
 import { ChartDisplay } from "./charts/chart-display";
 import { SimulationControls } from "./simulation-controls";
 import { DamData } from "./dam-data";
+import { PictureArea } from "./picture/picture-area";
+import { ControlArea } from "./controls/control-area";
 
 import "./app.sass";
 
-interface IProps extends IBaseProps {}
-interface IState {}
+interface ISize {     // Used by SizeMe to pass the resized parent's details
+  size: {             // to it's children.
+    width?: number;
+  };
+}
 
 @inject("stores")
 @observer
-export class AppComponent extends BaseComponent<IProps, IState> {
+export class AppComponent extends BaseComponent<{}, {}> {
 
   public render() {
+
     const {ui} = this.stores;
+
+    const pictureAreaStyle: React.CSSProperties = {
+      position: "relative",
+      margin: 5,
+    };
+
     return (
       <div className="app">
         <div className="controls">
-          <SimulationControls />
+          <SimulationControls>
+            <ControlArea />
+          </SimulationControls>
         </div>
         {ui.displayMode === "Simulation" &&
           <div className="section simulation">
-            <canvas id="canvas_for_cartoon" width="600" height="340" />
+            <div style={pictureAreaStyle}>
+              <SizeMe>
+                { ({size}: ISize ) => <PictureArea width={size.width ? size.width : 600} /> }
+              </SizeMe>
+            </div>
           </div>
         }
         {ui.displayMode === "Graph" &&
@@ -39,4 +60,5 @@ export class AppComponent extends BaseComponent<IProps, IState> {
       </div>
     );
   }
+
 }

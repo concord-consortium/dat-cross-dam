@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 22 18" xmlns="http://www.w3.org/2000/svg">
+  <path class="st31" d="M 12.514 16.431 C 10.344 15.621 5.464 11.501 5.464 11.501 C 5.464 11.501 5.444 5.911 10.364 3.621 C 13.384 2.211 17.394 1.451 20.154 2.091 C 21.414 6.771 20.854 10.421 19.724 13.131 C 17.984 12.281 14.264 11.611 12.674 13.081 C 11.614 14.071 12.304 15.491 12.514 16.431 Z" style="fill: rgb(166, 177, 178);"/>
+  <path class="st32" d="M 2.644 14.72 L 7.104 13.73 L 8.614 17.011 L 12.904 16.851 L 8.414 14.421 L 5.464 11.501 L 0.274 11.031 C 0.274 11.031 0.474 12.401 0.914 13.821 L 1.824 14.391 L 2.644 14.72 Z" style="fill: rgb(138, 146, 147);"/>
+  <path class="st33" d="M 0.274 11.031 C -0.036 8.161 1.444 5.021 5.144 2.711 C 9.014 0.301 15.924 -0.149 20.074 1.941 C 16.754 1.431 11.994 1.851 8.874 4.091 C 6.464 5.821 5.064 8.931 5.374 11.541 C 3.214 12.351 1.724 12.351 0.274 11.031 Z" style="fill: rgb(205, 211, 211); stroke: rgb(40, 40, 39); stroke-linejoin: bevel;"/>
+  <path class="st35" d="M 5.434 11.541 C 6.464 13.351 11.504 16.971 13.264 17.001 C 9.864 12.051 16.414 11.051 19.604 13.221 C 20.804 11.761 21.154 3.371 19.744 1.651" style="fill: none; stroke: rgb(40, 40, 39); stroke-linejoin: bevel;"/>
+  <path class="st36" d="M 17.324 5.491 C 17.724 7.901 17.714 10.781 17.464 12.131" style="fill: none; stroke: rgb(40, 40, 39); stroke-linecap: round;"/>
+  <path class="st36" d="M 13.884 6.061 C 14.124 8.381 14.744 10.971 15.224 12.071" style="fill: none; stroke: rgb(40, 40, 39); stroke-linecap: round;"/>
+  <path class="st36" d="M 10.434 7.761 C 10.804 9.431 12.364 12.111 13.164 12.731" style="fill: none; stroke: rgb(40, 40, 39); stroke-linecap: round;"/>
+  <path class="st36" d="M 8.554 10.831 C 9.694 12.861 11.094 13.841 12.154 14.631" style="fill: none; stroke: rgb(40, 40, 39); stroke-linecap: round;"/>
+  <line style="stroke: rgb(0, 0, 0); stroke-linecap: round;" x1="0.367" y1="11.22" x2="1.452" y2="14.217"/>
+  <line style="stroke: rgb(0, 0, 0); stroke-linecap: round;" x1="12.563" y1="16.956" x2="8.584" y2="17.112"/>
+  <line style="stroke: rgb(0, 0, 0); stroke-linecap: round;" x1="6.982" y1="13.545" x2="8.584" y2="17.06"/>
+  <line style="stroke: rgb(0, 0, 0);" x1="0.987" y1="13.339" x2="0.987" y2="12.874"/>
+</svg>
