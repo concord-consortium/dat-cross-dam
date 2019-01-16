@@ -24,24 +24,25 @@ export class AppComponent extends BaseComponent<{}, {}> {
 
   public render() {
 
-    const {ui} = this.stores;
+    const {ui, appMode} = this.stores;
 
     const pictureAreaStyle: React.CSSProperties = {
       position: "relative",
       margin: 5,
     };
-
     return (
       <div className="app-container">
         <div className="top-bar">DAT Cross Dam</div>
         <div className="controls-and-content-container">
-        <div className="left-panel">
-          <div className="controls">
-          <SimulationControls>
-            <ControlArea />
-          </SimulationControls>
-          </div>
-        </div>
+          {appMode === "dev" &&
+            <div className="left-panel">
+              <div className="controls">
+              <SimulationControls>
+                <ControlArea />
+              </SimulationControls>
+              </div>
+            </div>
+          }
         <div className="main-content">
           <div className="section simulation">
             <div style={pictureAreaStyle}>

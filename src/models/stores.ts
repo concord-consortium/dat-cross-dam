@@ -1,7 +1,7 @@
 import { UIModel, UIModelType } from "./ui";
 import { DamModel, DamModelType } from "./dam";
 
-export type AppMode = "authed" | "dev" | "test" | "demo" | "qa";
+export type AppMode = "prod" | "dev" ;
 
 export interface IStores {
   appMode: AppMode;
@@ -17,7 +17,7 @@ export interface ICreateStores {
 
 export function createStores(params?: ICreateStores): IStores {
   return {
-    appMode: params && params.appMode ? params.appMode : "dev",
+    appMode: params && params.appMode ? params.appMode : "prod",
     ui: params && params.ui || UIModel.create({}),
     riverData: params && params.riverData || DamModel.create()
   };
