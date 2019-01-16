@@ -3,8 +3,6 @@ import { types } from "mobx-state-tree";
 export const UIModel = types
   .model("UI", {
     displayMode: "Graph",
-    showLabels: false,
-    showDam: true,
     populationAgriburg: 0,
     populationFarmville: 0,
     cropsArgiburg: 20,
@@ -15,12 +13,6 @@ export const UIModel = types
     return {
       setDisplayMode(text: string) {
         self.displayMode = text;
-      },
-      setLabels(labels: boolean) {
-        self.showLabels = labels;
-      },
-      setDam(dam: boolean) {
-        self.showDam = dam;
       },
       setPopAgriburg(pop: number) {
         self.populationAgriburg = pop;

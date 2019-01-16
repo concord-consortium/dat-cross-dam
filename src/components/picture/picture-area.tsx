@@ -1,6 +1,5 @@
 import * as React from "react";
 
-import { IPictureParams } from "../app";
 import { BaseComponent, IBaseProps } from "../base";
 import { inject, observer, propTypes } from "mobx-react";
 
@@ -22,11 +21,7 @@ import SmallHousePink from "../../assets/imagery/buildings/SmallHousePink.svg";
 import SmallHouseWhite from "../../assets/imagery/buildings/SmallHouseWhite.svg";
 
 interface IProps extends IBaseProps {
-  pictureParams: IPictureParams;
   width: number;
-}
-
-interface IState {
 }
 
 interface IBuilding {
@@ -47,19 +42,13 @@ interface ITown {
 
 @inject("stores")
 @observer
-export class PictureArea extends BaseComponent<IProps, IState> {
-
-  constructor(props: IProps) {
-    super(props);
-    this.state = { showLabels: true };
-  }
+export class PictureArea extends BaseComponent<IProps, {}> {
 
   public render() {
 
     const { riverData, ui } = this.stores;
 
     const { width } = this.props;
-    const { showLabels, showDam } = this.props.pictureParams;
 
     const innerStyle: React.CSSProperties = {
       position: "absolute",
@@ -291,10 +280,10 @@ export class PictureArea extends BaseComponent<IProps, IState> {
         { renderTrees() }
         { renderRivers(riverData.flowPercentage / 25) }
         { renderLake(ui.lakeArea) }
-        { showDam === true ? renderDamn() : "" }
+        { renderDamn() }
         { renderTown(ui.populationFarmville, buildingsFarmville, townFarmville)}
         { renderTown(ui.populationAgriburg, buildingsAgriburg, townAgriburg)}
-        { ui.showLabels === true ? renderLabels() : ""}
+        { renderLabels() }
         { renderFrame() }
         <div style={innerStyle}>
           <span>DEBUGGING - Width: {width}</span>
