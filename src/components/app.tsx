@@ -46,7 +46,7 @@ export class AppComponent extends BaseComponent<{}, {}> {
             <div className="section simulation">
               <SizeMe monitorHeight={true}>
                 {({ size }: ISize) =>
-                  <PictureArea width={size.width ? size.width : 0} />
+                  <PictureArea width={size.width ? size.width : 0} height={size.height ? size.height : 0} />
                 }
               </SizeMe>
           </div>

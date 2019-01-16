@@ -22,6 +22,7 @@ import SmallHouseWhite from "../../assets/imagery/buildings/SmallHouseWhite.svg"
 
 interface IProps extends IBaseProps {
   width: number;
+  height?: number;
 }
 
 interface IBuilding {
