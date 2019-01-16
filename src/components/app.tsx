@@ -11,6 +11,7 @@ import { PictureArea } from "./picture/picture-area";
 import "./app.sass";
 
 import { CheckBox } from "./controls/check-box";
+import { getRelativePath } from "mobx-state-tree";
 
 export interface IPictureParams {
   showLabels: boolean;
@@ -57,41 +58,11 @@ export class AppComponent extends BaseComponent<IProps, IState> {
 
   public render() {
 
-    // DAL: ui "store" is unused at the moment, but eventually, I think it will
-    // house the UI settings that are application wide. Perhaps, "show labels"
-    // will belong in there.
-
     const {ui} = this.stores;
 
-    // DAL: For the moment, the styles are defined "inline". This is likely to
-    // be replaced as the final styles are defined and implemented -- and
-    // probably using SASS.
-
-    const gridStyle = {
-      display: "grid",
-      gridTemplateColumns: "1fr",
-      gridTemplateRows: "1fr 1fr 1fr"
-    };
-
-    const controlAreaStyle = {
+    const pictureAreaStyle: React.CSSProperties = {
+      position: "relative",
       margin: 5,
-      border: "2px solid green",
-      gridColumn: "1 / 2",
-      gridRow: "2 / 3"
-    };
-
-    const chartAreaStyle = {
-      margin: 5,
-      border: "2px solid yellow",
-      gridColumn: "1 / 2",
-      gridRow: "3 / 4"
-    };
-
-    const pictureAreaStyle = {
-      margin: 5,
-      border: "2px solid purple",
-      gridColumn: "1 / 2",
-      gridRow: "1 / 2"
     };
 
     const onChangePictureParams = (newPictureParams: IPictureParams) => {
