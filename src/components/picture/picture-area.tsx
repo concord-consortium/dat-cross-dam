@@ -96,9 +96,8 @@ export class PictureArea extends BaseComponent<IProps, {}> {
           case 2: return (<Rivers50 />);
           case 3: return (<Rivers75 />);
           default:
-            // tslint:disable no-console
+            // tslint:disable-next-line no-console
             console.error("The indicated river set index not found.");
-            // tslint:enable no-console
             return (<Rivers0 />);
         }
       };
