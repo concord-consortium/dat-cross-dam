@@ -32,33 +32,37 @@ export class AppComponent extends BaseComponent<{}, {}> {
     };
 
     return (
-      <div className="app">
-        <div className="controls">
+      <div className="app-container">
+        <div className="top-bar">DAT Cross Dam</div>
+        <div className="controls-and-content-container">
+        <div className="left-panel">
+          <div className="controls">
           <SimulationControls>
             <ControlArea />
           </SimulationControls>
+          </div>
         </div>
-        {ui.displayMode === "Simulation" &&
+        <div className="main-content">
           <div className="section simulation">
             <div style={pictureAreaStyle}>
-              <SizeMe>
-                { ({size}: ISize ) => <PictureArea width={size.width ? size.width : 600} /> }
-              </SizeMe>
+            <SizeMe>
+              { ({size}: ISize ) => <PictureArea width={size.width ? size.width : 600} /> }
+            </SizeMe>
+          </div>
+          </div>
+          {ui.displayMode === "Graph" &&
+            <div className="section chart">
+              <ChartDisplay />
             </div>
+          }
+          {ui.displayMode === "Table" &&
+            <div className="section table">
+              <DamData />
+            </div>
+            }
           </div>
-        }
-        {ui.displayMode === "Graph" &&
-          <div className="section chart">
-            <ChartDisplay />
-          </div>
-        }
-        {ui.displayMode === "Table" &&
-          <div className="section table">
-            <DamData />
-          </div>
-        }
+        </div>
       </div>
     );
   }
-
 }
