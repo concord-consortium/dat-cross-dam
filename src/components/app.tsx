@@ -103,24 +103,21 @@ export class AppComponent extends BaseComponent<IProps, IState> {
 
     return (
       <div className="app">
-        <div style={gridStyle}>
-          <div style={pictureAreaStyle}>
-            <SizeMe>
-              { ( {size}: ISize ) =>
-                <PictureArea width={size.width ? size.width : 600} pictureParams={this.state.pictureParams} />
-              }
-            </SizeMe>
-          </div>
           {/* <div style={controlAreaStyle}>
             <ControlArea pictureParams={this.state.pictureParams} onChange={onChangePictureParams} />
           </div> */}
-        </div>
         <div className="controls">
           <SimulationControls />
         </div>
         {ui.displayMode === "Simulation" &&
           <div className="section simulation">
-            <canvas id="canvas_for_cartoon" width="600" height="340" />
+            <div style={pictureAreaStyle}>
+              <SizeMe>
+                { ( {size}: ISize ) =>
+                  <PictureArea width={size.width ? size.width : 600} pictureParams={this.state.pictureParams} />
+                }
+              </SizeMe>
+            </div>
           </div>
         }
         {ui.displayMode === "Graph" &&
