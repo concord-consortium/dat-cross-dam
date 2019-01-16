@@ -46,7 +46,7 @@ export class AppComponent extends BaseComponent<IProps, IState> {
     this.state = {
       pictureParams: {
         showLabels: false,
-        showDam: false,
+        showDam: true,
         populationAgriburg: 0,
         populationFarmville: 0,
         cropsArgiburg: 20,

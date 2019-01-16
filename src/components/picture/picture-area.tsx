@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { IPictureParams } from "../app";
 import { BaseComponent, IBaseProps } from "../base";
+import { inject, observer, propTypes } from "mobx-react";
 
 import Scenery from "../../assets/imagery/scenery/scenery.svg";
 import Rivers0 from "../../assets/imagery/water/rivers0.svg";
@@ -44,6 +45,8 @@ interface ITown {
   adjusted: boolean;
 }
 
+@inject("stores")
+@observer
 export class PictureArea extends BaseComponent<IProps, IState> {
 
   constructor(props: IProps) {
@@ -52,6 +55,8 @@ export class PictureArea extends BaseComponent<IProps, IState> {
   }
 
   public render() {
+
+    const { riverData, ui } = this.stores;
 
     const { width } = this.props;
     const { showLabels, showDam } = this.props.pictureParams;
@@ -276,16 +281,20 @@ export class PictureArea extends BaseComponent<IProps, IState> {
       { svgBuilding: LongHouseRedRoof,     x: 40, y: 70, width: 27, height: 13 },
     ];
 
+    // tslint:disable no-console
+    console.log(">>> " + JSON.stringify(riverData));
+    // tslint:enable no-console
+
     return (
       <div style={innerStyle}>
         { renderScenery() }
         { renderTrees() }
-        { renderRivers(this.props.pictureParams.waterDivertedToFarmRiver) }
-        { renderLake(this.props.pictureParams.lakeArea) }
+        { renderRivers(riverData.flowPercentage / 25) }
+        { renderLake(ui.lakeArea) }
         { showDam === true ? renderDamn() : "" }
-        { renderTown(this.props.pictureParams.populationFarmville, buildingsFarmville, townFarmville)}
-        { renderTown(this.props.pictureParams.populationAgriburg, buildingsAgriburg, townAgriburg)}
-        { showLabels === true ? renderLabels() : ""}
+        { renderTown(ui.populationFarmville, buildingsFarmville, townFarmville)}
+        { renderTown(ui.populationAgriburg, buildingsAgriburg, townAgriburg)}
+        { ui.showLabels === true ? renderLabels() : ""}
         { renderFrame() }
         <div style={innerStyle}>
           <span>DEBUGGING - Width: {width}</span>
