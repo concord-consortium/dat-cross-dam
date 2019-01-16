@@ -270,10 +270,6 @@ export class PictureArea extends BaseComponent<IProps, {}> {
       { svgBuilding: LongHouseRedRoof,     x: 40, y: 70, width: 27, height: 13 },
     ];
 
-    // tslint:disable no-console
-    console.log(">>> " + JSON.stringify(riverData));
-    // tslint:enable no-console
-
     return (
       <div style={innerStyle}>
         { renderScenery() }
@@ -285,9 +281,6 @@ export class PictureArea extends BaseComponent<IProps, {}> {
         { renderTown(ui.populationAgriburg, buildingsAgriburg, townAgriburg)}
         { renderLabels() }
         { renderFrame() }
-        <div style={innerStyle}>
-          <span>DEBUGGING - Width: {width}</span>
-        </div>
       </div>
     );
   }
