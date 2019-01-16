@@ -17,7 +17,7 @@ export interface ICreateStores {
 
 export function createStores(params?: ICreateStores): IStores {
   return {
-    appMode: params && params.appMode ? params.appMode : "embed",
+    appMode: params && params.appMode ? params.appMode : "dev",
     ui: params && params.ui || UIModel.create({}),
     riverData: params && params.riverData || DamModel.create()
   };
