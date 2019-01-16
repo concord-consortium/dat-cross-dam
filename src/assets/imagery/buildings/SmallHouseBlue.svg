@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg viewBox="366.28 293.238 11.74 9.998" width="11.74" height="9.998" xmlns="http://www.w3.org/2000/svg">
-  <g>
+<svg viewBox="0 0 12 10" xmlns="http://www.w3.org/2000/svg">
+  <g transform="matrix(1.022147, 0, 0, 1, -374.39212, -293.238007)">
     <title>Small House - Blue</title>
     <polyline style="stroke: rgb(0, 0, 0); stroke-width: 0.5px; fill: none; stroke-linecap: round; stroke-opacity: 0.38;" points="367.123 300.427 370.21 303.179 376.503 303.236"/>
     <polygon style="stroke: rgb(0, 0, 0); stroke-width: 0.3px; fill: rgb(154, 206, 255);" points="370.269 302.786 376.953 302.899 376.953 297.9 370.269 297.731"/>
