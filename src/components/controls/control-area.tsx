@@ -84,11 +84,11 @@ export class ControlArea extends BaseComponent<IProps, IState> {
         <CheckBox label="Show Dam" isChecked={this.props.pictureParams.showDam} onChange={toggleDam} />
         <br />
         Agriburg Population ({this.props.pictureParams.populationAgriburg}):
-          <Slider style={sliderStyle} min={0} max={9} onChange={dragAP}
+          <Slider style={sliderStyle} min={0} max={99} onChange={dragAP}
           value={this.props.pictureParams.populationAgriburg} />
         <br />
         Farmville Population ({this.props.pictureParams.populationFarmville}):
-          <Slider style={sliderStyle} min={0} max={9} onChange={dragFP}
+          <Slider style={sliderStyle} min={0} max={99} onChange={dragFP}
           value={this.props.pictureParams.populationFarmville} />
         <br />
         ({this.props.pictureParams.waterDivertedToFarmRiver * 25}%) Water diverted to Farmville:

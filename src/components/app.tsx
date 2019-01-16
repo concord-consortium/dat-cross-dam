@@ -14,8 +14,8 @@ import { CheckBox } from "./controls/check-box";
 export interface IPictureParams {
   showLabels: boolean;
   showDam: boolean;
-  populationAgriburg: number;         // 0..9
-  populationFarmville: number;        // 0..9
+  populationAgriburg: number;         // 0..99
+  populationFarmville: number;        // 0..99
   cropsArgiburg: number;              // 0..99
   cropsFarmville: number;             // 0..99
   waterDivertedToFarmRiver: number;   // 0..3 for 0%, 25%, 50%, & 75%.
@@ -42,10 +42,10 @@ export class AppComponent extends BaseComponent<IProps, IState> {
     super(props);
     this.state = {
       pictureParams: {
-        showLabels: true,
+        showLabels: false,
         showDam: true,
-        populationAgriburg: 3,
-        populationFarmville: 8,
+        populationAgriburg: 99,
+        populationFarmville: 99,
         cropsArgiburg: 20,
         cropsFarmville: 70,
         waterDivertedToFarmRiver: 1,
@@ -95,7 +95,7 @@ export class AppComponent extends BaseComponent<IProps, IState> {
 
     const onChangePictureParams = (newPictureParams: IPictureParams) => {
       // tslint:disable no-console
-      console.log("*** OnChangePictureParams:  " + JSON.stringify(newPictureParams));
+      // console.log("*** OnChangePictureParams:  " + JSON.stringify(newPictureParams));
       // tslint:enable no-console
       this.setState({pictureParams: newPictureParams});
     };
