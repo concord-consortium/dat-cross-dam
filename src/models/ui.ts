@@ -2,7 +2,7 @@ import { types } from "mobx-state-tree";
 
 export const UIModel = types
   .model("UI", {
-    displayMode: "Simulation",
+    displayMode: "Graph",
     populationAgriburg: 50,
     populationFarmville: 50,
     cropsArgiburg: 50,
