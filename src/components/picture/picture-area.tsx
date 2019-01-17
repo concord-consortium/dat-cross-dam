@@ -33,36 +33,12 @@ import Field08 from "../../assets/imagery/fields/Field-08.svg";
 import Field09 from "../../assets/imagery/fields/Field-09.svg";
 import Field10 from "../../assets/imagery/fields/Field-10.svg";
 
-interface IProps extends IBaseProps {
-  width: number;
-  height?: number;
-}
+import "./picture-area.sass";
 
-const selectRivers = (i: number) => {
-  /*
-   * The rivers and canal have 4 possible display versions which are
-   * drawn (in the associated SVG file) according to this scheme:
-   *
-   * |       |   % of   |            Waterway              |
-   * | Index |   Water  |----------|-----------|-----------|
-   * |       | Diverted | Arigburg |    Farm   |   Canal   |
-   * |-------|----------|----------|-----------|-----------|
-   * |   0   |     0%   | Wide     | Low       | Brown     |
-   * |   1   |    25%   | Nominal  | Nominal   | Nominal   |
-   * |   2   |    50%   | Low      | Wide      | Wide      |
-   * |   3   |    75%   | Trickle  | Very Wide | Very Wide |
-   */
-  switch (i) {
-    case 0: return (<Rivers0 />);
-    case 1: return (<Rivers25 />);
-    case 2: return (<Rivers50 />);
-    case 3: return (<Rivers75 />);
-    default:
-      // tslint:disable-next-line no-console
-      console.error("The indicated river set index not found.");
-      return (<Rivers0 />);
-  }
-};
+interface IProps extends IBaseProps {
+  parentWidth: number;
+  parentHeight: number;
+}
 
 interface IBuilding {
   svgBuilding: SvgrComponent;
@@ -183,12 +159,23 @@ export class PictureArea extends BaseComponent<IProps, {}> {
   public render() {
 
     const { riverData, ui } = this.stores;
-    const { width } = this.props;
+
+    const { parentWidth, parentHeight } = this.props;
+
+    const baseSizeWidth = 600;
+    const baseSizeHeight = 340;
+    const aspectRatio = parentWidth / parentHeight;
+    const baseAspectRatio = baseSizeWidth / baseSizeHeight; // 1.765
+
+    const width = aspectRatio >= baseAspectRatio ? parentHeight * baseAspectRatio : parentWidth;
+
+    const simulationScale = width / baseSizeWidth;
+    const height = baseSizeHeight * simulationScale;
 
     const renderScenery = () => {
       return (
         <div style={innerStyle}>
-          <Scenery />
+          <Scenery width={width} height={height}/>
         </div>
       );
     };
@@ -199,6 +186,32 @@ export class PictureArea extends BaseComponent<IProps, {}> {
           "" {/* Temporary place holder til the tree layer is in place. */}
         </div>
       );
+    };
+
+    const selectRivers = (i: number) => {
+      /*
+       * The rivers and canal have 4 possible display versions which are
+       * drawn (in the associated SVG file) according to this scheme:
+       *
+       * |       |   % of   |            Waterway              |
+       * | Index |   Water  |----------|-----------|-----------|
+       * |       | Diverted | Arigburg |    Farm   |   Canal   |
+       * |-------|----------|----------|-----------|-----------|
+       * |   0   |     0%   | Wide     | Low       | Brown     |
+       * |   1   |    25%   | Nominal  | Nominal   | Nominal   |
+       * |   2   |    50%   | Low      | Wide      | Wide      |
+       * |   3   |    75%   | Trickle  | Very Wide | Very Wide |
+       */
+      switch (i) {
+        case 0: return (<Rivers0  width={width} height={height} />);
+        case 1: return (<Rivers25 width={width} height={height} />);
+        case 2: return (<Rivers50 width={width} height={height} />);
+        case 3: return (<Rivers75 width={width} height={height} />);
+        default:
+          // tslint:disable-next-line no-console
+          console.error("The indicated river set index not found.");
+          return (<Rivers0 width={width} height={height}/>);
+      }
     };
 
     const renderRivers = (index: number) => {
@@ -262,7 +275,7 @@ export class PictureArea extends BaseComponent<IProps, {}> {
     const renderLabels = () => {
       return (
         <div style={innerStyle}>
-          <Labels />
+          <Labels width={width} height={height}/>
         </div>
       );
     };
@@ -270,7 +283,7 @@ export class PictureArea extends BaseComponent<IProps, {}> {
     const renderFrame = () => {
       return (
         <div style={innerStyle}>
-          <Frame />
+          <Frame width={width} height={height}/>
         </div>
       );
     };
@@ -445,7 +458,7 @@ export class PictureArea extends BaseComponent<IProps, {}> {
         height: 62
       },
       {
-        svgField: Field06,
+        svgField: Field05,
         x: 364,
         y: 300,
         width: 48,
@@ -454,7 +467,7 @@ export class PictureArea extends BaseComponent<IProps, {}> {
     ];
 
     return (
-      <div style={innerStyle}>
+      <div className="picture-area-container">
         { renderScenery() }
         {/* { renderTrees() } */}
         { renderRivers(riverData.flowPercentage / 25) }
