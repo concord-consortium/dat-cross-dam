@@ -89,6 +89,8 @@ interface ICornField {
   svgField: SvgrComponent;
   x: number;
   y: number;
+  width: number;
+  height: number;
 }
 
 const townFarmville: ITown = {
@@ -358,7 +360,9 @@ export class PictureArea extends BaseComponent<IProps, {}> {
             <div style={innerStyle} key={i}>
               {
                 f.svgField({
-                  transform: `translate(${f.x * factor}, ${f.y * factor})`
+                  transform: `translate(${f.x * factor}, ${f.y * factor})`,
+                  width: f.width * factor,
+                  height: f.height * factor
                 })
               }
             </div>
@@ -375,27 +379,77 @@ export class PictureArea extends BaseComponent<IProps, {}> {
 
     const cornFieldsFarmville: ICornField[] = [
       {
-        svgField: Field05,
-        x: 450,
-        y: 140
+        svgField: Field06,
+        x: 392,
+        y: 152,
+        width: 130,
+        height: 53
       },
       {
-        svgField: Field06,
-        x: 280,
-        y: 140
+        svgField: Field07,
+        x: 520,
+        y: 201,
+        width: 45,
+        height: 14
+      },
+      {
+        svgField: Field08,
+        x: 472,
+        y: 139,
+        width: 76,
+        height: 26
+      },
+      {
+        svgField: Field09,
+        x: 510,
+        y: 144,
+        width: 86,
+        height: 33
+      },
+      {
+        svgField: Field10,
+        x: 517,
+        y: 127,
+        width: 80,
+        height: 20
       }
     ];
 
     const cornFieldsAgriburg: ICornField[] = [
       {
         svgField: Field01,
-        x: 250,
-        y: 290
+        x: 230,
+        y: 277,
+        width: 68,
+        height: 35
       },
       {
         svgField: Field02,
-        x: 280,
-        y: 290
+        x: 281,
+        y: 281,
+        width: 44,
+        height: 36
+      },
+      {
+        svgField: Field03,
+        x: 302,
+        y: 260,
+        width: 25,
+        height: 20
+      },
+      {
+        svgField: Field04,
+        x: 337,
+        y: 248,
+        width: 126,
+        height: 62
+      },
+      {
+        svgField: Field06,
+        x: 364,
+        y: 300,
+        width: 48,
+        height: 25
       }
     ];
 
@@ -407,11 +461,11 @@ export class PictureArea extends BaseComponent<IProps, {}> {
         { renderLake(ui.lakeArea) }
         { renderDamn() }
         { renderTown(ui.populationFarmville, buildingsFarmville, townFarmville)}
-        { renderFarms(ui.cropsFarmville, barnsFarmville)}
         { renderCornFields(ui.cropsFarmville, cornFieldsFarmville)}
+        { renderFarms(ui.cropsFarmville, barnsFarmville)}
         { renderTown(ui.populationAgriburg, buildingsAgriburg, townAgriburg)}
-        { renderFarms(ui.cropsArgiburg, barnsAgriburg)}
         { renderCornFields(ui.cropsArgiburg, cornFieldsAgriburg)}
+        { renderFarms(ui.cropsArgiburg, barnsAgriburg)}
         { renderLabels() }
         { renderFrame() }
       </div>
