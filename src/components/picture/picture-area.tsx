@@ -33,6 +33,8 @@ import Field08 from "../../assets/imagery/fields/Field-08.svg";
 import Field09 from "../../assets/imagery/fields/Field-09.svg";
 import Field10 from "../../assets/imagery/fields/Field-10.svg";
 
+import Trees from "../../assets/imagery/scenery/trees/Trees.svg";
+
 import "./picture-area.sass";
 
 interface IProps extends IBaseProps {
@@ -183,7 +185,7 @@ export class PictureArea extends BaseComponent<IProps, {}> {
     const renderTrees = () => {
       return (
         <div style={innerStyle}>
-          "" {/* Temporary place holder til the tree layer is in place. */}
+          <Trees width={width} height={height} />
         </div>
       );
     };
@@ -469,7 +471,7 @@ export class PictureArea extends BaseComponent<IProps, {}> {
     return (
       <div className="picture-area-container">
         { renderScenery() }
-        {/* { renderTrees() } */}
+        { renderTrees() }
         { renderRivers(riverData.flowPercentage / 25) }
         { renderLake(ui.lakeArea) }
         { renderDamn() }
