@@ -22,6 +22,17 @@ import SmallHouseWhite from "../../assets/imagery/buildings/SmallHouseWhite.svg"
 
 import Barn from "../../assets/imagery/buildings/Barn.svg";
 
+import Field01 from "../../assets/imagery/fields/Field-01.svg";
+import Field02 from "../../assets/imagery/fields/Field-02.svg";
+import Field03 from "../../assets/imagery/fields/Field-03.svg";
+import Field04 from "../../assets/imagery/fields/Field-04.svg";
+import Field05 from "../../assets/imagery/fields/Field-05.svg";
+import Field06 from "../../assets/imagery/fields/Field-06.svg";
+import Field07 from "../../assets/imagery/fields/Field-07.svg";
+import Field08 from "../../assets/imagery/fields/Field-08.svg";
+import Field09 from "../../assets/imagery/fields/Field-09.svg";
+import Field10 from "../../assets/imagery/fields/Field-10.svg";
+
 interface IProps extends IBaseProps {
   width: number;
   height?: number;
@@ -72,6 +83,12 @@ interface ITown {
   width: number;
   height: number;
   adjusted: boolean;
+}
+
+interface ICornField {
+  svgField: SvgrComponent;
+  x: number;
+  y: number;
 }
 
 const townFarmville: ITown = {
@@ -327,6 +344,61 @@ export class PictureArea extends BaseComponent<IProps, {}> {
       {x: 465, y: 307}
     ];
 
+    const howManyFields = (crops: number, fields: ICornField[]) => {
+      return crops / fields.length;
+    };
+
+    const renderCornFields = (crops: number, fields: ICornField[]) => {
+
+      const factor = width / 600;
+
+      const fieldList = () => {
+        return fields.slice(0, howManyFields(crops, fields)).map( (f, i) => {
+          return (
+            <div style={innerStyle} key={i}>
+              {
+                f.svgField({
+                  transform: `translate(${f.x * factor}, ${f.y * factor})`
+                })
+              }
+            </div>
+          );
+        });
+      };
+
+      return (
+        <div style={innerStyle}>
+          {fieldList()}
+        </div>
+      );
+    };
+
+    const cornFieldsFarmville: ICornField[] = [
+      {
+        svgField: Field05,
+        x: 450,
+        y: 140
+      },
+      {
+        svgField: Field06,
+        x: 280,
+        y: 140
+      }
+    ];
+
+    const cornFieldsAgriburg: ICornField[] = [
+      {
+        svgField: Field01,
+        x: 250,
+        y: 290
+      },
+      {
+        svgField: Field02,
+        x: 280,
+        y: 290
+      }
+    ];
+
     return (
       <div style={innerStyle}>
         { renderScenery() }
@@ -336,8 +408,10 @@ export class PictureArea extends BaseComponent<IProps, {}> {
         { renderDamn() }
         { renderTown(ui.populationFarmville, buildingsFarmville, townFarmville)}
         { renderFarms(ui.cropsFarmville, barnsFarmville)}
+        { renderCornFields(ui.cropsFarmville, cornFieldsFarmville)}
         { renderTown(ui.populationAgriburg, buildingsAgriburg, townAgriburg)}
         { renderFarms(ui.cropsArgiburg, barnsAgriburg)}
+        { renderCornFields(ui.cropsArgiburg, cornFieldsAgriburg)}
         { renderLabels() }
         { renderFrame() }
       </div>
