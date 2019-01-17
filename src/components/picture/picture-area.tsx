@@ -20,6 +20,8 @@ import SmallHouseBlue2DRoof from "../../assets/imagery/buildings/SmallHouseBlue2
 import SmallHousePink from "../../assets/imagery/buildings/SmallHousePink.svg";
 import SmallHouseWhite from "../../assets/imagery/buildings/SmallHouseWhite.svg";
 
+import Barn from "../../assets/imagery/buildings/Barn.svg";
+
 interface IProps extends IBaseProps {
   width: number;
 }
@@ -56,6 +58,11 @@ interface IBuilding {
   y: number;
   width: number;
   height: number;
+}
+
+interface IBarn {
+  x: number;
+  y: number;
 }
 
 interface ITown {
@@ -139,14 +146,6 @@ const buildingsAgriburg: IBuilding[] = [
   };
   return (movedBldg);
 });
-
-const innerStyle: React.CSSProperties = {
-  position: "absolute",
-  width: "100%",
-  height: "100%",
-  top: 0,
-  left: 0
-};
 
 // We use a random number (from a range) to mix up the locations of buildings
 // in the drawing list -- problem with that is that the build in Math.random()
@@ -268,6 +267,7 @@ export class PictureArea extends BaseComponent<IProps, {}> {
           const b2 = e2.y;
           return (b1 === b2 ? 0 : (b1 > b2 ? 1 : -1));
         };
+        let i = 0;
         for (const bldg of buildingList.slice(0, howManyBuildings).sort((e1, e2) => compareBases(e1, e2))) {
           const b = bldg.svgBuilding({
             width: bldg.width * factor,
@@ -276,7 +276,7 @@ export class PictureArea extends BaseComponent<IProps, {}> {
                                   ${(bldg.y - (bldg.height / 2)) * factor})`
           });
           list.push( (
-            <div style={innerStyle}>
+            <div style={innerStyle} key={i++}>
               {b}
             </div>
             ));
@@ -290,15 +290,53 @@ export class PictureArea extends BaseComponent<IProps, {}> {
       );
     };
 
+    const howManyFarms = (crops: number) => {
+      return crops / 25;
+    };
+
+    const renderFarms = (crops: number, barns: IBarn[]) => {
+      const factor = width / 600;
+      const barnList = () => {
+        return barns.slice(0, howManyFarms(crops)).map( (b, i) => {
+          return (
+            <div style={innerStyle} key={i}>
+              <Barn width={28 * factor} height={22 * factor}
+                transform={`translate(${b.x * factor}, ${b.y * factor})`} />
+            </div>
+          );
+        });
+      };
+
+      return (
+        <div style={innerStyle}>
+          {barnList()}
+        </div>
+      );
+    };
+
+    const barnsFarmville: IBarn[] =  [
+      {x: 450, y: 132},
+      {x: 398, y: 168},
+      {x: 519, y: 177}
+    ];
+
+    const barnsAgriburg: IBarn[] =  [
+      {x: 210, y: 273},
+      {x: 331, y: 290},
+      {x: 465, y: 307}
+    ];
+
     return (
       <div style={innerStyle}>
         { renderScenery() }
-        { renderTrees() }
+        {/* { renderTrees() } */}
         { renderRivers(riverData.flowPercentage / 25) }
         { renderLake(ui.lakeArea) }
         { renderDamn() }
         { renderTown(ui.populationFarmville, buildingsFarmville, townFarmville)}
+        { renderFarms(ui.cropsFarmville, barnsFarmville)}
         { renderTown(ui.populationAgriburg, buildingsAgriburg, townAgriburg)}
+        { renderFarms(ui.cropsArgiburg, barnsAgriburg)}
         { renderLabels() }
         { renderFrame() }
       </div>
