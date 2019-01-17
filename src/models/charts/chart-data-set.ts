@@ -1,7 +1,5 @@
 import { types, Instance } from "mobx-state-tree";
-// @ts-ignore
 import * as colors from "../../components/colors.scss";
-import { hexToRGB } from "../../utilities/color-utils";
 
 export interface Color {
   name: string;

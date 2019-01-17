@@ -2,7 +2,7 @@ import { inject, observer } from "mobx-react";
 import * as React from "react";
 import { BaseComponent, IBaseProps } from "../base";
 import { Chart, ChartType } from "./chart";
-import { SeasonData } from "../../models/dam";
+import { dataByFlow, SeasonData } from "../../data/dam-data-utility";
 import {
   DataPointType,
   DataPoint,
@@ -28,7 +28,7 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
   public render() {
     const { chartType } = this.state;
     const { riverData } = this.stores;
-    const currentData = riverData.allCurrentData;
+    const currentData = dataByFlow(riverData.flowPercentage);
     const charts = this.buildAllCharts(currentData);
 
     return (

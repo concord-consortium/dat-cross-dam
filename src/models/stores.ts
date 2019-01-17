@@ -1,7 +1,7 @@
 import { UIModel, UIModelType } from "./ui";
 import { DamModel, DamModelType } from "./dam";
 
-export type AppMode = "authed" | "dev" | "test" | "demo" | "qa";
+export type AppMode = "live" | "dev" | "embed" ;
 
 export interface IStores {
   appMode: AppMode;
