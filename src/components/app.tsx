@@ -12,9 +12,10 @@ import { ControlArea } from "./controls/control-area";
 
 import "./app.sass";
 
-interface ISize {     // Used by SizeMe to pass the resized parent's details
-  size: {             // to it's children.
+interface ISize {     // Used by SizeMe to pass the resized parent details
+  size: {             // to its children.
     width?: number;
+    height?: number;
   };
 }
 
@@ -24,41 +25,46 @@ export class AppComponent extends BaseComponent<{}, {}> {
 
   public render() {
 
-    const {ui} = this.stores;
-
-    const pictureAreaStyle: React.CSSProperties = {
-      position: "relative",
-      margin: 5,
-    };
+    const {ui, appMode} = this.stores;
 
     return (
-      <div className="app">
-        <div className="controls">
-          <SimulationControls>
-            <ControlArea />
-          </SimulationControls>
-        </div>
-        {ui.displayMode === "Simulation" &&
-          <div className="section simulation">
-            <div style={pictureAreaStyle}>
-              <SizeMe>
-                { ({size}: ISize ) => <PictureArea width={size.width ? size.width : 600} /> }
-              </SizeMe>
+      <div className="app-container">
+        {appMode !== "embed" &&
+          <div className="top-bar">DAT Cross Dam</div>
+        }
+        <div className="controls-and-content-container">
+          {appMode === "dev" &&
+            <div className="left-panel">
+              <div className="controls">
+              <SimulationControls>
+                <ControlArea />
+              </SimulationControls>
+              </div>
             </div>
+          }
+        <div className="main-content">
+            <div className="section simulation">
+              <SizeMe monitorHeight={true}>
+                {({ size }: ISize) =>
+                  <PictureArea width={size.width ? size.width : 0} height={size.height ? size.height : 0} />
+                }
+              </SizeMe>
           </div>
-        }
-        {ui.displayMode === "Graph" &&
-          <div className="section chart">
-            <ChartDisplay />
+          {ui.displayMode === "Graph" &&
+            <div className="section chart">
+              <div className="header">Chart</div>
+              <ChartDisplay />
+            </div>
+          }
+          {ui.displayMode === "Table" &&
+            <div className="section table">
+              <div className="header">Table</div>
+              <DamData />
+            </div>
+            }
           </div>
-        }
-        {ui.displayMode === "Table" &&
-          <div className="section table">
-            <DamData />
-          </div>
-        }
+        </div>
       </div>
     );
   }
-
 }

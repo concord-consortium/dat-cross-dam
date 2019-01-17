@@ -24,6 +24,7 @@ import Barn from "../../assets/imagery/buildings/Barn.svg";
 
 interface IProps extends IBaseProps {
   width: number;
+  height?: number;
 }
 
 const selectRivers = (i: number) => {

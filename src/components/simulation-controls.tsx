@@ -2,6 +2,7 @@ import * as React from "react";
 import { inject, observer, propTypes } from "mobx-react";
 import { BaseComponent } from "./base";
 import Slider from "rc-slider";
+import { dataByFlow } from "../data/dam-data-utility";
 
 import "./simulation-controls.sass";
 interface IProps {}
@@ -12,6 +13,9 @@ interface IState {}
 export class SimulationControls extends BaseComponent<IProps, IState> {
   public render() {
     const { riverData, ui } = this.stores;
+    const allData = dataByFlow(riverData.flowPercentage);
+    const dataToDisplay =
+      allData.filter(d => d.Year === riverData.currentYear && d.Season === riverData.currentSeason)[0];
     return (
       <div className="simulation-controls">
         <div>Diversion percentage: {riverData.flowPercentage}</div>
@@ -33,7 +37,7 @@ export class SimulationControls extends BaseComponent<IProps, IState> {
           <option value="Spring">Spring</option>
           <option value="Summer">Summer</option>
         </select>
-        <div>End of Season Area: {riverData.currentYearData[0].EndSeasonSurfaceArea}</div>
+        <div>End of Season Area: {dataToDisplay.EndSeasonSurfaceArea}</div>
         <div className="display-mode">Display Mode</div>
         <div><input type="radio" id="displayModeSim" name="displayMode" value="Simulation"
           checked={ui.displayMode === "Simulation"} onChange={this.handleDisplayModeChange}/>Simulation</div>
