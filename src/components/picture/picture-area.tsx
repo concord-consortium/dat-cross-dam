@@ -20,9 +20,24 @@ import SmallHouseBlue2DRoof from "../../assets/imagery/buildings/SmallHouseBlue2
 import SmallHousePink from "../../assets/imagery/buildings/SmallHousePink.svg";
 import SmallHouseWhite from "../../assets/imagery/buildings/SmallHouseWhite.svg";
 
+import Barn from "../../assets/imagery/buildings/Barn.svg";
+
+import Field01 from "../../assets/imagery/fields/Field-01.svg";
+import Field02 from "../../assets/imagery/fields/Field-02.svg";
+import Field03 from "../../assets/imagery/fields/Field-03.svg";
+import Field04 from "../../assets/imagery/fields/Field-04.svg";
+import Field05 from "../../assets/imagery/fields/Field-05.svg";
+import Field06 from "../../assets/imagery/fields/Field-06.svg";
+import Field07 from "../../assets/imagery/fields/Field-07.svg";
+import Field08 from "../../assets/imagery/fields/Field-08.svg";
+import Field09 from "../../assets/imagery/fields/Field-09.svg";
+import Field10 from "../../assets/imagery/fields/Field-10.svg";
+
+import "./picture-area.sass";
+
 interface IProps extends IBaseProps {
-  width: number;
-  height?: number;
+  parentWidth: number;
+  parentHeight: number;
 }
 
 interface IBuilding {
@@ -33,12 +48,108 @@ interface IBuilding {
   height: number;
 }
 
+interface IBarn {
+  x: number;
+  y: number;
+}
+
 interface ITown {
   x: number;
   y: number;
   width: number;
   height: number;
   adjusted: boolean;
+}
+
+interface ICornField {
+  svgField: SvgrComponent;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
+const townFarmville: ITown = {
+  x: 460,
+  y: 90,
+  width: 75,
+  height: 30,
+  adjusted: false
+};
+
+const buildingsFarmville: IBuilding[] = [
+  { svgBuilding: LongHouseGrayRoof,    x: 52, y: 70, width: 26, height: 14 },
+  { svgBuilding: SmallHouseBlue,       x: 20, y: 80, width: 12, height: 10 },
+  { svgBuilding: SmallHouseBlue2DRoof, x: 55, y: 95, width: 15, height: 15 },
+  { svgBuilding: SmallHouseBlue,       x: 70, y:  0, width: 13, height: 15 },
+  { svgBuilding: SmallHousePink,       x: 55, y:  0, width: 12, height: 15 },
+  { svgBuilding: SmallHouseWhite,      x: 60, y: 85, width: 14, height: 15 },
+  { svgBuilding: LongHouseGrayRoof,    x: 50, y:  0, width: 26, height: 14 },
+  { svgBuilding: SmallHouseBlue2DRoof, x: 55, y: 95, width: 11, height: 15 },
+  { svgBuilding: SmallHouseBlue,       x: 70, y:  0, width: 12, height: 10 },
+  { svgBuilding: SmallHousePink,       x: 55, y: 90, width: 16, height: 15 },
+  { svgBuilding: SmallHouseWhite,      x: 60, y: 85, width: 17, height: 15 },
+  { svgBuilding: LongHouseRedRoof,     x: 40, y: 70, width: 27, height: 13 },
+].map( (val, _ndx) => {
+  const town = townFarmville;
+  const movedBldg: IBuilding = {
+    svgBuilding: val.svgBuilding,
+    x: random(town.x, town.x + town.width),
+    y: random(town.y, town.y + town.height),
+    width: val.width,
+    height: val.height
+  };
+  return (movedBldg);
+});
+
+const innerStyle: React.CSSProperties = {
+  position: "absolute",
+  width: "100%",
+  height: "100%",
+  top: 0,
+  left: 0
+};
+
+const townAgriburg: ITown = {
+  x: 212,
+  y: 210,
+  width: 95,
+  height: 57,
+  adjusted: false
+};
+
+const buildingsAgriburg: IBuilding[] = [
+  { svgBuilding: LongHouseGrayRoof,    x: 52, y: 70, width: 26, height: 14 },
+  { svgBuilding: SmallHouseBlue,       x: 20, y: 80, width: 12, height: 10 },
+  { svgBuilding: SmallHouseBlue2DRoof, x: 55, y: 95, width: 15, height: 15 },
+  { svgBuilding: SmallHouseBlue,       x: 70, y:  0, width: 13, height: 15 },
+  { svgBuilding: SmallHousePink,       x: 55, y:  0, width: 12, height: 15 },
+  { svgBuilding: SmallHouseWhite,      x: 60, y: 85, width: 14, height: 15 },
+  { svgBuilding: LongHouseGrayRoof,    x: 50, y:  0, width: 26, height: 14 },
+  { svgBuilding: SmallHouseBlue2DRoof, x: 55, y: 95, width: 11, height: 15 },
+  { svgBuilding: SmallHouseBlue,       x: 70, y:  0, width: 12, height: 10 },
+  { svgBuilding: SmallHousePink,       x: 55, y: 90, width: 16, height: 15 },
+  { svgBuilding: SmallHouseWhite,      x: 60, y: 85, width: 17, height: 15 },
+  { svgBuilding: LongHouseRedRoof,     x: 40, y: 70, width: 27, height: 13 },
+].map( (val, _ndx) => {
+  const town = townAgriburg;
+  const movedBldg: IBuilding = {
+    svgBuilding: val.svgBuilding,
+    x: random(town.x, town.x + town.width),
+    y: random(town.y, town.y + town.height),
+    width: val.width,
+    height: val.height
+  };
+  return (movedBldg);
+});
+
+// We use a random number (from a range) to mix up the locations of buildings
+// in the drawing list -- problem with that is that the build in Math.random()
+// does not support a seed, so each time the building list is initialized, the
+// town's building layout changes. Many ways to solve this -- just not right at
+// this moment.
+function random(low: number, high: number): number {
+  return Math.floor(Math.random() * (high - low + 1) + low);
 }
 
 @inject("stores")
@@ -49,20 +160,22 @@ export class PictureArea extends BaseComponent<IProps, {}> {
 
     const { riverData, ui } = this.stores;
 
-    const { width } = this.props;
+    const { parentWidth, parentHeight } = this.props;
 
-    const innerStyle: React.CSSProperties = {
-      position: "absolute",
-      width: "100%",
-      height: "100%",
-      top: 0,
-      left: 0
-    };
+    const baseSizeWidth = 600;
+    const baseSizeHeight = 340;
+    const aspectRatio = parentWidth / parentHeight;
+    const baseAspectRatio = baseSizeWidth / baseSizeHeight; // 1.765
+
+    const width = aspectRatio >= baseAspectRatio ? parentHeight * baseAspectRatio : parentWidth;
+
+    const simulationScale = width / baseSizeWidth;
+    const height = baseSizeHeight * simulationScale;
 
     const renderScenery = () => {
       return (
         <div style={innerStyle}>
-          <Scenery />
+          <Scenery width={width} height={height}/>
         </div>
       );
     };
@@ -75,34 +188,33 @@ export class PictureArea extends BaseComponent<IProps, {}> {
       );
     };
 
+    const selectRivers = (i: number) => {
+      /*
+       * The rivers and canal have 4 possible display versions which are
+       * drawn (in the associated SVG file) according to this scheme:
+       *
+       * |       |   % of   |            Waterway              |
+       * | Index |   Water  |----------|-----------|-----------|
+       * |       | Diverted | Arigburg |    Farm   |   Canal   |
+       * |-------|----------|----------|-----------|-----------|
+       * |   0   |     0%   | Wide     | Low       | Brown     |
+       * |   1   |    25%   | Nominal  | Nominal   | Nominal   |
+       * |   2   |    50%   | Low      | Wide      | Wide      |
+       * |   3   |    75%   | Trickle  | Very Wide | Very Wide |
+       */
+      switch (i) {
+        case 0: return (<Rivers0  width={width} height={height} />);
+        case 1: return (<Rivers25 width={width} height={height} />);
+        case 2: return (<Rivers50 width={width} height={height} />);
+        case 3: return (<Rivers75 width={width} height={height} />);
+        default:
+          // tslint:disable-next-line no-console
+          console.error("The indicated river set index not found.");
+          return (<Rivers0 width={width} height={height}/>);
+      }
+    };
+
     const renderRivers = (index: number) => {
-
-      const selectRivers = (i: number) => {
-        /*
-         * The rivers and canal have 4 possible display versions which are
-         * drawn (in the associated SVG file) according to this scheme:
-         *
-         * |       |   % of   |            Waterway              |
-         * | Index |   Water  |----------|-----------|-----------|
-         * |       | Diverted | Arigburg |    Farm   |   Canal   |
-         * |-------|----------|----------|-----------|-----------|
-         * |   0   |     0%   | Wide     | Low       | Brown     |
-         * |   1   |    25%   | Nominal  | Nominal   | Nominal   |
-         * |   2   |    50%   | Low      | Wide      | Wide      |
-         * |   3   |    75%   | Trickle  | Very Wide | Very Wide |
-         */
-        switch (i) {
-          case 0: return (<Rivers0 />);
-          case 1: return (<Rivers25 />);
-          case 2: return (<Rivers50 />);
-          case 3: return (<Rivers75 />);
-          default:
-            // tslint:disable-next-line no-console
-            console.error("The indicated river set index not found.");
-            return (<Rivers0 />);
-        }
-      };
-
       return (
         <div style={innerStyle}>
           {selectRivers(index)}
@@ -163,7 +275,7 @@ export class PictureArea extends BaseComponent<IProps, {}> {
     const renderLabels = () => {
       return (
         <div style={innerStyle}>
-          <Labels />
+          <Labels width={width} height={height}/>
         </div>
       );
     };
@@ -171,7 +283,7 @@ export class PictureArea extends BaseComponent<IProps, {}> {
     const renderFrame = () => {
       return (
         <div style={innerStyle}>
-          <Frame />
+          <Frame width={width} height={height}/>
         </div>
       );
     };
@@ -179,20 +291,6 @@ export class PictureArea extends BaseComponent<IProps, {}> {
     const renderTown = (population: number, buildingList: IBuilding[], town: ITown) => {
 
       const factor = width / 600;
-
-      const newBuildingList = buildingList.map( (val, _ndx) => {
-        const random = (low: number, high: number) => {
-          return Math.floor(Math.random() * (high - low + 1) + low);
-        };
-        const movedBldg: IBuilding = {
-          svgBuilding: val.svgBuilding,
-          x: random(town.x, town.x + town.width),
-          y: random(town.y, town.y + town.height),
-          width: val.width,
-          height: val.height
-        };
-        return (movedBldg);
-      });
 
       const buildTown = () => {
         const list = [];
@@ -202,7 +300,8 @@ export class PictureArea extends BaseComponent<IProps, {}> {
           const b2 = e2.y;
           return (b1 === b2 ? 0 : (b1 > b2 ? 1 : -1));
         };
-        for (const bldg of newBuildingList.slice(0, howManyBuildings).sort((e1, e2) => compareBases(e1, e2))) {
+        let i = 0;
+        for (const bldg of buildingList.slice(0, howManyBuildings).sort((e1, e2) => compareBases(e1, e2))) {
           const b = bldg.svgBuilding({
             width: bldg.width * factor,
             height: bldg.height * factor,
@@ -210,7 +309,7 @@ export class PictureArea extends BaseComponent<IProps, {}> {
                                   ${(bldg.y - (bldg.height / 2)) * factor})`
           });
           list.push( (
-            <div style={innerStyle}>
+            <div style={innerStyle} key={i++}>
               {b}
             </div>
             ));
@@ -224,61 +323,162 @@ export class PictureArea extends BaseComponent<IProps, {}> {
       );
     };
 
-    const townFarmville: ITown = {
-      x: 460,
-      y: 90,
-      width: 75,
-      height: 30,
-      adjusted: false
+    const howManyFarms = (crops: number) => {
+      return crops / 25;
     };
 
-    const townAgriburg: ITown = {
-      x: 212,
-      y: 210,
-      width: 95,
-      height: 57,
-      adjusted: false
+    const renderFarms = (crops: number, barns: IBarn[]) => {
+      const factor = width / 600;
+      const barnList = () => {
+        return barns.slice(0, howManyFarms(crops)).map( (b, i) => {
+          return (
+            <div style={innerStyle} key={i}>
+              <Barn width={28 * factor} height={22 * factor}
+                transform={`translate(${b.x * factor}, ${b.y * factor})`} />
+            </div>
+          );
+        });
+      };
+
+      return (
+        <div style={innerStyle}>
+          {barnList()}
+        </div>
+      );
     };
 
-    const buildingsFarmville: IBuilding[] = [
-      { svgBuilding: LongHouseGrayRoof,    x: 52, y: 70, width: 26, height: 14 },
-      { svgBuilding: SmallHouseBlue,       x: 20, y: 80, width: 12, height: 10 },
-      { svgBuilding: SmallHouseBlue2DRoof, x: 55, y: 95, width: 15, height: 15 },
-      { svgBuilding: SmallHouseBlue,       x: 70, y:  0, width: 13, height: 15 },
-      { svgBuilding: SmallHousePink,       x: 55, y:  0, width: 12, height: 15 },
-      { svgBuilding: SmallHouseWhite,      x: 60, y: 85, width: 14, height: 15 },
-      { svgBuilding: LongHouseGrayRoof,    x: 50, y:  0, width: 26, height: 14 },
-      { svgBuilding: SmallHouseBlue2DRoof, x: 55, y: 95, width: 11, height: 15 },
-      { svgBuilding: SmallHouseBlue,       x: 70, y:  0, width: 12, height: 10 },
-      { svgBuilding: SmallHousePink,       x: 55, y: 90, width: 16, height: 15 },
-      { svgBuilding: SmallHouseWhite,      x: 60, y: 85, width: 17, height: 15 },
-      { svgBuilding: LongHouseRedRoof,     x: 40, y: 70, width: 27, height: 13 },
+    const barnsFarmville: IBarn[] =  [
+      {x: 450, y: 132},
+      {x: 398, y: 168},
+      {x: 519, y: 177}
     ];
 
-    const buildingsAgriburg: IBuilding[] = [
-      { svgBuilding: LongHouseGrayRoof,    x: 52, y: 70, width: 26, height: 14 },
-      { svgBuilding: SmallHouseBlue,       x: 20, y: 80, width: 12, height: 10 },
-      { svgBuilding: SmallHouseBlue2DRoof, x: 55, y: 95, width: 15, height: 15 },
-      { svgBuilding: SmallHouseBlue,       x: 70, y:  0, width: 13, height: 15 },
-      { svgBuilding: SmallHousePink,       x: 55, y:  0, width: 12, height: 15 },
-      { svgBuilding: SmallHouseWhite,      x: 60, y: 85, width: 14, height: 15 },
-      { svgBuilding: LongHouseGrayRoof,    x: 50, y:  0, width: 26, height: 14 },
-      { svgBuilding: SmallHouseBlue2DRoof, x: 55, y: 95, width: 11, height: 15 },
-      { svgBuilding: SmallHouseBlue,       x: 70, y:  0, width: 12, height: 10 },
-      { svgBuilding: SmallHousePink,       x: 55, y: 90, width: 16, height: 15 },
-      { svgBuilding: SmallHouseWhite,      x: 60, y: 85, width: 17, height: 15 },
-      { svgBuilding: LongHouseRedRoof,     x: 40, y: 70, width: 27, height: 13 },
+    const barnsAgriburg: IBarn[] =  [
+      {x: 210, y: 273},
+      {x: 331, y: 290},
+      {x: 465, y: 307}
+    ];
+
+    const howManyFields = (crops: number, fields: ICornField[]) => {
+      return crops / fields.length;
+    };
+
+    const renderCornFields = (crops: number, fields: ICornField[]) => {
+
+      const factor = width / 600;
+
+      const fieldList = () => {
+        return fields.slice(0, howManyFields(crops, fields)).map( (f, i) => {
+          return (
+            <div style={innerStyle} key={i}>
+              {
+                f.svgField({
+                  transform: `translate(${f.x * factor}, ${f.y * factor})`,
+                  width: f.width * factor,
+                  height: f.height * factor
+                })
+              }
+            </div>
+          );
+        });
+      };
+
+      return (
+        <div style={innerStyle}>
+          {fieldList()}
+        </div>
+      );
+    };
+
+    const cornFieldsFarmville: ICornField[] = [
+      {
+        svgField: Field06,
+        x: 392,
+        y: 152,
+        width: 130,
+        height: 53
+      },
+      {
+        svgField: Field07,
+        x: 520,
+        y: 201,
+        width: 45,
+        height: 14
+      },
+      {
+        svgField: Field08,
+        x: 472,
+        y: 139,
+        width: 76,
+        height: 26
+      },
+      {
+        svgField: Field09,
+        x: 510,
+        y: 144,
+        width: 86,
+        height: 33
+      },
+      {
+        svgField: Field10,
+        x: 517,
+        y: 127,
+        width: 80,
+        height: 20
+      }
+    ];
+
+    const cornFieldsAgriburg: ICornField[] = [
+      {
+        svgField: Field01,
+        x: 230,
+        y: 277,
+        width: 68,
+        height: 35
+      },
+      {
+        svgField: Field02,
+        x: 281,
+        y: 281,
+        width: 44,
+        height: 36
+      },
+      {
+        svgField: Field03,
+        x: 302,
+        y: 260,
+        width: 25,
+        height: 20
+      },
+      {
+        svgField: Field04,
+        x: 337,
+        y: 248,
+        width: 126,
+        height: 62
+      },
+      {
+        svgField: Field05,
+        x: 364,
+        y: 300,
+        width: 48,
+        height: 25
+      }
     ];
 
     return (
-      <div style={innerStyle}>
+      <div className="picture-area-container">
         { renderScenery() }
-        { renderTrees() }
+        {/* { renderTrees() } */}
         { renderRivers(riverData.flowPercentage / 25) }
         { renderLake(ui.lakeArea) }
         { renderDamn() }
         { renderTown(ui.populationFarmville, buildingsFarmville, townFarmville)}
+        { renderCornFields(ui.cropsFarmville, cornFieldsFarmville)}
+        { renderFarms(ui.cropsFarmville, barnsFarmville)}
         { renderTown(ui.populationAgriburg, buildingsAgriburg, townAgriburg)}
+        { renderCornFields(ui.cropsArgiburg, cornFieldsAgriburg)}
+        { renderFarms(ui.cropsArgiburg, barnsAgriburg)}
         { renderLabels() }
         { renderFrame() }
       </div>

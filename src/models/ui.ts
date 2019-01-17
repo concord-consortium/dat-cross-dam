@@ -3,10 +3,10 @@ import { types } from "mobx-state-tree";
 export const UIModel = types
   .model("UI", {
     displayMode: "Graph",
-    populationAgriburg: 0,
-    populationFarmville: 0,
-    cropsArgiburg: 20,
-    cropsFarmville: 70,
+    populationAgriburg: 50,
+    populationFarmville: 50,
+    cropsArgiburg: 50,
+    cropsFarmville: 50,
     lakeArea: 50
   })
   .actions((self) => {
