@@ -185,7 +185,7 @@ export class PictureArea extends BaseComponent<IProps, {}> {
     const renderTrees = () => {
       return (
         <div style={innerStyle}>
-          <Trees />
+          <Trees width={width} height={height} />
         </div>
       );
     };
