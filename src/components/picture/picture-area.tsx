@@ -20,9 +20,11 @@ import SmallHouseBlue2DRoof from "../../assets/imagery/buildings/SmallHouseBlue2
 import SmallHousePink from "../../assets/imagery/buildings/SmallHousePink.svg";
 import SmallHouseWhite from "../../assets/imagery/buildings/SmallHouseWhite.svg";
 
+import "./picture-area.sass";
+
 interface IProps extends IBaseProps {
-  width: number;
-  height?: number;
+  parentWidth: number;
+  parentHeight: number;
 }
 
 interface IBuilding {
@@ -49,7 +51,17 @@ export class PictureArea extends BaseComponent<IProps, {}> {
 
     const { riverData, ui } = this.stores;
 
-    const { width } = this.props;
+    const { parentWidth, parentHeight } = this.props;
+
+    const baseSizeWidth = 600;
+    const baseSizeHeight = 340;
+    const aspectRatio = parentWidth / parentHeight;
+    const baseAspectRatio = baseSizeWidth / baseSizeHeight; // 1.765
+
+    const width = aspectRatio >= baseAspectRatio ? parentHeight * baseAspectRatio : parentWidth;
+
+    const simulationScale = width / baseSizeWidth;
+    const height = baseSizeHeight * simulationScale;
 
     const innerStyle: React.CSSProperties = {
       position: "absolute",
@@ -62,7 +74,7 @@ export class PictureArea extends BaseComponent<IProps, {}> {
     const renderScenery = () => {
       return (
         <div style={innerStyle}>
-          <Scenery />
+          <Scenery width={width} height={height}/>
         </div>
       );
     };
@@ -92,14 +104,14 @@ export class PictureArea extends BaseComponent<IProps, {}> {
          * |   3   |    75%   | Trickle  | Very Wide | Very Wide |
          */
         switch (i) {
-          case 0: return (<Rivers0 />);
-          case 1: return (<Rivers25 />);
-          case 2: return (<Rivers50 />);
-          case 3: return (<Rivers75 />);
+          case 0: return (<Rivers0  width={width} height={height} />);
+          case 1: return (<Rivers25 width={width} height={height} />);
+          case 2: return (<Rivers50 width={width} height={height} />);
+          case 3: return (<Rivers75 width={width} height={height} />);
           default:
             // tslint:disable-next-line no-console
             console.error("The indicated river set index not found.");
-            return (<Rivers0 />);
+            return (<Rivers0 width={width} height={height}/>);
         }
       };
 
@@ -163,7 +175,7 @@ export class PictureArea extends BaseComponent<IProps, {}> {
     const renderLabels = () => {
       return (
         <div style={innerStyle}>
-          <Labels />
+          <Labels width={width} height={height}/>
         </div>
       );
     };
@@ -171,7 +183,7 @@ export class PictureArea extends BaseComponent<IProps, {}> {
     const renderFrame = () => {
       return (
         <div style={innerStyle}>
-          <Frame />
+          <Frame width={width} height={height}/>
         </div>
       );
     };
@@ -271,7 +283,7 @@ export class PictureArea extends BaseComponent<IProps, {}> {
     ];
 
     return (
-      <div style={innerStyle}>
+      <div className="picture-area-container">
         { renderScenery() }
         { renderTrees() }
         { renderRivers(riverData.flowPercentage / 25) }
