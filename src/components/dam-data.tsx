@@ -8,17 +8,16 @@ import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-balham.css";
 import "./dam-data.sass";
 
-interface IProps extends IBaseProps {}
+interface IProps extends IBaseProps {
+  parentWidth: number;
+  parentHeight: number;
+}
 interface IState { }
 
 const visibleColumns = [
   "Year",
-  "Season",
   "FarmLakeArea",
-  "StartSeasonSurfaceArea",
-  "StartSeasonVolume",
   "EndSeasonSurfaceArea",
-  "EndSeasonVolume",
   "CornYieldFarmville",
   "CornYieldAgriburg"];
 
@@ -28,10 +27,19 @@ export class DamData extends BaseComponent<IProps, IState> {
 
   public render() {
     const { riverData } = this.stores;
+    const { parentWidth, parentHeight } = this.props;
+    const gridStyle: React.CSSProperties = {
+      width: parentWidth,
+      height: parentHeight,
+    };
     const cols = this.getDataColumns();
+    const tableData = dataByFlow(riverData.flowPercentage).filter(d => {
+      if (d.Year <= 10 && d.Season === "Summer") return d;
+      return;
+    });
     return (
-      <div className="dam-data-grid">
-        <AgGridReact columnDefs={cols} rowData={dataByFlow(riverData.flowPercentage)} headerHeight={48}
+      <div className="dam-data-grid" style={gridStyle}>
+        <AgGridReact columnDefs={cols} rowData={tableData} headerHeight={48}
           onGridReady={this.onGridReady} />
       </div>
     );
@@ -45,7 +53,11 @@ export class DamData extends BaseComponent<IProps, IState> {
     Object.keys(allData[0]).map(d => {
       if (visibleColumns.indexOf(d) > -1) {
         const headerName = d.replace(/([A-Z])/g, " $1").trim();
-        const c: ColDef = { headerName, field: d, valueFormatter: this.numberFormatter };
+        const c: ColDef = {
+          headerName, field: d,
+          valueFormatter: this.numberFormatter,
+          width: headerName === "Year" ? 50 : undefined
+        };
         cols.push(c);
       }
     });

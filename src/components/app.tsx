@@ -29,9 +29,6 @@ export class AppComponent extends BaseComponent<{}, {}> {
 
     return (
       <div className="app-container">
-        {appMode !== "embed" &&
-          <div className="top-bar">DAT Cross Dam</div>
-        }
         <div className="controls-and-content-container">
           {appMode === "dev" &&
             <div className="left-panel">
@@ -43,25 +40,31 @@ export class AppComponent extends BaseComponent<{}, {}> {
             </div>
           }
         <div className="main-content">
-            <div className="section simulation">
+          <div className="section simulation">
+            <SizeMe monitorHeight={true}>
+              {({ size }: ISize) =>
+                <PictureArea parentWidth={size.width ? size.width : 0} parentHeight={size.height ? size.height : 1} />
+              }
+            </SizeMe>
+            </div>
+            <div className="section chart-table">
+              <div className="subsection table">
               <SizeMe monitorHeight={true}>
-                {({ size }: ISize) =>
-                  <PictureArea parentWidth={size.width ? size.width : 0} parentHeight={size.height ? size.height : 1} />
-                }
-              </SizeMe>
-          </div>
-          {ui.displayMode === "Graph" &&
-            <div className="section chart">
-              <div className="header">Chart</div>
-              <ChartDisplay />
+                  {({ size }: ISize) =>
+                    <DamData parentWidth={size.width ? size.width : 0}
+                      parentHeight={size.height ? size.height : 1} />
+                  }
+                </SizeMe>
+              </div>
+              <div className="subsection chart">
+                <SizeMe monitorHeight={true}>
+                  {({ size }: ISize) =>
+                    <ChartDisplay parentWidth={size.width ? size.width : 0}
+                      parentHeight={size.height ? size.height : 1} />
+                  }
+                </SizeMe>
+              </div>
             </div>
-          }
-          {ui.displayMode === "Table" &&
-            <div className="section table">
-              <div className="header">Table</div>
-              <DamData />
-            </div>
-            }
           </div>
         </div>
       </div>

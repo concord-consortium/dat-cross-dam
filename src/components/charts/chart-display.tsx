@@ -12,7 +12,10 @@ import {
 } from "../../models/charts/chart-data-set";
 import { ChartDataModelType, ChartDataModel } from "../../models/charts/chart-data";
 
-interface IProps extends IBaseProps {}
+interface IProps extends IBaseProps {
+  parentWidth: number;
+  parentHeight: number;
+}
 interface IState {
   chartType: ChartType;
   chartData: string;
@@ -28,24 +31,28 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
 
   public render() {
     const { chartType, chartData } = this.state;
+    const { parentWidth, parentHeight } = this.props;
     const { riverData } = this.stores;
     const currentData = dataByFlow(riverData.flowPercentage);
     const charts = this.buildAllCharts(currentData);
 
     return (
-      <div className="chart-test-panel">
+      <div className="chart-panel">
         <div className="content">
-          <select value={chartType} onChange={this.handleChangeSelection} data-test="chart-type">
-            <option value={"line"} data-test="line-option">Line</option>
-            <option value={"horizontalBar"} data-test="horizontalBar-option">Horizontal Bar</option>
-            <option value={"bar"} data-test="bar-option">Bar</option>
-          </select>
-          <select value={chartData} onChange={this.handleChangeDataSelection} data-test="chart-data">
-            <option value={"corn"} data-test="volume-option">Corn Yield</option>
-            <option value={"lake"} data-test="area-option">Lake Surface Area</option>
-          </select>
-          <div>
-            <Chart title="Chart Test" chartData={charts} chartType={chartType} isPlaying={false} />
+          <div className="chart-options">
+            <select value={chartType} onChange={this.handleChangeSelection} data-test="chart-type">
+              <option value={"line"} data-test="line-option">Line</option>
+              <option value={"horizontalBar"} data-test="horizontalBar-option">Horizontal Bar</option>
+              <option value={"bar"} data-test="bar-option">Bar</option>
+            </select>
+            <select value={chartData} onChange={this.handleChangeDataSelection} data-test="chart-data">
+              <option value={"corn"} data-test="volume-option">Corn Yield</option>
+              <option value={"lake"} data-test="area-option">Lake Surface Area</option>
+            </select>
+          </div>
+          <div className="chart-content-container">
+            <Chart title="Chart Test" chartData={charts} chartType={chartType}
+              isPlaying={false} width={parentWidth} height={parentHeight} />
           </div>
         </div>
         <div className="footer"/>

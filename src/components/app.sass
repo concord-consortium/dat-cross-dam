@@ -45,32 +45,41 @@
         align-items: center
 
     .main-content
-      flex-grow: 1
       display: grid
-      grid-template-rows: 1fr
+      grid-template-columns: 100%
+      grid-template-rows: 65% 35%
       color: $main-content-color
       background-color: $main-content-bgcolor
+      width: 100%
 
       .section
+        display: grid
+        grid-template-rows: 100%
         color: $color-nav-cinder-dark3
-        background-color: $section-bgcolor
+        background-color: $color-white
         border: $component-border-width solid white
         border-radius: $component-border-radius
-        margin: $double-two-up-margin
-        border-radius: $component-border-radius
+        margin: 0
+        border-radius: 0
 
         &.simulation
           position: relative
-          min-height: 40vh
+          order: 0
+        &.chart-table
+          display: grid
+          grid-template-columns: 30% 70%
+          flex: 1 1 auto
 
-        .header
-          flex: 0 0 $section-header-height
-          display: flex
-          align-items: center
-          font-family: $font-stack
-          color: $section-header-color
-          text-align: center
-          background-color: $section-header-bgcolor
-          border-top-left-radius: $component-border-radius
-          border-top-right-radius: $component-border-radius
-          padding: $quarter-padding
+        .subsection
+          overflow: hidden
+          height: 100%
+          &.table
+            overflow-y: auto
+          &.chart
+            position: relative
+            overflow-y: auto
+
+          .chart-options
+            position: absolute
+            top: 0px
+            right: 0px
