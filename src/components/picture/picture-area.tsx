@@ -481,7 +481,7 @@ export class PictureArea extends BaseComponent<IProps, {}> {
         { renderTown(ui.populationAgriburg, buildingsAgriburg, townAgriburg)}
         { renderCornFields(ui.cropsArgiburg, cornFieldsAgriburg)}
         { renderFarms(ui.cropsArgiburg, barnsAgriburg)}
-        { renderLabels() }
+        { ui.showLabels ? renderLabels() : "" }
         { renderFrame() }
       </div>
     );
