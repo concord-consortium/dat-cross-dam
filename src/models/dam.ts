@@ -4,7 +4,8 @@ export const DamModel = types
   .model("Dam", {
     flowPercentage: 0,
     currentYear: 1,
-    currentSeason: "Spring"
+    currentSeason: "Spring",
+    dataView: "lake"
   })
   .actions(self => ({
     setFlowPercentage(flow: number) {
@@ -15,6 +16,9 @@ export const DamModel = types
     },
     setSeason(season: string) {
       self.currentSeason = season;
+    },
+    setDataView(dataView: string) {
+      self.dataView = dataView;
     }
   }))
   ;

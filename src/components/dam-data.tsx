@@ -14,12 +14,15 @@ interface IProps extends IBaseProps {
 }
 interface IState { }
 
-const visibleColumns = [
+const visibleColumnsCorn = [
   "Year",
-  "FarmLakeArea",
-  "EndSeasonSurfaceArea",
   "CornYieldFarmville",
   "CornYieldAgriburg"];
+
+const visibleColumnsLake = [
+  "Year",
+  "FarmLakeArea",
+  "EndSeasonSurfaceArea"];
 
 @inject("stores")
 @observer
@@ -48,7 +51,7 @@ export class DamData extends BaseComponent<IProps, IState> {
   private getDataColumns = (): ColDef[] => {
     const { riverData } = this.stores;
     const allData = dataByFlow(riverData.flowPercentage);
-
+    const visibleColumns = riverData.dataView === "lake" ? visibleColumnsLake : visibleColumnsCorn;
     const cols: ColDef[] = [];
     Object.keys(allData[0]).map(d => {
       if (visibleColumns.indexOf(d) > -1) {
@@ -56,7 +59,7 @@ export class DamData extends BaseComponent<IProps, IState> {
         const c: ColDef = {
           headerName, field: d,
           valueFormatter: this.numberFormatter,
-          width: headerName === "Year" ? 50 : undefined
+          width: headerName === "Year" ? 50 : 100
         };
         cols.push(c);
       }

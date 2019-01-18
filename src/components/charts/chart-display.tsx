@@ -18,7 +18,6 @@ interface IProps extends IBaseProps {
 }
 interface IState {
   chartType: ChartType;
-  chartData: string;
 }
 
 @inject("stores")
@@ -26,11 +25,11 @@ interface IState {
 export class ChartDisplay extends BaseComponent<IProps, IState> {
   constructor(props: IProps) {
     super(props);
-    this.state = { chartType: "bar", chartData: "lake" };
+    this.state = { chartType: "bar" };
   }
 
   public render() {
-    const { chartType, chartData } = this.state;
+    const { chartType } = this.state;
     const { parentWidth, parentHeight } = this.props;
     const { riverData } = this.stores;
     const currentData = dataByFlow(riverData.flowPercentage);
@@ -45,7 +44,7 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
               <option value={"horizontalBar"} data-test="horizontalBar-option">Horizontal Bar</option>
               <option value={"bar"} data-test="bar-option">Bar</option>
             </select>
-            <select value={chartData} onChange={this.handleChangeDataSelection} data-test="chart-data">
+            <select value={riverData.dataView} onChange={this.handleChangeDataSelection} data-test="chart-data">
               <option value={"corn"} data-test="volume-option">Corn Yield</option>
               <option value={"lake"} data-test="area-option">Lake Surface Area</option>
             </select>
@@ -68,9 +67,10 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
   }
 
   private handleChangeDataSelection = (e: any) => {
+    const { riverData } = this.stores;
     const selectedValue = e.currentTarget.value ? e.currentTarget.value : "lake";
-    if (selectedValue !== this.state.chartData) {
-      this.setState({ chartData:  selectedValue });
+    if (selectedValue !== riverData.dataView) {
+      riverData.setDataView(selectedValue);
     }
   }
 
@@ -90,7 +90,7 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
   }
 
   private buildAllCharts = (sourceData: SeasonData[]) => {
-    const { chartData } = this.state;
+    const { riverData } = this.stores;
 
     const cornAgriburgDataSet = ChartDataSetModel.create({
       name: "Corn Yield - Agriburg",
@@ -118,7 +118,7 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
 
     const chartDataSets: ChartDataSetModelType[] = [];
 
-    switch (chartData) {
+    switch (riverData.dataView) {
       case "corn":
         chartDataSets.push(cornAgriburgDataSet);
         chartDataSets.push(cornFarmvilleDataSet);
