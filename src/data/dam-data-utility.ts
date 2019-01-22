@@ -11,6 +11,14 @@ export function dataByFlow(flowPercentage: number): SeasonData[] {
   if (flowPercentage === 75) allData = dam75 as SeasonData[];
   return allData;
 }
+export function dataByFlowByYear(flowPercentage: number, year: number): SeasonData[] {
+  let allData: SeasonData[] = dam0 as SeasonData[];
+  if (flowPercentage === 0) allData = dam0 as SeasonData[];
+  if (flowPercentage === 25) allData = dam25 as SeasonData[];
+  if (flowPercentage === 50) allData = dam50 as SeasonData[];
+  if (flowPercentage === 75) allData = dam75 as SeasonData[];
+  return allData.filter(d => d.Year <= year);
+}
 
 export interface SeasonData {
     Year: number;
