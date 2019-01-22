@@ -27,8 +27,8 @@ export class Chart extends React.Component<IChartProps, IChartState> {
     const chart = chartType === "line" ?
       <LineChart
         chartData={chartData}
-        width={this.props.width}
-        height={this.props.height}
+        width={width}
+        height={height}
         isPlaying={isPlaying}
         data-test="line-chart" />
       :
