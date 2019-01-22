@@ -36,19 +36,17 @@ export class AppComponent extends BaseComponent<{}, {}> {
                 <SizeMe monitorHeight={true}>
                   {({ size }: ISize) =>
                     <PictureArea
-                      parentWidth={size.width ? size.width : 0} parentHeight={size.height ? size.height : 1} />
+                      parentWidth={size.width ? size.width : 600} parentHeight={size.height ? size.height : 340} />
                   }
                 </SizeMe>
               </div>
-              {appMode === "dev" &&
-                <div className="subsection sim-controls">
-                  <div className="controls-bottom">
-                    <SimulationControls>
-                      <ControlArea />
-                    </SimulationControls>
-                  </div>
+              <div className="subsection sim-controls">
+                <div className="controls-bottom">
+                  <SimulationControls>
+                    <ControlArea />
+                  </SimulationControls>
                 </div>
-              }
+              </div>
             </div>
             <div className="section chart-table">
               <div className="subsection table">

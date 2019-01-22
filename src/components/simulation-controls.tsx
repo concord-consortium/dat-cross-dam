@@ -12,7 +12,7 @@ interface IState {}
 @observer
 export class SimulationControls extends BaseComponent<IProps, IState> {
   public render() {
-    const { riverData, ui } = this.stores;
+    const { riverData, ui, appMode } = this.stores;
     const allData = dataByFlow(riverData.flowPercentage);
     const dataToDisplay =
       allData.filter(d => d.Year === riverData.currentYear && d.Season === riverData.currentSeason)[0];
@@ -31,20 +31,26 @@ export class SimulationControls extends BaseComponent<IProps, IState> {
           min={1}
           max={10}
           value={riverData.currentYear}
-          />
-        <div>Season: {riverData.currentSeason}</div>
-        <select onChange={this.handleSeasonChange} value={riverData.currentSeason}>
-          <option value="Spring">Spring</option>
-          <option value="Summer">Summer</option>
-        </select>
-        <div>End of Season Area: {dataToDisplay.EndSeasonSurfaceArea}</div>
-        <div className="display-mode">Display Mode</div>
-        <div><input type="radio" id="displayModeSim" name="displayMode" value="Simulation"
-          checked={ui.displayMode === "Simulation"} onChange={this.handleDisplayModeChange}/>Simulation</div>
-        <div><input type="radio" id="displayModeGraph" name="displayMode" value="Graph"
-          checked={ui.displayMode === "Graph"} onChange={this.handleDisplayModeChange}/>Graph</div>
-        <div><input type="radio" id="displayModeTable" name="displayMode" value="Table"
-          checked={ui.displayMode === "Table"} onChange={this.handleDisplayModeChange}/>Table</div>
+        />
+        <div>Show Labels: </div><input type="checkbox" checked={ui.showLabels} onChange={this.handleShowLabelsChange} />
+
+        {appMode === "dev" &&
+          <div>
+          <div>Season: {riverData.currentSeason}</div>
+          <select onChange={this.handleSeasonChange} value={riverData.currentSeason}>
+            <option value="Spring">Spring</option>
+            <option value="Summer">Summer</option>
+          </select>
+          <div>End of Season Area: {dataToDisplay.EndSeasonSurfaceArea}</div>
+          <div className="display-mode">Display Mode</div>
+          <div><input type="radio" id="displayModeSim" name="displayMode" value="Simulation"
+            checked={ui.displayMode === "Simulation"} onChange={this.handleDisplayModeChange} />Simulation</div>
+          <div><input type="radio" id="displayModeGraph" name="displayMode" value="Graph"
+            checked={ui.displayMode === "Graph"} onChange={this.handleDisplayModeChange} />Graph</div>
+          <div><input type="radio" id="displayModeTable" name="displayMode" value="Table"
+            checked={ui.displayMode === "Table"} onChange={this.handleDisplayModeChange} />Table</div>
+          </div>
+        }
         {this.props.children}
       </div>
     );
@@ -65,5 +71,10 @@ export class SimulationControls extends BaseComponent<IProps, IState> {
   private handleDisplayModeChange = (e: React.FormEvent<HTMLInputElement>) => {
     const { ui } = this.stores;
     ui.setDisplayMode(e.currentTarget.value);
+  }
+  private handleShowLabelsChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const { ui } = this.stores;
+    console.log(e.currentTarget.checked);
+    ui.setShowLabels(e.currentTarget.checked);
   }
 }

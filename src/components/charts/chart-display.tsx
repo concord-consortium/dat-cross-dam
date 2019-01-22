@@ -101,7 +101,8 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
       fixedMaxA2: 250,
       fixedMinA2: 0,
       a1AxisLabel: "Year",
-      a2AxisLabel: "Corn Yield bu/acre"
+      a2AxisLabel: "Corn Yield bu/acre",
+      maxPoints: 10
     });
 
     const cornFarmvilleDataSet = ChartDataSetModel.create({
@@ -113,7 +114,8 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
       fixedMaxA2: 250,
       fixedMinA2: 0,
       a1AxisLabel: "Year",
-      a2AxisLabel: "Corn Yield bu/acre"
+      a2AxisLabel: "Corn Yield bu/acre",
+      maxPoints: 10
     });
 
     const lakeSurfaceAreaDataSet = ChartDataSetModel.create({
@@ -125,7 +127,8 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
       fixedMaxA2: 90000,
       fixedMinA2: 0,
       a1AxisLabel: "Year",
-      a2AxisLabel: "Surface Area cu.feet"
+      a2AxisLabel: "Surface Area cu.feet",
+      maxPoints: 10
     });
 
     const chartDataSets: ChartDataSetModelType[] = [];

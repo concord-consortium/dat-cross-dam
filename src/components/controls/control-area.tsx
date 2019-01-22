@@ -17,17 +17,11 @@ export class ControlArea extends BaseComponent<{}, {}> {
 
     const { ui } = this.stores;
 
-    const changeShowLabels = (event: any) => {
-      const target = event.currentTarget as HTMLInputElement;
-      ui.setShowLabels(target.checked);
-    };
-
     return (
       <div>
         <hr />
-        <span><b>Temp. Display Controls <i>(To Be Removed!!!)</i></b></span>
+        <span><b>Test SVG Display Controls <i>(Development Only)</i></b></span>
         <br /><br />
-        Show Labels: <input type="checkbox" checked={ui.showLabels} onChange={changeShowLabels} />
         Agriburg Population ({ui.populationAgriburg}):
         <Slider min={0} max={99} value={ui.populationAgriburg} onChange={ui.setPopAgriburg} />
         Farmville Population ({ui.populationFarmville}):

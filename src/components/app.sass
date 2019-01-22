@@ -50,10 +50,12 @@
         &.simulation
           position: relative
           display: grid
-          grid-template-rows: 70% 30%
+          grid-template-rows: 60% 40%
           order: 0
           .subsection
             overflow: auto
+            &.sim-controls
+              z-index: 1
 
         &.chart-table
           display: grid
