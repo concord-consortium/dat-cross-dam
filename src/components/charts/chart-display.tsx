@@ -97,7 +97,9 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
       dataPoints: this.buildChart(sourceData, "Summer", "corna"),
       color: ChartColors[3].hex,
       backgroundOpacity: 0.9,
-      stack: "CornA"
+      stack: "CornA",
+      fixedMaxA2: 250,
+      fixedMinA2: 0
     });
 
     const cornFarmvilleDataSet = ChartDataSetModel.create({
@@ -105,7 +107,9 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
       dataPoints: this.buildChart(sourceData, "Summer", "cornf"),
       color: ChartColors[1].hex,
       backgroundOpacity: 0.9,
-      stack: "CornF"
+      stack: "CornF",
+      fixedMaxA2: 250,
+      fixedMinA2: 0
     });
 
     const lakeSurfaceAreaDataSet = ChartDataSetModel.create({
@@ -113,7 +117,9 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
       dataPoints: this.buildChart(sourceData, "Summer", "lake"),
       color: ChartColors[0].hex,
       backgroundOpacity: 0.9,
-      stack: "Lake"
+      stack: "Lake",
+      fixedMaxA2: 90000,
+      fixedMinA2: 0
     });
 
     const chartDataSets: ChartDataSetModelType[] = [];
