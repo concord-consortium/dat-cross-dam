@@ -60,6 +60,12 @@ export const ChartDataModel = types
 
     get subsetIdx() {
       return self.dataSets[0].dataStartIdx;
+    },
+    get a1AxisLabel() {
+      return self.dataSets[0].a1AxisLabel;
+    },
+    get a2AxisLabel() {
+      return self.dataSets[0].a2AxisLabel;
     }
   }))
   .extend(self => {

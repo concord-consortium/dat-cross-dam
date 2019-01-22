@@ -125,7 +125,7 @@ export class LineChart extends BaseComponent<ILineProps, ILineState> {
         text: chartData.name
       },
       scales: {
-        display: false,
+        display: true,
         yAxes: [{
           ticks: {
             min: minMaxValues.minA2,
@@ -133,7 +133,8 @@ export class LineChart extends BaseComponent<ILineProps, ILineState> {
           },
           scaleLabel: {
             display: true,
-            fontSize: 12
+            fontSize: 12,
+            labelString: chartData.a2AxisLabel
           }
         }],
         xAxes: [{
@@ -143,6 +144,11 @@ export class LineChart extends BaseComponent<ILineProps, ILineState> {
             max: minMaxValues.maxA1,
             minRotation: chartData.dataLabelRotation,
             maxRotation: chartData.dataLabelRotation
+          },
+          scaleLabel: {
+            display: true,
+            fontSize: 12,
+            labelString: chartData.a1AxisLabel
           }
         }]
       }
