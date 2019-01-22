@@ -25,31 +25,34 @@ export class AppComponent extends BaseComponent<{}, {}> {
 
   public render() {
 
-    const {ui, appMode} = this.stores;
+    const { ui, appMode } = this.stores;
 
     return (
       <div className="app-container">
         <div className="controls-and-content-container">
-          {appMode === "dev" &&
-            <div className="left-panel">
-              <div className="controls">
-              <SimulationControls>
-                <ControlArea />
-              </SimulationControls>
+          <div className="main-content">
+            <div className="section simulation">
+              <div className="subsection simulation">
+                <SizeMe monitorHeight={true}>
+                  {({ size }: ISize) =>
+                    <PictureArea
+                      parentWidth={size.width ? size.width : 0} parentHeight={size.height ? size.height : 1} />
+                  }
+                </SizeMe>
               </div>
-            </div>
-          }
-        <div className="main-content">
-          <div className="section simulation">
-            <SizeMe monitorHeight={true}>
-              {({ size }: ISize) =>
-                <PictureArea parentWidth={size.width ? size.width : 0} parentHeight={size.height ? size.height : 1} />
+              {appMode === "dev" &&
+                <div className="subsection sim-controls">
+                  <div className="controls-bottom">
+                    <SimulationControls>
+                      <ControlArea />
+                    </SimulationControls>
+                  </div>
+                </div>
               }
-            </SizeMe>
             </div>
             <div className="section chart-table">
               <div className="subsection table">
-              <SizeMe monitorHeight={true}>
+                <SizeMe monitorHeight={true}>
                   {({ size }: ISize) =>
                     <DamData parentWidth={size.width ? size.width : 0}
                       parentHeight={size.height ? size.height : 1} />
