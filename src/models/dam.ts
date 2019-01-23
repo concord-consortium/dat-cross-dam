@@ -1,4 +1,9 @@
 import { types, Instance } from "mobx-state-tree";
+import {
+  getCurrentCropPercentageAgriburg,
+  getCurrentCropPercentageFarmville,
+  getCurrentLakeArea
+} from "../data/dam-data-utility";
 
 export const DamModel = types
   .model("Dam", {
@@ -7,6 +12,19 @@ export const DamModel = types
     currentSeason: "Spring",
     dataView: "lake",
     isPlaying: false
+  })
+  .views((self) => {
+    return {
+      getCropsAgriburg() {
+        return (getCurrentCropPercentageAgriburg(self.flowPercentage, self.currentYear));
+      },
+      getCropsFarmville() {
+        return (getCurrentCropPercentageFarmville(self.flowPercentage, self.currentYear));
+      },
+      getCurrentLakeArea() {
+        return (getCurrentLakeArea(self.flowPercentage, self.currentYear));
+      }
+    };
   })
   .actions(self => ({
     setFlowPercentage(flow: number) {
