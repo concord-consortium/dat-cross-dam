@@ -3,6 +3,13 @@ import * as dam25 from "../data/dam25.json";
 import * as dam50 from "../data/dam50.json";
 import * as dam75 from "../data/dam75.json";
 
+// Only used for min/max value calculations
+function _allData(): SeasonData[] {
+  const allFlowData: SeasonData[] = dam0 as SeasonData[];
+  allFlowData.concat(dam25 as SeasonData[]).concat(dam50 as SeasonData[]).concat(dam75 as SeasonData[]);
+  return allFlowData;
+}
+
 export function dataByFlow(flowPercentage: number): SeasonData[] {
   let allData: SeasonData[] = dam0 as SeasonData[];
   if (flowPercentage === 0) allData = dam0 as SeasonData[];
@@ -109,21 +116,21 @@ interface DataMinMax {
 }
 
 function getMinMaxCropsAgriburg(flowPercentage: number): DataMinMax {
-  const data = dataByFlow(flowPercentage);
+  const data = _allData();
   const maxCrops = Math.max(...data.map(p => p.CornYieldAgriburg));
   const minCrops = Math.min(...data.map(p => p.CornYieldAgriburg));
   return { Max: maxCrops, Min: minCrops };
 }
 
 function getMinMaxCropsFarmville(flowPercentage: number): DataMinMax {
-  const data = dataByFlow(flowPercentage);
+  const data = _allData();
   const maxCrops = Math.max(...data.map(p => p.CornYieldFarmville));
   const minCrops = Math.min(...data.map(p => p.CornYieldFarmville));
   return { Max: maxCrops, Min: minCrops };
 }
 
 function getMinMaxLakeArea(flowPercentage: number): DataMinMax {
-  const data = dataByFlow(flowPercentage);
+  const data = _allData();
   const maxArea = Math.max(...data.map(p => p.EndSeasonSurfaceArea));
   const minArea = Math.min(...data.map(p => p.EndSeasonSurfaceArea));
   return { Max: maxArea, Min: minArea };
