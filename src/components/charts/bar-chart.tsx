@@ -14,6 +14,9 @@ interface IBarProps {
 }
 
 const defaultOptions: ChartOptions = {
+  animation: {
+    duration: 0
+  },
   title: {
     display: false,
     text: "",

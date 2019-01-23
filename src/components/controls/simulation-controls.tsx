@@ -103,7 +103,7 @@ export class SimulationControls extends BaseComponent<IProps, IState> {
       riverData.setIsPlaying(false);
     } else {
       riverData.setIsPlaying(true);
-      _playInterval = setInterval(this.simulationTick, 2000);
+      _playInterval = setInterval(this.simulationTick, 1000);
     }
   }
   private simulationTick = () => {
