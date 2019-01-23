@@ -5,7 +5,7 @@ import { SizeMe } from "react-sizeme";
 
 import { BaseComponent, IBaseProps } from "./base";
 import { ChartDisplay } from "./charts/chart-display";
-import { SimulationControls } from "./simulation-controls";
+import { SimulationControls } from "./controls/simulation-controls";
 import { DamData } from "./dam-data";
 import { PictureArea } from "./picture/picture-area";
 import { ControlArea } from "./controls/control-area";

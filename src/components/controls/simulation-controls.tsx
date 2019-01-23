@@ -1,12 +1,16 @@
 import * as React from "react";
 import { inject, observer, propTypes } from "mobx-react";
-import { BaseComponent } from "./base";
+import { BaseComponent } from "../base";
 import Slider from "rc-slider";
-import { dataByFlow } from "../data/dam-data-utility";
+import { dataByFlow } from "../../data/dam-data-utility";
 
 import "./simulation-controls.sass";
+import "./toolbar-buttons.css";
+
 interface IProps {}
 interface IState {}
+
+let _playInterval: any;
 
 @inject("stores")
 @observer
@@ -16,15 +20,11 @@ export class SimulationControls extends BaseComponent<IProps, IState> {
     const allData = dataByFlow(riverData.flowPercentage);
     const dataToDisplay =
       allData.filter(d => d.Year === riverData.currentYear && d.Season === riverData.currentSeason)[0];
+    const playButtonStyle = riverData.isPlaying ?
+      "pause-icon-button" :
+      "play-icon-button";
     return (
       <div className="simulation-controls">
-        <div>Diversion percentage: {riverData.flowPercentage}</div>
-        <select onChange={this.handleFlowPercentageChange} value={riverData.flowPercentage}>
-          <option value="0">0</option>
-          <option value="25">25</option>
-          <option value="50">50</option>
-          <option value="75">75</option>
-        </select>
         <div>Year: {riverData.currentYear}</div>
         <Slider  className="year-slider"
           onChange={this.handleYearChange}
@@ -32,7 +32,27 @@ export class SimulationControls extends BaseComponent<IProps, IState> {
           max={10}
           value={riverData.currentYear}
         />
-        <div>Show Labels: </div><input type="checkbox" checked={ui.showLabels} onChange={this.handleShowLabelsChange} />
+        <div>Diversion percentage: {riverData.flowPercentage}</div>
+        <select onChange={this.handleFlowPercentageChange} value={riverData.flowPercentage}>
+          <option value="0">0</option>
+          <option value="25">25</option>
+          <option value="50">50</option>
+          <option value="75">75</option>
+        </select>
+
+        <div className="buttons">
+          <div className="toolbar-button">
+            <div className={playButtonStyle} onClick={this.handleSimulationPlayToggle} />
+          </div>
+          <div className="toolbar-button">
+            <div className="reset-icon-button" />
+          </div>
+        </div>
+
+        <div className="label-toggle">
+          <label>Labels</label>
+          <input type="checkbox" checked={ui.showLabels} onChange={this.handleShowLabelsChange} />
+        </div>
 
         {appMode === "dev" &&
           <div>
@@ -51,7 +71,7 @@ export class SimulationControls extends BaseComponent<IProps, IState> {
             checked={ui.displayMode === "Table"} onChange={this.handleDisplayModeChange} />Table</div>
           </div>
         }
-        {this.props.children}
+        {appMode === "dev" && this.props.children}
       </div>
     );
   }
@@ -75,5 +95,23 @@ export class SimulationControls extends BaseComponent<IProps, IState> {
   private handleShowLabelsChange = (e: React.FormEvent<HTMLInputElement>) => {
     const { ui } = this.stores;
     ui.setShowLabels(e.currentTarget.checked);
+  }
+  private handleSimulationPlayToggle = (e: React.FormEvent<HTMLDivElement>) => {
+    const { riverData } = this.stores;
+    if (riverData.isPlaying) {
+      clearInterval(_playInterval);
+      riverData.setIsPlaying(false);
+    } else {
+      riverData.setIsPlaying(true);
+      _playInterval = setInterval(this.simulationTick, 2000);
+    }
+  }
+  private simulationTick = () => {
+    const { riverData } = this.stores;
+    if (riverData.currentYear < 10) {
+      riverData.setYear(riverData.currentYear + 1);
+    } else {
+      riverData.setIsPlaying(false);
+    }
   }
 }

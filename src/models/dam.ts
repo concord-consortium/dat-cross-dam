@@ -5,7 +5,8 @@ export const DamModel = types
     flowPercentage: 0,
     currentYear: 1,
     currentSeason: "Spring",
-    dataView: "lake"
+    dataView: "lake",
+    isPlaying: false
   })
   .actions(self => ({
     setFlowPercentage(flow: number) {
@@ -19,6 +20,9 @@ export const DamModel = types
     },
     setDataView(dataView: string) {
       self.dataView = dataView;
+    },
+    setIsPlaying(isPlaying: boolean) {
+      self.isPlaying = isPlaying;
     }
   }))
   ;
