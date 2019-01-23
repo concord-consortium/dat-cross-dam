@@ -11,6 +11,7 @@ interface IProps {}
 interface IState {}
 
 let _playInterval: any;
+const simulationSpeed = 2000;
 
 @inject("stores")
 @observer
@@ -22,7 +23,7 @@ export class SimulationControls extends BaseComponent<IProps, IState> {
       allData.filter(d => d.Year === riverData.currentYear && d.Season === riverData.currentSeason)[0];
     const playButtonStyle = riverData.isPlaying ?
       "pause-icon-button" :
-      "play-icon-button";
+      riverData.currentYear < 10 ? "play-icon-button" : "play-icon-button disabled";
     return (
       <div className="simulation-controls">
         <div>Year: {riverData.currentYear}</div>
@@ -47,7 +48,7 @@ export class SimulationControls extends BaseComponent<IProps, IState> {
             <div className={playButtonStyle} onClick={this.handleSimulationPlayToggle} />
           </div>
           <div className="toolbar-button">
-            <div className="reset-icon-button" />
+            <div className="reset-icon-button" onClick={this.handleSimulationReset} />
           </div>
         </div>
 
@@ -99,21 +100,38 @@ export class SimulationControls extends BaseComponent<IProps, IState> {
     ui.setShowLabels(e.currentTarget.checked);
   }
   private handleSimulationPlayToggle = (e: React.FormEvent<HTMLDivElement>) => {
-    const { riverData } = this.stores;
-    if (riverData.isPlaying) {
-      clearInterval(_playInterval);
-      riverData.setIsPlaying(false);
-    } else {
-      riverData.setIsPlaying(true);
-      _playInterval = setInterval(this.simulationTick, 1000);
+    const { riverData, appMode } = this.stores;
+    clearInterval(_playInterval);
+    if (riverData.currentYear < 10) {
+      if (riverData.isPlaying) {
+        riverData.setIsPlaying(false);
+      } else {
+        riverData.setIsPlaying(true);
+        this.simulationTick();
+        const intervalTickRate = appMode === "dev" ? 1000 : simulationSpeed;
+        _playInterval = setInterval(this.simulationTick, intervalTickRate);
+      }
     }
   }
   private simulationTick = () => {
     const { riverData } = this.stores;
-    if (riverData.currentYear < 10) {
-      riverData.setYear(riverData.currentYear + 1);
-    } else {
-      riverData.setIsPlaying(false);
+    if (riverData.isPlaying) {
+
+      const nextYear = riverData.currentYear + 1;
+      if (nextYear < 10) {
+        riverData.setYear(nextYear);
+      } else if (nextYear === 10) {
+        riverData.setYear(nextYear);
+        riverData.setIsPlaying(false);
+      } else {
+        riverData.setIsPlaying(false);
+      }
     }
+  }
+  private handleSimulationReset = (e: React.FormEvent<HTMLDivElement>) => {
+    const { riverData } = this.stores;
+    riverData.setIsPlaying(false);
+    riverData.setYear(1);
+    clearInterval(_playInterval);
   }
 }
