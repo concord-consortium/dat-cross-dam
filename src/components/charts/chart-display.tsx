@@ -2,7 +2,7 @@ import { inject, observer } from "mobx-react";
 import * as React from "react";
 import { BaseComponent, IBaseProps } from "../base";
 import { Chart, ChartType } from "./chart";
-import { dataByFlow, dataByFlowByYear, SeasonData, dataByFlowByYearPadded } from "../../data/dam-data-utility";
+import { dataByFlow, dataByFlowUpToYear, SeasonData, dataByFlowByYearPadded } from "../../data/dam-data-utility";
 import {
   DataPointType,
   DataPoint,
@@ -33,29 +33,32 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
     const { parentWidth, parentHeight } = this.props;
     const { riverData } = this.stores;
     const currentData = chartType === "bar" ? dataByFlowByYearPadded(riverData.flowPercentage, riverData.currentYear) :
-    dataByFlowByYear(riverData.flowPercentage, riverData.currentYear);
+    dataByFlowUpToYear(riverData.flowPercentage, riverData.currentYear);
     const charts = this.buildAllCharts(currentData);
+
+    const chartTypeOption = (chartDisplayType: string) => {
+      const optionId = "chartDisplayType" + chartDisplayType;
+      const optionStyle =
+          chartType === chartDisplayType ?
+          "chart-display-style selected" : "chart-display-style";
+      return <div className={optionStyle}>
+        <label htmlFor={optionId}>{chartDisplayType}</label>
+        <input type="radio" id={optionId} name="chartDisplayType" value={chartDisplayType}
+          checked={chartType === chartDisplayType} onChange={this.handleChangeSelection} />
+      </div>;
+    };
 
     return (
       <div className="chart-panel">
-        <div className="content">
-          <div className="chart-options">
-            <select value={chartType} onChange={this.handleChangeSelection} data-test="chart-type">
-              <option value={"line"} data-test="line-option">Line</option>
-              <option value={"horizontalBar"} data-test="horizontalBar-option">Horizontal Bar</option>
-              <option value={"bar"} data-test="bar-option">Bar</option>
-            </select>
-            <select value={riverData.dataView} onChange={this.handleChangeDataSelection} data-test="chart-data">
-              <option value={"corn"} data-test="volume-option">Corn Yield</option>
-              <option value={"lake"} data-test="area-option">Lake Surface Area</option>
-            </select>
-          </div>
-          <div className="chart-content-container">
-            <Chart title="Chart Test" chartData={charts} chartType={chartType}
-              isPlaying={false} width={parentWidth} height={parentHeight} />
-          </div>
+        <div className="chart-options">
+          {chartTypeOption("line")}
+          {chartTypeOption("bar")}
+
         </div>
-        <div className="footer"/>
+        <div className="chart-content-container">
+          <Chart title="Chart Test" chartData={charts} chartType={chartType}
+            isPlaying={false} width={parentWidth} height={parentHeight} />
+        </div>
       </div>
     );
   }
@@ -64,14 +67,6 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
     const selectedValue = e.currentTarget.value ? e.currentTarget.value : "bar";
     if (selectedValue !== this.state.chartType) {
       this.setState({ chartType:  selectedValue });
-    }
-  }
-
-  private handleChangeDataSelection = (e: any) => {
-    const { riverData } = this.stores;
-    const selectedValue = e.currentTarget.value ? e.currentTarget.value : "lake";
-    if (selectedValue !== riverData.dataView) {
-      riverData.setDataView(selectedValue);
     }
   }
 

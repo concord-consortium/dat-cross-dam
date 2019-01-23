@@ -53,6 +53,13 @@ export class SimulationControls extends BaseComponent<IProps, IState> {
         {flowButton(25)}
         {flowButton(50)}
         {flowButton(75)}
+        <div className="data-analysis-type">
+          <select value={riverData.dataView} onChange={this.handleChangeDataSelection} data-test="chart-data">
+            <option value={"corn"} data-test="volume-option">Corn Yield</option>
+            <option value={"lake"} data-test="area-option">Lake Surface Area</option>
+          </select>
+         </div>
+
         <div className="buttons">
           <div className="toolbar-button">
             <div className={playButtonStyle} onClick={this.handleSimulationPlayToggle} />
@@ -88,6 +95,15 @@ export class SimulationControls extends BaseComponent<IProps, IState> {
       </div>
     );
   }
+
+  private handleChangeDataSelection = (e: any) => {
+    const { riverData } = this.stores;
+    const selectedValue = e.currentTarget.value ? e.currentTarget.value : "lake";
+    if (selectedValue !== riverData.dataView) {
+      riverData.setDataView(selectedValue);
+    }
+  }
+
   private handleYearChange = (value: number) => {
     const { riverData } = this.stores;
     riverData.setYear(value);

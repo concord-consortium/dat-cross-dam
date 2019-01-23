@@ -18,7 +18,7 @@ export function dataByFlow(flowPercentage: number): SeasonData[] {
   if (flowPercentage === 75) allData = dam75 as SeasonData[];
   return allData;
 }
-export function dataByFlowByYear(flowPercentage: number, year: number): SeasonData[] {
+export function dataByFlowUpToYear(flowPercentage: number, year: number): SeasonData[] {
   let allData: SeasonData[] = dam0 as SeasonData[];
   if (flowPercentage === 0) allData = dam0 as SeasonData[];
   if (flowPercentage === 25) allData = dam25 as SeasonData[];
@@ -26,14 +26,14 @@ export function dataByFlowByYear(flowPercentage: number, year: number): SeasonDa
   if (flowPercentage === 75) allData = dam75 as SeasonData[];
   return allData.filter(d => d.Year <= year);
 }
-export function dataByFlowForYear(flowPercentage: number, year: number): SeasonData {
+export function dataByFlowForSpecificYear(flowPercentage: number, year: number): SeasonData {
   const allData = dataByFlow(flowPercentage);
   const yearData = allData.filter(d => d.Year === year);
   return yearData[1];
 }
 
 export function dataByFlowByYearPadded(flowPercentage: number, year: number): SeasonData[] {
-  const data = dataByFlowByYear(flowPercentage, year);
+  const data = dataByFlowUpToYear(flowPercentage, year);
   if (year < 10) {
     for (let i = year + 1; i <= 10; i++) {
       data.push(blankSeasonData(i));
@@ -115,21 +115,21 @@ interface DataMinMax {
   Min: number;
 }
 
-function getMinMaxCropsAgriburg(flowPercentage: number): DataMinMax {
+function getMinMaxCropsAgriburg(): DataMinMax {
   const data = _allData();
   const maxCrops = Math.max(...data.map(p => p.CornYieldAgriburg));
   const minCrops = Math.min(...data.map(p => p.CornYieldAgriburg));
   return { Max: maxCrops, Min: minCrops };
 }
 
-function getMinMaxCropsFarmville(flowPercentage: number): DataMinMax {
+function getMinMaxCropsFarmville(): DataMinMax {
   const data = _allData();
   const maxCrops = Math.max(...data.map(p => p.CornYieldFarmville));
   const minCrops = Math.min(...data.map(p => p.CornYieldFarmville));
   return { Max: maxCrops, Min: minCrops };
 }
 
-function getMinMaxLakeArea(flowPercentage: number): DataMinMax {
+function getMinMaxLakeArea(): DataMinMax {
   const data = _allData();
   const maxArea = Math.max(...data.map(p => p.EndSeasonSurfaceArea));
   const minArea = Math.min(...data.map(p => p.EndSeasonSurfaceArea));
@@ -137,18 +137,18 @@ function getMinMaxLakeArea(flowPercentage: number): DataMinMax {
 }
 
 export function getCurrentCropPercentageAgriburg(flowPercentage: number, year: number): number {
-  const minmax = getMinMaxCropsAgriburg(flowPercentage);
-  const currentValue = dataByFlowForYear(flowPercentage, year).CornYieldAgriburg;
+  const minmax = getMinMaxCropsAgriburg();
+  const currentValue = dataByFlowForSpecificYear(flowPercentage, year).CornYieldAgriburg;
   return calcValue(minmax, currentValue);
 }
 export function getCurrentCropPercentageFarmville(flowPercentage: number, year: number): number {
-  const minmax = getMinMaxCropsFarmville(flowPercentage);
-  const currentValue = dataByFlowForYear(flowPercentage, year).CornYieldFarmville;
+  const minmax = getMinMaxCropsFarmville();
+  const currentValue = dataByFlowForSpecificYear(flowPercentage, year).CornYieldFarmville;
   return calcValue(minmax, currentValue);
 }
 export function getCurrentLakeArea(flowPercentage: number, year: number): number {
-  const minmax = getMinMaxLakeArea(flowPercentage);
-  const currentValue = dataByFlowForYear(flowPercentage, year).EndSeasonSurfaceArea;
+  const minmax = getMinMaxLakeArea();
+  const currentValue = dataByFlowForSpecificYear(flowPercentage, year).EndSeasonSurfaceArea;
   return calcValue(minmax, currentValue);
 }
 

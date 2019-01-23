@@ -67,8 +67,6 @@
 
           .subsection
             overflow: hidden
-
-
             &.table
               overflow-y: auto
             &.chart
@@ -76,8 +74,28 @@
               overflow-y: auto
               padding-bottom: 16px
 
-            .chart-options
-              position: absolute
-              top: 0px
-              right: 0px
-              z-index: 1
+              .chart-options
+                position: absolute
+                top: 0px
+                right: 0px
+                z-index: 1
+
+                .chart-display-style
+                  border-radius: 4px
+                  border: 2px solid $color-nav-cinder-light3
+                  background: $color-nav-cinder-light3
+                  float: left
+                  text-align: center
+                  margin: 2px
+                  font-size: 0.9em
+                  &:hover
+                    background: $color-nav-cinder-light2
+                  &.selected
+                    border: 2px solid $color-nav-cinder-light1
+
+                  input[type="radio"]
+                    display: none
+
+                  label
+                    padding: 2px
+                    padding-left: 3px
