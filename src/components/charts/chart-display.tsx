@@ -2,7 +2,7 @@ import { inject, observer } from "mobx-react";
 import * as React from "react";
 import { BaseComponent, IBaseProps } from "../base";
 import { Chart, ChartType } from "./chart";
-import { dataByFlow, dataByFlowByYear, SeasonData } from "../../data/dam-data-utility";
+import { dataByFlow, dataByFlowByYear, SeasonData, dataByFlowByYearPadded } from "../../data/dam-data-utility";
 import {
   DataPointType,
   DataPoint,
@@ -32,7 +32,8 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
     const { chartType } = this.state;
     const { parentWidth, parentHeight } = this.props;
     const { riverData } = this.stores;
-    const currentData = dataByFlowByYear(riverData.flowPercentage, riverData.currentYear);
+    const currentData = chartType === "bar" ? dataByFlowByYearPadded(riverData.flowPercentage, riverData.currentYear) :
+    dataByFlowByYear(riverData.flowPercentage, riverData.currentYear);
     const charts = this.buildAllCharts(currentData);
 
     return (

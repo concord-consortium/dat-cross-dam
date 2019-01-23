@@ -3,7 +3,7 @@ import * as React from "react";
 import { BaseComponent, IBaseProps } from "./base";
 import { AgGridReact } from "ag-grid-react";
 import { ColDef, ValueFormatterParams, AgGridEvent } from "ag-grid-community";
-import { dataByFlow, dataByFlowByYear } from "../data/dam-data-utility";
+import { dataByFlow, dataByFlowByYear, dataByFlowByYearPadded } from "../data/dam-data-utility";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-balham.css";
 import "./dam-data.sass";
