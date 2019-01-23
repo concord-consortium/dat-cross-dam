@@ -76,7 +76,9 @@ export const ChartDataSetModel = types
     expandOnly: false,
     fixedLabelRotation: types.maybe(types.number),
     dataStartIdx: types.maybe(types.number),
-    stack: types.maybe(types.string)
+    stack: types.maybe(types.string),
+    a1AxisLabel: types.maybe(types.string),
+    a2AxisLabel: types.maybe(types.string)
   })
   .views(self => ({
     get visibleDataPoints() {

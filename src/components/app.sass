@@ -31,46 +31,48 @@
     height: 100%
     overflow: hidden
 
-    .left-panel
-      flex-grow: 0
-      flex-shrink: 0
-      flex-basis: $left-nav-panel-width
-      display: flex
-      flex-direction: column
-      background-color: $left-nav-bgcolor
-      margin-right: $component-margin
-      .controls
-        display: flex
-        flex-direction: column
-        align-items: center
-
     .main-content
-      flex-grow: 1
       display: grid
-      grid-template-rows: 1fr
+      grid-template-columns: 65% 35%
       color: $main-content-color
       background-color: $main-content-bgcolor
+      width: 100%
+      height: 100%
 
       .section
         color: $color-nav-cinder-dark3
-        background-color: $section-bgcolor
+        background-color: $color-white
         border: $component-border-width solid white
         border-radius: $component-border-radius
-        margin: $double-two-up-margin
-        border-radius: $component-border-radius
+        margin: 0
+        border-radius: 0
 
         &.simulation
           position: relative
-          min-height: 40vh
+          display: grid
+          grid-template-rows: 60% 40%
+          order: 0
+          .subsection
+            overflow: auto
+            &.sim-controls
+              z-index: 1
 
-        .header
-          flex: 0 0 $section-header-height
-          display: flex
-          align-items: center
-          font-family: $font-stack
-          color: $section-header-color
-          text-align: center
-          background-color: $section-header-bgcolor
-          border-top-left-radius: $component-border-radius
-          border-top-right-radius: $component-border-radius
-          padding: $quarter-padding
+        &.chart-table
+          display: grid
+          grid-template-rows: 40% 60%
+          flex: 1 1 auto
+
+          .subsection
+            overflow: hidden
+
+            &.table
+              overflow-y: auto
+            &.chart
+              position: relative
+              overflow-y: auto
+
+            .chart-options
+              position: absolute
+              top: 0px
+              right: 0px
+              z-index: 1

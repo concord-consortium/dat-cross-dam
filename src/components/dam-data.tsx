@@ -3,24 +3,26 @@ import * as React from "react";
 import { BaseComponent, IBaseProps } from "./base";
 import { AgGridReact } from "ag-grid-react";
 import { ColDef, ValueFormatterParams, AgGridEvent } from "ag-grid-community";
-import { dataByFlow } from "../data/dam-data-utility";
+import { dataByFlow, dataByFlowByYear } from "../data/dam-data-utility";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-balham.css";
 import "./dam-data.sass";
 
-interface IProps extends IBaseProps {}
+interface IProps extends IBaseProps {
+  parentWidth: number;
+  parentHeight: number;
+}
 interface IState { }
 
-const visibleColumns = [
+const visibleColumnsCorn = [
   "Year",
-  "Season",
-  "FarmLakeArea",
-  "StartSeasonSurfaceArea",
-  "StartSeasonVolume",
-  "EndSeasonSurfaceArea",
-  "EndSeasonVolume",
   "CornYieldFarmville",
   "CornYieldAgriburg"];
+
+const visibleColumnsLake = [
+  "Year",
+  "FarmLakeArea",
+  "EndSeasonSurfaceArea"];
 
 @inject("stores")
 @observer
@@ -28,10 +30,19 @@ export class DamData extends BaseComponent<IProps, IState> {
 
   public render() {
     const { riverData } = this.stores;
+    const { parentWidth, parentHeight } = this.props;
+    const gridStyle: React.CSSProperties = {
+      width: parentWidth,
+      height: parentHeight,
+    };
     const cols = this.getDataColumns();
+    const tableData = dataByFlowByYear(riverData.flowPercentage, riverData.currentYear).filter(d => {
+      if (d.Year <= 10 && d.Season === "Summer") return d;
+      return;
+    });
     return (
-      <div className="dam-data-grid">
-        <AgGridReact columnDefs={cols} rowData={dataByFlow(riverData.flowPercentage)} headerHeight={48}
+      <div className="dam-data-grid" style={gridStyle}>
+        <AgGridReact columnDefs={cols} rowData={tableData} headerHeight={48}
           onGridReady={this.onGridReady} />
       </div>
     );
@@ -39,13 +50,17 @@ export class DamData extends BaseComponent<IProps, IState> {
 
   private getDataColumns = (): ColDef[] => {
     const { riverData } = this.stores;
-    const allData = dataByFlow(riverData.flowPercentage);
-
+    const allData = dataByFlowByYear(riverData.flowPercentage, riverData.currentYear);
+    const visibleColumns = riverData.dataView === "lake" ? visibleColumnsLake : visibleColumnsCorn;
     const cols: ColDef[] = [];
     Object.keys(allData[0]).map(d => {
       if (visibleColumns.indexOf(d) > -1) {
         const headerName = d.replace(/([A-Z])/g, " $1").trim();
-        const c: ColDef = { headerName, field: d, valueFormatter: this.numberFormatter };
+        const c: ColDef = {
+          headerName, field: d,
+          valueFormatter: this.numberFormatter,
+          width: headerName === "Year" ? 50 : 100
+        };
         cols.push(c);
       }
     });

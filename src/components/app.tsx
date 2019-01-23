@@ -25,43 +25,47 @@ export class AppComponent extends BaseComponent<{}, {}> {
 
   public render() {
 
-    const {ui, appMode} = this.stores;
+    const { ui, appMode } = this.stores;
 
     return (
       <div className="app-container">
-        {appMode !== "embed" &&
-          <div className="top-bar">DAT Cross Dam</div>
-        }
         <div className="controls-and-content-container">
-          {appMode === "dev" &&
-            <div className="left-panel">
-              <div className="controls">
-              <SimulationControls>
-                <ControlArea />
-              </SimulationControls>
+          <div className="main-content">
+            <div className="section simulation">
+              <div className="subsection simulation">
+                <SizeMe monitorHeight={true}>
+                  {({ size }: ISize) =>
+                    <PictureArea
+                      parentWidth={size.width ? size.width : 600} parentHeight={size.height ? size.height : 340} />
+                  }
+                </SizeMe>
+              </div>
+              <div className="subsection sim-controls">
+                <div className="controls-bottom">
+                  <SimulationControls>
+                    <ControlArea />
+                  </SimulationControls>
+                </div>
               </div>
             </div>
-          }
-        <div className="main-content">
-            <div className="section simulation">
-              <SizeMe monitorHeight={true}>
-                {({ size }: ISize) =>
-                  <PictureArea parentWidth={size.width ? size.width : 0} parentHeight={size.height ? size.height : 1} />
-                }
-              </SizeMe>
-          </div>
-          {ui.displayMode === "Graph" &&
-            <div className="section chart">
-              <div className="header">Chart</div>
-              <ChartDisplay />
+            <div className="section chart-table">
+              <div className="subsection table">
+                <SizeMe monitorHeight={true}>
+                  {({ size }: ISize) =>
+                    <DamData parentWidth={size.width ? size.width : 0}
+                      parentHeight={size.height ? size.height : 1} />
+                  }
+                </SizeMe>
+              </div>
+              <div className="subsection chart">
+                <SizeMe monitorHeight={true}>
+                  {({ size }: ISize) =>
+                    <ChartDisplay parentWidth={size.width ? size.width : 0}
+                      parentHeight={size.height ? size.height : 1} />
+                  }
+                </SizeMe>
+              </div>
             </div>
-          }
-          {ui.displayMode === "Table" &&
-            <div className="section table">
-              <div className="header">Table</div>
-              <DamData />
-            </div>
-            }
           </div>
         </div>
       </div>

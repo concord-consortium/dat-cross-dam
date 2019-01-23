@@ -2,7 +2,7 @@ import { inject, observer } from "mobx-react";
 import * as React from "react";
 import { BaseComponent, IBaseProps } from "../base";
 import { Chart, ChartType } from "./chart";
-import { dataByFlow, SeasonData } from "../../data/dam-data-utility";
+import { dataByFlow, dataByFlowByYear, SeasonData } from "../../data/dam-data-utility";
 import {
   DataPointType,
   DataPoint,
@@ -12,10 +12,12 @@ import {
 } from "../../models/charts/chart-data-set";
 import { ChartDataModelType, ChartDataModel } from "../../models/charts/chart-data";
 
-interface IProps extends IBaseProps {}
+interface IProps extends IBaseProps {
+  parentWidth: number;
+  parentHeight: number;
+}
 interface IState {
   chartType: ChartType;
-  chartData: string;
 }
 
 @inject("stores")
@@ -23,29 +25,33 @@ interface IState {
 export class ChartDisplay extends BaseComponent<IProps, IState> {
   constructor(props: IProps) {
     super(props);
-    this.state = { chartType: "bar", chartData: "lake" };
+    this.state = { chartType: "bar" };
   }
 
   public render() {
-    const { chartType, chartData } = this.state;
+    const { chartType } = this.state;
+    const { parentWidth, parentHeight } = this.props;
     const { riverData } = this.stores;
-    const currentData = dataByFlow(riverData.flowPercentage);
+    const currentData = dataByFlowByYear(riverData.flowPercentage, riverData.currentYear);
     const charts = this.buildAllCharts(currentData);
 
     return (
-      <div className="chart-test-panel">
+      <div className="chart-panel">
         <div className="content">
-          <select value={chartType} onChange={this.handleChangeSelection} data-test="chart-type">
-            <option value={"line"} data-test="line-option">Line</option>
-            <option value={"horizontalBar"} data-test="horizontalBar-option">Horizontal Bar</option>
-            <option value={"bar"} data-test="bar-option">Bar</option>
-          </select>
-          <select value={chartData} onChange={this.handleChangeDataSelection} data-test="chart-data">
-            <option value={"corn"} data-test="volume-option">Corn Yield</option>
-            <option value={"lake"} data-test="area-option">Lake Surface Area</option>
-          </select>
-          <div>
-            <Chart title="Chart Test" chartData={charts} chartType={chartType} isPlaying={false} />
+          <div className="chart-options">
+            <select value={chartType} onChange={this.handleChangeSelection} data-test="chart-type">
+              <option value={"line"} data-test="line-option">Line</option>
+              <option value={"horizontalBar"} data-test="horizontalBar-option">Horizontal Bar</option>
+              <option value={"bar"} data-test="bar-option">Bar</option>
+            </select>
+            <select value={riverData.dataView} onChange={this.handleChangeDataSelection} data-test="chart-data">
+              <option value={"corn"} data-test="volume-option">Corn Yield</option>
+              <option value={"lake"} data-test="area-option">Lake Surface Area</option>
+            </select>
+          </div>
+          <div className="chart-content-container">
+            <Chart title="Chart Test" chartData={charts} chartType={chartType}
+              isPlaying={false} width={parentWidth} height={parentHeight} />
           </div>
         </div>
         <div className="footer"/>
@@ -61,9 +67,10 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
   }
 
   private handleChangeDataSelection = (e: any) => {
+    const { riverData } = this.stores;
     const selectedValue = e.currentTarget.value ? e.currentTarget.value : "lake";
-    if (selectedValue !== this.state.chartData) {
-      this.setState({ chartData:  selectedValue });
+    if (selectedValue !== riverData.dataView) {
+      riverData.setDataView(selectedValue);
     }
   }
 
@@ -83,14 +90,19 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
   }
 
   private buildAllCharts = (sourceData: SeasonData[]) => {
-    const { chartData } = this.state;
+    const { riverData } = this.stores;
 
     const cornAgriburgDataSet = ChartDataSetModel.create({
       name: "Corn Yield - Agriburg",
       dataPoints: this.buildChart(sourceData, "Summer", "corna"),
       color: ChartColors[3].hex,
       backgroundOpacity: 0.9,
-      stack: "CornA"
+      stack: "CornA",
+      fixedMaxA2: 250,
+      fixedMinA2: 0,
+      a1AxisLabel: "Year",
+      a2AxisLabel: "Corn Yield bu/acre",
+      maxPoints: 10
     });
 
     const cornFarmvilleDataSet = ChartDataSetModel.create({
@@ -98,7 +110,12 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
       dataPoints: this.buildChart(sourceData, "Summer", "cornf"),
       color: ChartColors[1].hex,
       backgroundOpacity: 0.9,
-      stack: "CornF"
+      stack: "CornF",
+      fixedMaxA2: 250,
+      fixedMinA2: 0,
+      a1AxisLabel: "Year",
+      a2AxisLabel: "Corn Yield bu/acre",
+      maxPoints: 10
     });
 
     const lakeSurfaceAreaDataSet = ChartDataSetModel.create({
@@ -106,12 +123,17 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
       dataPoints: this.buildChart(sourceData, "Summer", "lake"),
       color: ChartColors[0].hex,
       backgroundOpacity: 0.9,
-      stack: "Lake"
+      stack: "Lake",
+      fixedMaxA2: 90000,
+      fixedMinA2: 0,
+      a1AxisLabel: "Year",
+      a2AxisLabel: "Surface Area cu.feet",
+      maxPoints: 10
     });
 
     const chartDataSets: ChartDataSetModelType[] = [];
 
-    switch (chartData) {
+    switch (riverData.dataView) {
       case "corn":
         chartDataSets.push(cornAgriburgDataSet);
         chartDataSets.push(cornFarmvilleDataSet);
@@ -125,8 +147,7 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
 
     const allChartData: ChartDataModelType = ChartDataModel.create({
       name: "Results",
-      dataSets: chartDataSets,
-      labels: []
+      dataSets: chartDataSets
     });
 
     return allChartData;

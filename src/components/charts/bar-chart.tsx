@@ -110,12 +110,22 @@ export class BarChart extends React.Component<IBarProps> {
             min: 0,
             max: chartData.minMaxAll.maxA2
           },
+          scaleLabel: {
+            display: true,
+            fontSize: 12,
+            labelString: chartData.a1AxisLabel
+          },
           stacked: true
         }],
         yAxes: [{
           ticks: {
             min: 0,
             max: chartData.minMaxAll.maxA2
+          },
+          scaleLabel: {
+            display: true,
+            fontSize: 12,
+            labelString: chartData.a2AxisLabel
           },
           stacked: true
         }]
@@ -130,7 +140,7 @@ export class BarChart extends React.Component<IBarProps> {
           options={options}
           height={h}
           width={w}
-          redraw={false}
+          redraw={true}
           data-test="bar"
         />
       );
@@ -141,7 +151,7 @@ export class BarChart extends React.Component<IBarProps> {
           options={options}
           height={h}
           width={w}
-          redraw={false}
+          redraw={true}
           data-test="horizontal-bar"
         />
       );
