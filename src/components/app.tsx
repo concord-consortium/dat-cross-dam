@@ -9,6 +9,7 @@ import { SimulationControls } from "./simulation-controls";
 import { DamData } from "./dam-data";
 import { PictureArea } from "./picture/picture-area";
 import { ControlArea } from "./controls/control-area";
+import { Attribution } from "./attribution";
 
 import "./app.sass";
 
@@ -68,6 +69,7 @@ export class AppComponent extends BaseComponent<{}, {}> {
             </div>
           </div>
         </div>
+        <Attribution />
       </div>
     );
   }
