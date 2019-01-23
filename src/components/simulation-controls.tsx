@@ -74,7 +74,6 @@ export class SimulationControls extends BaseComponent<IProps, IState> {
   }
   private handleShowLabelsChange = (e: React.FormEvent<HTMLInputElement>) => {
     const { ui } = this.stores;
-    console.log(e.currentTarget.checked);
     ui.setShowLabels(e.currentTarget.checked);
   }
 }
