@@ -24,6 +24,19 @@ export class SimulationControls extends BaseComponent<IProps, IState> {
     const playButtonStyle = riverData.isPlaying ?
       "pause-icon-button" :
       riverData.currentYear < 10 ? "play-icon-button" : "play-icon-button disabled";
+
+    const flowButton = (percentage: number) => {
+      const optionId = "flow" + percentage;
+      const optionStyle =
+        riverData.flowPercentage === percentage ?
+          "flow-percentage-option selected" : "flow-percentage-option";
+      return <div className={optionStyle}>
+        <label htmlFor={optionId}>{percentage}%</label>
+        <input type="radio" id={optionId} name="flow" value={percentage}
+          checked={riverData.flowPercentage === percentage} onChange={this.handleFlowPercentageChange} />
+      </div>;
+    };
+
     return (
       <div className="simulation-controls">
         <div>Year: {riverData.currentYear}</div>
@@ -35,14 +48,11 @@ export class SimulationControls extends BaseComponent<IProps, IState> {
           dots={true}
           value={riverData.currentYear}
         />
-        <div>Diversion percentage: {riverData.flowPercentage}</div>
-        <select onChange={this.handleFlowPercentageChange} value={riverData.flowPercentage}>
-          <option value="0">0</option>
-          <option value="25">25</option>
-          <option value="50">50</option>
-          <option value="75">75</option>
-        </select>
-
+        <div>Diversion percentage: {riverData.flowPercentage}%</div>
+        {flowButton(0)}
+        {flowButton(25)}
+        {flowButton(50)}
+        {flowButton(75)}
         <div className="buttons">
           <div className="toolbar-button">
             <div className={playButtonStyle} onClick={this.handleSimulationPlayToggle} />
@@ -53,8 +63,8 @@ export class SimulationControls extends BaseComponent<IProps, IState> {
         </div>
 
         <div className="label-toggle">
-          <label>Labels</label>
-          <input type="checkbox" checked={ui.showLabels} onChange={this.handleShowLabelsChange} />
+          <label htmlFor="label-toggle">Labels</label>
+          <input id="label-toggle" type="checkbox" checked={ui.showLabels} onChange={this.handleShowLabelsChange} />
         </div>
 
         {appMode === "dev" &&
@@ -86,7 +96,7 @@ export class SimulationControls extends BaseComponent<IProps, IState> {
     const { riverData } = this.stores;
     riverData.setSeason(e.currentTarget.value);
   }
-  private handleFlowPercentageChange = (e: React.FormEvent<HTMLSelectElement>) => {
+  private handleFlowPercentageChange = (e: React.FormEvent<HTMLInputElement>) => {
     const { riverData } = this.stores;
     const flowPercentage = parseInt(e.currentTarget.value, 10);
     riverData.setFlowPercentage(isNaN(flowPercentage) ? 0 : flowPercentage);
