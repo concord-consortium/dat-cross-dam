@@ -26,10 +26,12 @@ export class SimulationControls extends BaseComponent<IProps, IState> {
     return (
       <div className="simulation-controls">
         <div>Year: {riverData.currentYear}</div>
-        <Slider  className="year-slider"
+        <Slider className="year-slider"
           onChange={this.handleYearChange}
           min={1}
           max={10}
+          step={1}
+          dots={true}
           value={riverData.currentYear}
         />
         <div>Diversion percentage: {riverData.flowPercentage}</div>

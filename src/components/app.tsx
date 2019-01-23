@@ -42,11 +42,9 @@ export class AppComponent extends BaseComponent<{}, {}> {
                 </SizeMe>
               </div>
               <div className="subsection sim-controls">
-                <div className="controls-bottom">
-                  <SimulationControls>
-                    <ControlArea />
-                  </SimulationControls>
-                </div>
+                <SimulationControls>
+                  <ControlArea />
+                </SimulationControls>
               </div>
             </div>
             <div className="section chart-table">
@@ -66,10 +64,12 @@ export class AppComponent extends BaseComponent<{}, {}> {
                   }
                 </SizeMe>
               </div>
+              <div className="subsection attribution">
+                <Attribution />
+              </div>
             </div>
           </div>
         </div>
-        <Attribution />
       </div>
     );
   }
