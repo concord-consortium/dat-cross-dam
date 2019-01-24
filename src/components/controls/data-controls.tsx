@@ -8,8 +8,8 @@ interface IProps {}
 interface IState {}
 
 const labelText: any = {
-  corn: "Corn Yield",
-  lake: "Lake Surface Area"
+  corn: "Corn Yield (bu/acre)",
+  lake: "Lake Surface Area (acre)"
 };
 
 @inject("stores")

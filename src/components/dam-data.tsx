@@ -34,6 +34,7 @@ export class DamData extends BaseComponent<IProps, IState> {
     const gridStyle: React.CSSProperties = {
       width: parentWidth,
       height: parentHeight,
+      maxHeight: "300px"
     };
     const cols = this.getDataColumns();
     const tableData = dataByFlowUpToYear(riverData.flowPercentage, riverData.currentYear).filter(d => {
@@ -42,7 +43,7 @@ export class DamData extends BaseComponent<IProps, IState> {
     });
     return (
       <div className="dam-data-grid" style={gridStyle}>
-        <AgGridReact columnDefs={cols} rowData={tableData} headerHeight={48}
+        <AgGridReact columnDefs={cols} rowData={tableData} headerHeight={24}
           onGridReady={this.onGridReady} />
       </div>
     );
@@ -59,7 +60,8 @@ export class DamData extends BaseComponent<IProps, IState> {
         const c: ColDef = {
           headerName, field: d,
           valueFormatter: this.numberFormatter,
-          width: headerName === "Year" ? 50 : 100
+          width: headerName === "Year" ? 50 : 135,
+          suppressSizeToFit: headerName === "Year" ? true : false
         };
         cols.push(c);
       }
@@ -69,8 +71,12 @@ export class DamData extends BaseComponent<IProps, IState> {
 
   private numberFormatter = (v: ValueFormatterParams): string => {
     if (typeof (v.value) === "string") return v.value;
-    const roundedValue = Math.round(v.value);
-    return roundedValue.toString();
+    if (v.value > 10) {
+      const roundedValue = Math.round(v.value);
+      return roundedValue.toString();
+    } else {
+      return v.value;
+    }
   }
 
   private onGridReady = (params: AgGridEvent) => {
