@@ -19,6 +19,11 @@ const visibleColumnsCorn = [
   "CornYieldFarmville",
   "CornYieldAgriburg"];
 
+const lakeColumnHeaders = {
+  FarmLakeArea: "Start Season Area",
+  EndSeasonSurfaceArea: "End Season Area"
+};
+
 const visibleColumnsLake = [
   "Year",
   "FarmLakeArea",
@@ -56,7 +61,16 @@ export class DamData extends BaseComponent<IProps, IState> {
     const cols: ColDef[] = [];
     Object.keys(allData[0]).map(d => {
       if (visibleColumns.indexOf(d) > -1) {
-        const headerName = d.replace(/([A-Z])/g, " $1").trim();
+        let headerName = d.replace(/([A-Z])/g, " $1").trim();
+
+        // Compensating for original data column name displayability
+        if (d === "FarmLakeArea") {
+          headerName = lakeColumnHeaders.FarmLakeArea;
+        }
+        if (d === "EndSeasonSurfaceArea") {
+          headerName = lakeColumnHeaders.EndSeasonSurfaceArea;
+        }
+
         const c: ColDef = {
           headerName, field: d,
           valueFormatter: this.numberFormatter,
