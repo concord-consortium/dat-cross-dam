@@ -73,8 +73,7 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
   private buildChart = (sourceData: SeasonData[], season: string, chartType: string) => {
     const points: DataPointType[] = [];
     sourceData.forEach((d) => {
-      if (d.Year && d.Year < 11 && d.Season === season) {
-
+      if (d.Season === season) {
         const dataToChart =
           chartType === "lake" ? d.EndSeasonSurfaceArea :
           chartType === "corna" ? d.CornYieldAgriburg : d.CornYieldFarmville;

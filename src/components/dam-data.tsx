@@ -71,12 +71,8 @@ export class DamData extends BaseComponent<IProps, IState> {
 
   private numberFormatter = (v: ValueFormatterParams): string => {
     if (typeof (v.value) === "string") return v.value;
-    if (v.value > 10) {
-      const roundedValue = Math.round(v.value);
-      return roundedValue.toString();
-    } else {
-      return v.value;
-    }
+    const roundedValue = Math.round(v.value);
+    return roundedValue.toString();
   }
 
   private onGridReady = (params: AgGridEvent) => {
