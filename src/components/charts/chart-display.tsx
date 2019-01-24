@@ -41,8 +41,9 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
       const optionStyle =
           chartType === chartDisplayType ?
           "chart-display-style selected" : "chart-display-style";
+      const labelStyle = "label-display-style " + chartDisplayType;
       return <div className={optionStyle}>
-        <label htmlFor={optionId}>{chartDisplayType}</label>
+        <label htmlFor={optionId} className={labelStyle}>&nbsp;</label>
         <input type="radio" id={optionId} name="chartDisplayType" value={chartDisplayType}
           checked={chartType === chartDisplayType} onChange={this.handleChangeSelection} />
       </div>;
@@ -53,7 +54,6 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
         <div className="chart-options">
           {chartTypeOption("line")}
           {chartTypeOption("bar")}
-
         </div>
         <div className="chart-content-container">
           <Chart title="Chart Test" chartData={charts} chartType={chartType}
