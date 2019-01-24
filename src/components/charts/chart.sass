@@ -4,6 +4,7 @@
   position: relative
   background-color: white
   display: block
+  max-height: 350px
 
   .line-chart-container
     display: flex
@@ -11,3 +12,43 @@
     height: 100%
     width: 100%
 
+
+.chart-options
+  position: absolute
+  top: 0px
+  right: 0px
+  z-index: 1
+
+  .chart-display-style
+    border-radius: 2px
+    border: 2px solid $color-nav-cinder-light3
+    float: left
+    text-align: center
+    background: $color-white
+    font-size: 0.9em
+    opacity: 0.7
+    padding: 2px
+    &:hover
+      background: $color-nav-cinder-light2
+      opacity: 1
+    &.selected
+      border: 2px solid $color-nav-cinder-light1
+      opacity: 1
+
+    input[type="radio"]
+      display: none
+
+    label
+      padding: 2px
+      padding-left: 3px
+
+  .label-display-style
+    background-size: contain
+    background-repeat: no-repeat
+    width: 18px
+    height: 18px
+    display: inline-block
+    &.bar
+      background-image: url("../../assets/buttons/bar-chart.png")
+    &.line
+      background-image: url("../../assets/buttons/line-chart.png")
