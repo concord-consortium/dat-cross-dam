@@ -5,10 +5,11 @@ import { SizeMe } from "react-sizeme";
 
 import { BaseComponent, IBaseProps } from "./base";
 import { ChartDisplay } from "./charts/chart-display";
-import { SimulationControls } from "./simulation-controls";
+import { SimulationControls } from "./controls/simulation-controls";
 import { DamData } from "./dam-data";
 import { PictureArea } from "./picture/picture-area";
 import { ControlArea } from "./controls/control-area";
+import { Attribution } from "./attribution";
 
 import "./app.sass";
 
@@ -41,11 +42,9 @@ export class AppComponent extends BaseComponent<{}, {}> {
                 </SizeMe>
               </div>
               <div className="subsection sim-controls">
-                <div className="controls-bottom">
-                  <SimulationControls>
-                    <ControlArea />
-                  </SimulationControls>
-                </div>
+                <SimulationControls>
+                  <ControlArea />
+                </SimulationControls>
               </div>
             </div>
             <div className="section chart-table">
@@ -64,6 +63,9 @@ export class AppComponent extends BaseComponent<{}, {}> {
                       parentHeight={size.height ? size.height : 1} />
                   }
                 </SizeMe>
+              </div>
+              <div className="subsection attribution">
+                <Attribution />
               </div>
             </div>
           </div>

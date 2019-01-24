@@ -3,7 +3,7 @@ import * as React from "react";
 import { BaseComponent, IBaseProps } from "./base";
 import { AgGridReact } from "ag-grid-react";
 import { ColDef, ValueFormatterParams, AgGridEvent } from "ag-grid-community";
-import { dataByFlow, dataByFlowByYear } from "../data/dam-data-utility";
+import { dataByFlowUpToYear } from "../data/dam-data-utility";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-balham.css";
 import "./dam-data.sass";
@@ -36,7 +36,7 @@ export class DamData extends BaseComponent<IProps, IState> {
       height: parentHeight,
     };
     const cols = this.getDataColumns();
-    const tableData = dataByFlowByYear(riverData.flowPercentage, riverData.currentYear).filter(d => {
+    const tableData = dataByFlowUpToYear(riverData.flowPercentage, riverData.currentYear).filter(d => {
       if (d.Year <= 10 && d.Season === "Summer") return d;
       return;
     });
@@ -50,7 +50,7 @@ export class DamData extends BaseComponent<IProps, IState> {
 
   private getDataColumns = (): ColDef[] => {
     const { riverData } = this.stores;
-    const allData = dataByFlowByYear(riverData.flowPercentage, riverData.currentYear);
+    const allData = dataByFlowUpToYear(riverData.flowPercentage, riverData.currentYear);
     const visibleColumns = riverData.dataView === "lake" ? visibleColumnsLake : visibleColumnsCorn;
     const cols: ColDef[] = [];
     Object.keys(allData[0]).map(d => {

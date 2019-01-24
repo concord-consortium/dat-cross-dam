@@ -58,7 +58,7 @@ const lineDatasetDefaults: ChartData<any> = {
   pointBorderWidth: 1,
   pointHoverRadius: 5,
   pointHoverBorderWidth: 2,
-  pointRadius: 1,
+  pointRadius: 4,
   pointHitRadius: 10,
   data: [0],
   backgroundColor: ChartColors.map(c => hexToRGBValue(c.hex, 0.4)),

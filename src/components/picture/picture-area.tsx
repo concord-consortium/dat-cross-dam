@@ -468,19 +468,26 @@ export class PictureArea extends BaseComponent<IProps, {}> {
       }
     ];
 
+    // TODO: First pass at wiring up data to SVG display - this will need some adjustment!
+    const currentLakeArea = riverData.getCurrentLakeArea();
+    const currentCropsAgriburg = riverData.getCropsAgriburg();
+    const currentCropsFarmville = riverData.getCropsFarmville();
+    // There is no stored data for population, so we need a cunning algorithm
+    const populationAgriburg = 1 / currentCropsAgriburg;
+    const populationFarmville = 1 / currentCropsFarmville;
     return (
       <div className="picture-area-container">
         { renderScenery() }
         { renderTrees() }
         { renderRivers(riverData.flowPercentage / 25) }
-        { renderLake(ui.lakeArea) }
+        { renderLake(currentLakeArea) }
         { renderDamn() }
-        { renderTown(ui.populationFarmville, buildingsFarmville, townFarmville)}
-        { renderCornFields(ui.cropsFarmville, cornFieldsFarmville)}
-        { renderFarms(ui.cropsFarmville, barnsFarmville)}
-        { renderTown(ui.populationAgriburg, buildingsAgriburg, townAgriburg)}
-        { renderCornFields(ui.cropsArgiburg, cornFieldsAgriburg)}
-        { renderFarms(ui.cropsArgiburg, barnsAgriburg)}
+        { renderTown(populationFarmville, buildingsFarmville, townFarmville)}
+        { renderCornFields(currentCropsFarmville, cornFieldsFarmville)}
+        { renderFarms(currentCropsFarmville, barnsFarmville)}
+        { renderTown(populationAgriburg, buildingsAgriburg, townAgriburg)}
+        { renderCornFields(currentCropsAgriburg, cornFieldsAgriburg)}
+        { renderFarms(currentCropsAgriburg, barnsAgriburg)}
         { ui.showLabels ? renderLabels() : "" }
         { renderFrame() }
       </div>
