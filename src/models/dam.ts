@@ -2,7 +2,9 @@ import { types, Instance } from "mobx-state-tree";
 import {
   getCurrentCropPercentageAgriburg,
   getCurrentCropPercentageFarmville,
-  getCurrentLakeArea
+  getCurrentLakeArea,
+  getCurrentPercentageAgriburgResidentialUse,
+  getCurrentPercentageFarmvilleResidentialUse
 } from "../data/dam-data-utility";
 
 export const DamModel = types
@@ -23,7 +25,14 @@ export const DamModel = types
       },
       getCurrentLakeArea() {
         return (getCurrentLakeArea(self.flowPercentage, self.currentYear));
+      },
+      getResidentialUseAgriburg() {
+        return (getCurrentPercentageAgriburgResidentialUse(self.flowPercentage, self.currentYear));
+      },
+      getResidentialUseFarmville() {
+        return (getCurrentPercentageFarmvilleResidentialUse(self.flowPercentage, self.currentYear));
       }
+
     };
   })
   .actions(self => ({

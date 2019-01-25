@@ -1,13 +1,15 @@
 import * as React from "react";
 import { inject, observer, propTypes } from "mobx-react";
-import { BaseComponent } from "../base";
+import { BaseComponent, IBaseProps } from "../base";
 import Slider from "rc-slider";
 import { dataByFlow } from "../../data/dam-data-utility";
 
 import "./simulation-controls.sass";
 import "./toolbar-buttons.css";
 
-interface IProps {}
+interface IProps extends IBaseProps {
+  style: any;
+}
 interface IState {}
 
 let _playInterval: any;
@@ -17,6 +19,7 @@ const simulationSpeed = 2000;
 @observer
 export class SimulationControls extends BaseComponent<IProps, IState> {
   public render() {
+    const { style } = this.props;
     const { riverData, ui, appMode } = this.stores;
     const allData = dataByFlow(riverData.flowPercentage);
     const dataToDisplay =
@@ -38,7 +41,7 @@ export class SimulationControls extends BaseComponent<IProps, IState> {
     };
 
     return (
-      <div className="simulation-controls">
+      <div className="simulation-controls" style={style}>
         <div>Year: {riverData.currentYear}</div>
         <Slider className="year-slider"
           onChange={this.handleYearChange}
@@ -49,11 +52,13 @@ export class SimulationControls extends BaseComponent<IProps, IState> {
           value={riverData.currentYear}
         />
         <div>Diversion percentage: {riverData.flowPercentage}%</div>
-        {flowButton(0)}
-        {flowButton(25)}
-        {flowButton(50)}
-        {flowButton(75)}
-        <div className="buttons">
+        <div className="flow-options">
+          {flowButton(0)}
+          {flowButton(25)}
+          {flowButton(50)}
+          {flowButton(75)}
+        </div>
+        <div className="run-simulation-buttons">
           <div className="toolbar-button">
             <div className={playButtonStyle} onClick={this.handleSimulationPlayToggle} />
           </div>
