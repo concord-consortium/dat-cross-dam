@@ -160,7 +160,7 @@ export class PictureArea extends BaseComponent<IProps, {}> {
 
   public render() {
 
-    const { riverData, ui } = this.stores;
+    const { riverData, ui, appMode } = this.stores;
 
     const { parentWidth, parentHeight } = this.props;
 
@@ -333,8 +333,26 @@ export class PictureArea extends BaseComponent<IProps, {}> {
       );
     };
 
+    // The parameter, crops, is expected to be in the range 0..100. The number
+    // of farms, which is representbed by the number of barns displayed in each
+    // town's farm-land, is mapped like this:
+    //
+    // |  crops  | barns |
+    // |---------|-------|
+    // |    0    |   0   |
+    // |  1..32  |   1   |
+    // |  33..64 |   2   |
+    // | 65..100 |   3   |
     const howManyFarms = (crops: number) => {
-      return crops / 25;
+      if (crops <= 0) {
+        return 0;
+      } else if (crops <= 32) {
+        return 1;
+      } else if (crops <= 64) {
+        return 2;
+      } else {
+        return 3;
+      }
     };
 
     const renderFarms = (crops: number, barns: IBarn[]) => {
@@ -358,7 +376,7 @@ export class PictureArea extends BaseComponent<IProps, {}> {
     };
 
     const barnsFarmville: IBarn[] =  [
-      {x: 450, y: 132},
+      {x: 450, y: 125},
       {x: 398, y: 168},
       {x: 519, y: 177}
     ];
@@ -369,8 +387,33 @@ export class PictureArea extends BaseComponent<IProps, {}> {
       {x: 465, y: 307}
     ];
 
+    // The parameter, crops, is expected to be in the range 0..100. The number
+    // of agricultural areas, which is represented by the number of corn fields
+    // displayed in each town's farm-land, is mapped like this:
+    //
+    // |  crops  | corn fields |
+    // |---------|-------------|
+    // |  0..5   |      0      |
+    // |  6..25  |      1      |
+    // | 26..45  |      2      |
+    // | 46..65  |      3      |
+    // | 66..85  |      4      |
+    // | 86..100 |      5      |
+
     const howManyFields = (crops: number, fields: ICornField[]) => {
-      return crops / fields.length;
+      if (crops <= 5) {
+        return 0;
+      } else if (crops <= 25) {
+        return 1;
+      } else if (crops <= 45) {
+        return 2;
+      } else if (crops <= 65) {
+        return 3;
+      } else if (crops <= 85) {
+        return 4;
+      } else {
+        return 5;
+      }
     };
 
     const renderCornFields = (crops: number, fields: ICornField[]) => {
@@ -485,13 +528,15 @@ export class PictureArea extends BaseComponent<IProps, {}> {
     // (or perhaps, resolution) to make it look good. That's a different
     // problem.
 
+    const isDev = appMode === "dev";
+
     const showLabels = ui.showLabels;
     const flowPercentage = riverData.flowPercentage;
-    const currentLakeArea = riverData.getCurrentLakeArea();
-    const currentCropsAgriburg = riverData.getCropsAgriburg();
-    const currentCropsFarmville = riverData.getCropsFarmville();
-    const populationAgriburg = riverData.getResidentialUseAgriburg();
-    const populationFarmville = riverData.getResidentialUseFarmville();
+    const currentLakeArea = isDev ? ui.lakeArea : riverData.getCurrentLakeArea();
+    const currentCropsAgriburg = isDev ? ui.cropsArgiburg : riverData.getCropsAgriburg();
+    const currentCropsFarmville = isDev ? ui.cropsFarmville : riverData.getCropsFarmville();
+    const populationAgriburg = isDev ? ui.populationAgriburg : riverData.getResidentialUseAgriburg();
+    const populationFarmville = isDev ? ui.populationFarmville : riverData.getResidentialUseFarmville();
 
     // Except for showLabels, which is a boolean, and flowPercentage, which is
     // one of values in the set fixed values { 0, 25, 50, 75 }, the remaining
