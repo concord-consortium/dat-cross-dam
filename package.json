@@ -109,6 +109,7 @@
   },
   "dependencies": {
     "@svgr/webpack": "^4.1.0",
+    "@types/seedrandom": "^2.4.27",
     "ag-grid-community": "^20.0.0",
     "ag-grid-react": "^20.0.0",
     "chart.js": "^2.7.3",
@@ -124,6 +125,7 @@
     "react-chartjs-2": "^2.7.4",
     "react-dom": "^16.7.0",
     "react-sizeme": "^2.5.2",
+    "seedrandom": "^2.4.4",
     "uuid": "^3.3.2",
     "wait-on": "^3.2.0"
   }
