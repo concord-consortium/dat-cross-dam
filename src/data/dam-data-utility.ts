@@ -3,6 +3,14 @@ import * as dam25 from "../data/dam25.json";
 import * as dam50 from "../data/dam50.json";
 import * as dam75 from "../data/dam75.json";
 
+// Workaround for chart rendering:
+// Data for CropYieldAgriburg at 75% diversion is actually zero in the data,
+// but the bar chart displays the year instead of the data when it sees this as the
+// value for the data point in the second dataset. I've changed the value to 0.01
+// in all instances in the JSON to ensure the bars are no longer rendered incorrectly.
+// This may be an erroneous data type(perhaps 0 is read as a boolean ?) but further
+// investigation would be needed to know for sure.
+
 // Only used for min/max value calculations
 function _allData(): SeasonData[] {
   const allFlowData: SeasonData[] = dam0 as SeasonData[];

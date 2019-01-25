@@ -36,6 +36,8 @@ import Field10 from "../../assets/imagery/fields/Field-10.svg";
 import Trees from "../../assets/imagery/scenery/trees/Trees.svg";
 
 import "./picture-area.sass";
+import { SimulationControls } from "../controls/simulation-controls";
+import { ControlArea } from "../controls/control-area";
 
 interface IProps extends IBaseProps {
   parentWidth: number;
@@ -553,21 +555,35 @@ export class PictureArea extends BaseComponent<IProps, {}> {
                 `${Math.round(populationFarmville)}`);
     }
 
+    const controlContainerStyle: React.CSSProperties = {
+      position: "absolute",
+      width: "95%",
+      height: "100%",
+      top: 0,
+      left: 0
+    };
+    controlContainerStyle.top = height;
+
     return (
-      <div className="picture-area-container">
-        { renderScenery() }
-        { renderTrees() }
-        { renderRivers(flowPercentage / 25) }
-        { renderLake(currentLakeArea) }
-        { renderDamn() }
-        { renderTown(populationFarmville, buildingsFarmville, townFarmville)}
-        { renderCornFields(currentCropsFarmville, cornFieldsFarmville)}
-        { renderFarms(currentCropsFarmville, barnsFarmville)}
-        { renderTown(populationAgriburg, buildingsAgriburg, townAgriburg)}
-        { renderCornFields(currentCropsAgriburg, cornFieldsAgriburg)}
-        { renderFarms(currentCropsAgriburg, barnsAgriburg)}
-        { showLabels ? renderLabels() : "" }
-        { renderFrame() }
+      <div className="subsection simulation">
+        <div className="picture-area-container">
+          { renderScenery() }
+          { renderTrees() }
+          { renderRivers(flowPercentage / 25) }
+          { renderLake(currentLakeArea) }
+          { renderDamn() }
+          { renderTown(populationFarmville, buildingsFarmville, townFarmville)}
+          { renderCornFields(currentCropsFarmville, cornFieldsFarmville)}
+          { renderFarms(currentCropsFarmville, barnsFarmville)}
+          { renderTown(populationAgriburg, buildingsAgriburg, townAgriburg)}
+          { renderCornFields(currentCropsAgriburg, cornFieldsAgriburg)}
+          { renderFarms(currentCropsAgriburg, barnsAgriburg)}
+          { showLabels ? renderLabels() : "" }
+          { renderFrame() }
+        </div>
+        <SimulationControls style={controlContainerStyle}>
+          <ControlArea />
+        </SimulationControls>
       </div>
     );
   }
