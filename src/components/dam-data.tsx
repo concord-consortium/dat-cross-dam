@@ -19,6 +19,11 @@ const visibleColumnsCorn = [
   "CornYieldFarmville",
   "CornYieldAgriburg"];
 
+const lakeColumnHeaders = {
+  FarmLakeArea: "Start Season Area",
+  EndSeasonSurfaceArea: "End Season Area"
+};
+
 const visibleColumnsLake = [
   "Year",
   "FarmLakeArea",
@@ -34,6 +39,7 @@ export class DamData extends BaseComponent<IProps, IState> {
     const gridStyle: React.CSSProperties = {
       width: parentWidth,
       height: parentHeight,
+      maxHeight: "300px"
     };
     const cols = this.getDataColumns();
     const tableData = dataByFlowUpToYear(riverData.flowPercentage, riverData.currentYear).filter(d => {
@@ -42,7 +48,7 @@ export class DamData extends BaseComponent<IProps, IState> {
     });
     return (
       <div className="dam-data-grid" style={gridStyle}>
-        <AgGridReact columnDefs={cols} rowData={tableData} headerHeight={48}
+        <AgGridReact columnDefs={cols} rowData={tableData} headerHeight={24}
           onGridReady={this.onGridReady} />
       </div>
     );
@@ -55,12 +61,27 @@ export class DamData extends BaseComponent<IProps, IState> {
     const cols: ColDef[] = [];
     Object.keys(allData[0]).map(d => {
       if (visibleColumns.indexOf(d) > -1) {
-        const headerName = d.replace(/([A-Z])/g, " $1").trim();
+        let headerName = d.replace(/([A-Z])/g, " $1").trim();
+
+        // Compensating for original data column name displayability
+        if (d === "FarmLakeArea") {
+          headerName = lakeColumnHeaders.FarmLakeArea;
+        }
+        if (d === "EndSeasonSurfaceArea") {
+          headerName = lakeColumnHeaders.EndSeasonSurfaceArea;
+        }
         const c: ColDef = {
           headerName, field: d,
           valueFormatter: this.numberFormatter,
-          width: headerName === "Year" ? 50 : 100
+          width: 135,
+          suppressSizeToFit: false,
+          cellClass: "dam-value"
         };
+        if (headerName === "Year") {
+          c.width = 50;
+          c.suppressSizeToFit = true;
+          c.cellClass = "dam-year";
+        }
         cols.push(c);
       }
     });

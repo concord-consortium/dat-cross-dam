@@ -41,8 +41,9 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
       const optionStyle =
           chartType === chartDisplayType ?
           "chart-display-style selected" : "chart-display-style";
+      const labelStyle = "label-display-style " + chartDisplayType;
       return <div className={optionStyle}>
-        <label htmlFor={optionId}>{chartDisplayType}</label>
+        <label htmlFor={optionId} className={labelStyle}>&nbsp;</label>
         <input type="radio" id={optionId} name="chartDisplayType" value={chartDisplayType}
           checked={chartType === chartDisplayType} onChange={this.handleChangeSelection} />
       </div>;
@@ -53,7 +54,6 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
         <div className="chart-options">
           {chartTypeOption("line")}
           {chartTypeOption("bar")}
-
         </div>
         <div className="chart-content-container">
           <Chart title="Chart Test" chartData={charts} chartType={chartType}
@@ -73,8 +73,7 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
   private buildChart = (sourceData: SeasonData[], season: string, chartType: string) => {
     const points: DataPointType[] = [];
     sourceData.forEach((d) => {
-      if (d.Year && d.Year < 11 && d.Season === season) {
-
+      if (d.Season === season) {
         const dataToChart =
           chartType === "lake" ? d.EndSeasonSurfaceArea :
           chartType === "corna" ? d.CornYieldAgriburg : d.CornYieldFarmville;
@@ -89,7 +88,7 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
     const { riverData } = this.stores;
 
     const cornAgriburgDataSet = ChartDataSetModel.create({
-      name: "Corn Yield - Agriburg",
+      name: "Corn Yield Agriburg",
       dataPoints: this.buildChart(sourceData, "Summer", "corna"),
       color: ChartColors[3].hex,
       backgroundOpacity: 0.9,
@@ -97,12 +96,12 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
       fixedMaxA2: 250,
       fixedMinA2: 0,
       a1AxisLabel: "Year",
-      a2AxisLabel: "Corn Yield bu/acre",
+      a2AxisLabel: "Corn Yield (bu/acre)",
       maxPoints: 10
     });
 
     const cornFarmvilleDataSet = ChartDataSetModel.create({
-      name: "Corn Yield - Farmville",
+      name: "Corn Yield Farmville",
       dataPoints: this.buildChart(sourceData, "Summer", "cornf"),
       color: ChartColors[1].hex,
       backgroundOpacity: 0.9,
@@ -110,7 +109,7 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
       fixedMaxA2: 250,
       fixedMinA2: 0,
       a1AxisLabel: "Year",
-      a2AxisLabel: "Corn Yield bu/acre",
+      a2AxisLabel: "Corn Yield (bu/acre)",
       maxPoints: 10
     });
 
@@ -123,7 +122,7 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
       fixedMaxA2: 90000,
       fixedMinA2: 0,
       a1AxisLabel: "Year",
-      a2AxisLabel: "Surface Area cu.feet",
+      a2AxisLabel: "Surface Area (acre)",
       maxPoints: 10
     });
 

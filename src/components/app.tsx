@@ -1,11 +1,10 @@
 import { inject, observer } from "mobx-react";
-import { getRelativePath } from "mobx-state-tree";
 import * as React from "react";
 import { SizeMe } from "react-sizeme";
-
-import { BaseComponent, IBaseProps } from "./base";
+import { BaseComponent } from "./base";
 import { ChartDisplay } from "./charts/chart-display";
 import { SimulationControls } from "./controls/simulation-controls";
+import { DataControls } from "./controls/data-controls";
 import { DamData } from "./dam-data";
 import { PictureArea } from "./picture/picture-area";
 import { ControlArea } from "./controls/control-area";
@@ -25,29 +24,23 @@ interface ISize {     // Used by SizeMe to pass the resized parent details
 export class AppComponent extends BaseComponent<{}, {}> {
 
   public render() {
-
     const { ui, appMode } = this.stores;
-
     return (
       <div className="app-container">
         <div className="controls-and-content-container">
           <div className="main-content">
             <div className="section simulation">
-              <div className="subsection simulation">
-                <SizeMe monitorHeight={true}>
-                  {({ size }: ISize) =>
-                    <PictureArea
-                      parentWidth={size.width ? size.width : 600} parentHeight={size.height ? size.height : 340} />
-                  }
-                </SizeMe>
-              </div>
-              <div className="subsection sim-controls">
-                <SimulationControls>
-                  <ControlArea />
-                </SimulationControls>
-              </div>
+              <SizeMe monitorHeight={true}>
+                {({ size }: ISize) =>
+                  <PictureArea
+                    parentWidth={size.width ? size.width : 600} parentHeight={size.height ? size.height : 340} />
+                }
+              </SizeMe>
             </div>
             <div className="section chart-table">
+              <div className="subsection header">
+                <DataControls />
+              </div>
               <div className="subsection table">
                 <SizeMe monitorHeight={true}>
                   {({ size }: ISize) =>
