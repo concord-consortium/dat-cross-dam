@@ -70,13 +70,18 @@ export class DamData extends BaseComponent<IProps, IState> {
         if (d === "EndSeasonSurfaceArea") {
           headerName = lakeColumnHeaders.EndSeasonSurfaceArea;
         }
-
         const c: ColDef = {
           headerName, field: d,
           valueFormatter: this.numberFormatter,
-          width: headerName === "Year" ? 50 : 135,
-          suppressSizeToFit: headerName === "Year" ? true : false
+          width: 135,
+          suppressSizeToFit: false,
+          cellClass: "dam-value"
         };
+        if (headerName === "Year") {
+          c.width = 50;
+          c.suppressSizeToFit = true;
+          c.cellClass = "dam-year";
+        }
         cols.push(c);
       }
     });
