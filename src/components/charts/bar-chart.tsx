@@ -26,11 +26,8 @@ const defaultOptions: ChartOptions = {
     display: true,
     position: "bottom",
     labels: {
-      filter: (legendItem: any, chartData: any) => {
-        // Hidden labels, like for "extra" bars, are marked with a "#"
-        return legendItem.text.indexOf("#") === -1;
-      },
-      boxWidth: 50
+      boxWidth: 12,
+      fontSize: 11
     }
   },
   maintainAspectRatio: false,
@@ -51,7 +48,7 @@ const defaultOptions: ChartOptions = {
     }]
   },
   tooltips: {
-    enabled: false
+    enabled: true
   }
 };
 
@@ -115,7 +112,7 @@ export class BarChart extends React.Component<IBarProps> {
           },
           scaleLabel: {
             display: true,
-            fontSize: 12,
+            fontSize: 11,
             labelString: chartData.a1AxisLabel
           },
           stacked: true

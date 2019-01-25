@@ -29,6 +29,10 @@ const defaultOptions: ChartOptions = {
   legend: {
     display: true,
     position: "bottom",
+    labels: {
+      usePointStyle: true,
+      fontSize: 11
+    }
   },
   maintainAspectRatio: false,
   scales: {
@@ -82,6 +86,7 @@ const lineData = (chartData: ChartDataModelType) => {
       // borderColor is the color of the line
       dset.borderColor = hexToRGBValue(d.color, 1);
       dset.pointBorderColor = hexToRGBValue(d.color, 1);
+      dset.pointBackgroundColor = hexToRGBValue(d.color, 0.4);
       dset.pointHoverBackgroundColor = hexToRGBValue(d.color, 1);
       dset.pointHoverBorderColor = hexToRGBValue(d.color, 1);
     }
