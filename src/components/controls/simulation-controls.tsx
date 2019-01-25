@@ -106,6 +106,9 @@ export class SimulationControls extends BaseComponent<IProps, IState> {
     const { riverData } = this.stores;
     const flowPercentage = parseInt(e.currentTarget.value, 10);
     riverData.setFlowPercentage(isNaN(flowPercentage) ? 0 : flowPercentage);
+    // Force the simulation back to year 1 when we change the flow setting
+    riverData.setYear(1);
+    clearInterval(_playInterval);
   }
   private handleDisplayModeChange = (e: React.FormEvent<HTMLInputElement>) => {
     const { ui } = this.stores;
