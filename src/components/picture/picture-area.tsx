@@ -542,6 +542,7 @@ export class PictureArea extends BaseComponent<IProps, {}> {
     // one of values in the set fixed values { 0, 25, 50, 75 }, the remaining
     // values are in the range 0..100.
 
+    if (isDev || appMode === "displayOnConsole") {
     // tslint:disable-next-line no-console
     console.log(`%  lake  AC  FC  AP  FP\n` +
                 `${flowPercentage}\t` +
@@ -550,6 +551,7 @@ export class PictureArea extends BaseComponent<IProps, {}> {
                 `${Math.round(currentCropsFarmville)}\t` +
                 `${Math.round(populationAgriburg)}\t` +
                 `${Math.round(populationFarmville)}`);
+    }
 
     return (
       <div className="picture-area-container">
