@@ -211,7 +211,7 @@ export class PictureArea extends BaseComponent<IProps, {}> {
         case 3: return (<Rivers75 width={width} height={height} />);
         default:
           // tslint:disable-next-line no-console
-          console.error("The indicated river set index not found.");
+          console.error(`River set index, ${i}, not found.`);
           return (<Rivers0 width={width} height={height}/>);
       }
     };
@@ -227,6 +227,14 @@ export class PictureArea extends BaseComponent<IProps, {}> {
     const renderLake = (lakeArea: number) => {
 
       const factor = width / 600.0;       // Factor determined by the actual display width.
+
+      // Note: There is a slight problem here. The number we are getting, lakeArea is
+      // actually an normalized of the acreage of the lake. We are actually using it here
+      // as a linear measure of the lake which is then scaled vertically and horizontally.
+      // In other words, we are using a two measures that actually do not have a linear
+      // relationship, but rather, a squared relationship. At the moment, I kind of don't
+      // think this error of design would make any difference to a user's interpretation
+      // of the display -- so let's leave it for another day.
 
       const minLakeScale = 0.7;           // Limits of scaling factor lake -- used with
       const maxLakeScale = 1.5;           // lakeArea to compute the final size.
@@ -468,18 +476,41 @@ export class PictureArea extends BaseComponent<IProps, {}> {
       }
     ];
 
-    // TODO: First pass at wiring up data to SVG display - this will need some adjustment!
+    // The picture display is controlled by 7 values. One is from the ui store
+    // and the rest come from the riverData.
+
+    // The populations of the two towns are based on their residential water
+    // usage, respectively. From a simulation perspective, this makes pretty
+    // good sense, but the data provided to us doesn't have enough fidelity
+    // (or perhaps, resolution) to make it look good. That's a different
+    // problem.
+
+    const showLabels = ui.showLabels;
+    const flowPercentage = riverData.flowPercentage;
     const currentLakeArea = riverData.getCurrentLakeArea();
     const currentCropsAgriburg = riverData.getCropsAgriburg();
     const currentCropsFarmville = riverData.getCropsFarmville();
-    // There is no stored data for population, so we need a cunning algorithm
-    const populationAgriburg = 1 / currentCropsAgriburg;
-    const populationFarmville = 1 / currentCropsFarmville;
+    const populationAgriburg = riverData.getResidentialUseAgriburg();
+    const populationFarmville = riverData.getResidentialUseFarmville();
+
+    // Except for showLabels, which is a boolean, and flowPercentage, which is
+    // one of values in the set fixed values { 0, 25, 50, 75 }, the remaining
+    // values are in the range 0..100.
+
+    // tslint:disable-next-line no-console
+    console.log(`%  lake  AC  FC  AP  FP\n` +
+                `${flowPercentage}\t` +
+                `${Math.round(currentLakeArea)}\t` +
+                `${Math.round(currentCropsAgriburg)}\t` +
+                `${Math.round(currentCropsFarmville)}\t` +
+                `${Math.round(populationAgriburg)}\t` +
+                `${Math.round(populationFarmville)}`);
+
     return (
       <div className="picture-area-container">
         { renderScenery() }
         { renderTrees() }
-        { renderRivers(riverData.flowPercentage / 25) }
+        { renderRivers(flowPercentage / 25) }
         { renderLake(currentLakeArea) }
         { renderDamn() }
         { renderTown(populationFarmville, buildingsFarmville, townFarmville)}
@@ -488,7 +519,7 @@ export class PictureArea extends BaseComponent<IProps, {}> {
         { renderTown(populationAgriburg, buildingsAgriburg, townAgriburg)}
         { renderCornFields(currentCropsAgriburg, cornFieldsAgriburg)}
         { renderFarms(currentCropsAgriburg, barnsAgriburg)}
-        { ui.showLabels ? renderLabels() : "" }
+        { showLabels ? renderLabels() : "" }
         { renderFrame() }
       </div>
     );

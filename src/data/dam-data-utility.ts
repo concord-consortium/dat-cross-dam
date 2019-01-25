@@ -74,6 +74,7 @@ export interface SeasonData {
     WaterDemandCorn: number;
     WaterNeeded: number;
 }
+
 function blankSeasonData(year: number): SeasonData {
   const blankData: SeasonData = {
     Year: year,
@@ -136,6 +137,20 @@ function getMinMaxLakeArea(): DataMinMax {
   return { Max: maxArea, Min: minArea };
 }
 
+function getMinMaxResidentialUseAgriburg(): DataMinMax {
+  const data = _allData();
+  const maxResidentialUse = Math.max(...data.map(p => p.AgriburgResidentialUse));
+  const minResidentialUse = Math.min(...data.map(p => p.AgriburgResidentialUse));
+  return { Max: maxResidentialUse, Min: minResidentialUse};
+}
+
+function getMinMaxResidentialUseFarmville(): DataMinMax {
+  const data = _allData();
+  const maxResidentialUse = Math.max(...data.map(p => p.FarmvilleResidentialUse));
+  const minResidentialUse = Math.min(...data.map(p => p.FarmvilleResidentialUse));
+  return { Max: maxResidentialUse, Min: minResidentialUse};
+}
+
 export function getCurrentCropPercentageAgriburg(flowPercentage: number, year: number): number {
   const minmax = getMinMaxCropsAgriburg();
   const currentValue = dataByFlowForSpecificYear(flowPercentage, year).CornYieldAgriburg;
@@ -149,6 +164,18 @@ export function getCurrentCropPercentageFarmville(flowPercentage: number, year: 
 export function getCurrentLakeArea(flowPercentage: number, year: number): number {
   const minmax = getMinMaxLakeArea();
   const currentValue = dataByFlowForSpecificYear(flowPercentage, year).EndSeasonSurfaceArea;
+  return calcValue(minmax, currentValue);
+}
+
+export function getCurrentPercentageAgriburgResidentialUse(flowPercentage: number, year: number): number {
+  const minmax = getMinMaxResidentialUseAgriburg();
+  const currentValue = dataByFlowForSpecificYear(flowPercentage, year).AgriburgResidentialUse;
+  return calcValue(minmax, currentValue);
+}
+
+export function getCurrentPercentageFarmvilleResidentialUse(flowPercentage: number, year: number): number {
+  const minmax = getMinMaxResidentialUseFarmville();
+  const currentValue = dataByFlowForSpecificYear(flowPercentage, year).FarmvilleResidentialUse;
   return calcValue(minmax, currentValue);
 }
 
