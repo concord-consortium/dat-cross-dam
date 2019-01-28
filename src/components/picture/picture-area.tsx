@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { BaseComponent, IBaseProps } from "../base";
 import { inject, observer, propTypes } from "mobx-react";
+import * as seedrandom from "seedrandom";
 
 import Scenery from "../../assets/imagery/scenery/scenery.svg";
 import Rivers0 from "../../assets/imagery/water/rivers0.svg";
@@ -73,9 +74,31 @@ interface ICornField {
   height: number;
 }
 
+const innerStyle: React.CSSProperties = {
+  position: "absolute",
+  width: "100%",
+  height: "100%",
+  top: 0,
+  left: 0
+};
+
+// A random number generator is used to mix up the locations of buildings
+// in the drawing list -- problem with that is that the built in Math.random()
+// does not support a seed. Thus, each time the building list is initialized,
+// the town's building layout changes. It seems a little odd to have the town
+// reorganize itself whenever the page is refreshed.
+//
+// To solve this, an NPM package, seedrandom, is used to make sure we can
+// regenerate the town's buildings, the same way each time.
+
+const randomNumberGenerator = seedrandom("12345");
+const rand = (low: number, high: number): number => {
+  return Math.floor(randomNumberGenerator() * (high - low + 1) + low);
+};
+
 const townFarmville: ITown = {
-  x: 460,
-  y: 90,
+  x: 464,
+  y: 94,
   width: 75,
   height: 30,
   adjusted: false
@@ -98,26 +121,18 @@ const buildingsFarmville: IBuilding[] = [
   const town = townFarmville;
   const movedBldg: IBuilding = {
     svgBuilding: val.svgBuilding,
-    x: random(town.x, town.x + town.width),
-    y: random(town.y, town.y + town.height),
+    x: rand(town.x, town.x + town.width),
+    y: rand(town.y, town.y + town.height),
     width: val.width,
     height: val.height
   };
   return (movedBldg);
 });
 
-const innerStyle: React.CSSProperties = {
-  position: "absolute",
-  width: "100%",
-  height: "100%",
-  top: 0,
-  left: 0
-};
-
 const townAgriburg: ITown = {
-  x: 212,
+  x: 220,
   y: 210,
-  width: 95,
+  width: 85,
   height: 57,
   adjusted: false
 };
@@ -139,22 +154,13 @@ const buildingsAgriburg: IBuilding[] = [
   const town = townAgriburg;
   const movedBldg: IBuilding = {
     svgBuilding: val.svgBuilding,
-    x: random(town.x, town.x + town.width),
-    y: random(town.y, town.y + town.height),
+    x: rand(town.x, town.x + town.width),
+    y: rand(town.y, town.y + town.height),
     width: val.width,
     height: val.height
   };
   return (movedBldg);
 });
-
-// We use a random number (from a range) to mix up the locations of buildings
-// in the drawing list -- problem with that is that the build in Math.random()
-// does not support a seed, so each time the building list is initialized, the
-// town's building layout changes. Many ways to solve this -- just not right at
-// this moment.
-function random(low: number, high: number): number {
-  return Math.floor(Math.random() * (high - low + 1) + low);
-}
 
 @inject("stores")
 @observer
@@ -336,7 +342,7 @@ export class PictureArea extends BaseComponent<IProps, {}> {
     };
 
     // The parameter, crops, is expected to be in the range 0..100. The number
-    // of farms, which is representbed by the number of barns displayed in each
+    // of farms, which is represented by the number of barns displayed in each
     // town's farm-land, is mapped like this:
     //
     // |  crops  | barns |
@@ -523,7 +529,7 @@ export class PictureArea extends BaseComponent<IProps, {}> {
 
     // The picture display is controlled by 7 values. One is from the ui store
     // and the rest come from the riverData.
-
+    //
     // The populations of the two towns are based on their residential water
     // usage, respectively. From a simulation perspective, this makes pretty
     // good sense, but the data provided to us doesn't have enough fidelity
@@ -545,14 +551,14 @@ export class PictureArea extends BaseComponent<IProps, {}> {
     // values are in the range 0..100.
 
     if (isDev || appMode === "displayOnConsole") {
-    // tslint:disable-next-line no-console
-    console.log(`%  lake  AC  FC  AP  FP\n` +
-                `${flowPercentage}\t` +
-                `${Math.round(currentLakeArea)}\t` +
-                `${Math.round(currentCropsAgriburg)}\t` +
-                `${Math.round(currentCropsFarmville)}\t` +
-                `${Math.round(populationAgriburg)}\t` +
-                `${Math.round(populationFarmville)}`);
+      // tslint:disable-next-line no-console
+      console.log(`%  lake  AC  FC  AP  FP\n` +
+                  `${flowPercentage}\t` +
+                  `${Math.round(currentLakeArea)}\t` +
+                  `${Math.round(currentCropsAgriburg)}\t` +
+                  `${Math.round(currentCropsFarmville)}\t` +
+                  `${Math.round(populationAgriburg)}\t` +
+                  `${Math.round(populationFarmville)}`);
     }
 
     const controlContainerStyle: React.CSSProperties = {
