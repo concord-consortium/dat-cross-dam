@@ -25,7 +25,7 @@ export class Attribution extends BaseComponent<IProps, IAttributionState> {
           This simulation was developed by Concord Consortium in collaboration with Indiana University
           and Educational Testing Service under the grant: DAT-CROSS: Developing Assessments
           and Tools to Support the Teaching and Learning of Science Crosscutting Concepts
-          funded by the U. S. Department of Education.
+          funded by the U. S. Department of Education, Grant Number R305A170634.
         </div>
         <div>Copyright © 2019 The Concord Consortium. All rights reserved.
           The software is licensed under the MIT license.
