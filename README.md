@@ -16,19 +16,19 @@ You *do not* need to build to deploy the code, that is automatic.  See more info
 1. Make sure if you are using Visual Studio Code that you use the workspace version of TypeScript.
    To ensure that you are open a TypeScript file in VSC and then click on the version number next to
    `TypeScript React` in the status bar and select 'Use Workspace Version' in the popup menu.
+2. Data prepared from supplied xlsx spreadsheet, saved as csv
+   then [converted to JSON](http://www.convertcsv.com/csv-to-json.htm)
 
 ## Deployment
-
-*TODO* Set up Travis Deployment
 
 Production releases to S3 are based on the contents of the /dist folder and are built automatically by Travis
 for each branch pushed to GitHub and each merge into production.
 
-Merges into production are deployed to http://starter-projects.concord.org.
+Merges into production are deployed to https://dat-dross-dam.concord.org.
 
-Other branches are deployed to http://starter-projects.concord.org/branch/<name>.
+Other branches are deployed to https://dat-dross-dam.concord.org/branch/<name>.
 
-You can view the status of all the branch deploys [here](https://travis-ci.org/concord-consortium/starter-projects/branches).
+You can view the status of all the builds [here](https://travis-ci.com/concord-consortium/dat-dross-dam/builds).
 
 To deploy a production release:
 
@@ -50,7 +50,7 @@ Run `npm test` to run jest tests. Run `npm run test:full` to run jest and Cypres
 
 ## License
 
-Starter Projects are Copyright 2018 (c) by the Concord Consortium and is distributed under the [MIT license](http://www.opensource.org/licenses/MIT).
+DAT Cross Dam created by the Concord Consortium in collaboration with Indiana University and the Educational Testing Service. Copyright 2018 (c) by the Concord Consortium and is distributed under the [MIT license](http://www.opensource.org/licenses/MIT).
 
 See license.md for the complete license text.
 
