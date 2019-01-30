@@ -2,9 +2,11 @@ import * as React from "react";
 
 import { BaseComponent, IBaseProps } from "../base";
 import { inject, observer, propTypes } from "mobx-react";
-import * as seedrandom from "seedrandom";
+
+import { rand } from "../../utilities/rand";
 
 import Scenery from "../../assets/imagery/scenery/scenery.svg";
+import Trees from "../../assets/imagery/scenery/trees.svg";
 import Rivers0 from "../../assets/imagery/water/rivers0.svg";
 import Rivers25 from "../../assets/imagery/water/rivers25.svg";
 import Rivers50 from "../../assets/imagery/water/rivers50.svg";
@@ -33,8 +35,6 @@ import Field07 from "../../assets/imagery/fields/Field-07.svg";
 import Field08 from "../../assets/imagery/fields/Field-08.svg";
 import Field09 from "../../assets/imagery/fields/Field-09.svg";
 import Field10 from "../../assets/imagery/fields/Field-10.svg";
-
-import Trees from "../../assets/imagery/scenery/trees/Trees.svg";
 
 import "./picture-area.sass";
 import { SimulationControls } from "../controls/simulation-controls";
@@ -80,20 +80,6 @@ const innerStyle: React.CSSProperties = {
   height: "100%",
   top: 0,
   left: 0
-};
-
-// A random number generator is used to mix up the locations of buildings
-// in the drawing list -- problem with that is that the built in Math.random()
-// does not support a seed. Thus, each time the building list is initialized,
-// the town's building layout changes. It seems a little odd to have the town
-// reorganize itself whenever the page is refreshed.
-//
-// To solve this, an NPM package, seedrandom, is used to make sure we can
-// regenerate the town's buildings, the same way each time.
-
-const randomNumberGenerator = seedrandom("12345");
-const rand = (low: number, high: number): number => {
-  return Math.floor(randomNumberGenerator() * (high - low + 1) + low);
 };
 
 const townFarmville: ITown = {
@@ -185,15 +171,25 @@ export class PictureArea extends BaseComponent<IProps, {}> {
     const renderScenery = () => {
       return (
         <div style={innerStyle}>
-          <Scenery width={width} height={height}/>
+          <div style={innerStyle}>
+            <Scenery width={width} height={height}/>
+          </div>
+          <div style={innerStyle}>
+            <Trees width={width} height={height} />
+          </div>
         </div>
       );
     };
 
-    const renderTrees = () => {
+    const renderOrnamentation = (labels: boolean) => {
       return (
         <div style={innerStyle}>
-          <Trees width={width} height={height} />
+          <div style={innerStyle}>
+            <Frame width={width} height={height}/>
+          </div>
+          <div style={innerStyle}>
+            { labels === true ? <Labels width={width} height={height} /> : "" }
+          </div>
         </div>
       );
     };
@@ -286,22 +282,6 @@ export class PictureArea extends BaseComponent<IProps, {}> {
       return(
         <div style={innerStyle}>
           {dam}
-        </div>
-      );
-    };
-
-    const renderLabels = () => {
-      return (
-        <div style={innerStyle}>
-          <Labels width={width} height={height}/>
-        </div>
-      );
-    };
-
-    const renderFrame = () => {
-      return (
-        <div style={innerStyle}>
-          <Frame width={width} height={height}/>
         </div>
       );
     };
@@ -574,7 +554,6 @@ export class PictureArea extends BaseComponent<IProps, {}> {
       <div className="subsection simulation">
         <div className="picture-area-container">
           { renderScenery() }
-          { renderTrees() }
           { renderRivers(flowPercentage / 25) }
           { renderLake(currentLakeArea) }
           { renderDamn() }
@@ -584,8 +563,7 @@ export class PictureArea extends BaseComponent<IProps, {}> {
           { renderTown(populationAgriburg, buildingsAgriburg, townAgriburg)}
           { renderCornFields(currentCropsAgriburg, cornFieldsAgriburg)}
           { renderFarms(currentCropsAgriburg, barnsAgriburg)}
-          { showLabels ? renderLabels() : "" }
-          { renderFrame() }
+          { renderOrnamentation(showLabels)}
         </div>
         <SimulationControls style={controlContainerStyle}>
           <ControlArea />

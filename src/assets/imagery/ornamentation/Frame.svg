@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <svg viewBox="0 0 600 340" xmlns="http://www.w3.org/2000/svg">
   <g>
-    <title>Frame</title>
     <rect x="2" y="2" width="596" height="336" style="fill: none; stroke: rgb(80, 63, 0); stroke-width: 4px;"/>
   </g>
 </svg>

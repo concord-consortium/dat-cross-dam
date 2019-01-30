@@ -189,5 +189,5 @@ export function getCurrentPercentageFarmvilleResidentialUse(flowPercentage: numb
 
 function calcValue(minmax: DataMinMax, currentValue: number): number {
   const range = minmax.Max - minmax.Min;
-  return (currentValue - minmax.Min) / range * 100;
+  return Math.min(100, Math.max(0, (currentValue - minmax.Min) / range) * 100);
 }
