@@ -21,15 +21,17 @@ export class Attribution extends BaseComponent<IProps, IAttributionState> {
       <div className="attribution-text">
         <div className="small-logo" onClick={this.toggleAttribution} />
           <div>This interactive was created by the Concord Consortium in
-          collaboration with Indiana University and the Educational Testing Service.</div>
-          <div>Copyright © 2019 The Concord Consortium. All rights reserved.
+          collaboration with Indiana University and the Educational Testing Service.
+          This simulation was developed by Concord Consortium in collaboration with Indiana University
+          and Educational Testing Service under the grant: DAT-CROSS: Developing Assessments
+          and Tools to Support the Teaching and Learning of Science Crosscutting Concepts
+          funded by the U. S. Department of Education.
+        </div>
+        <div>Copyright © 2019 The Concord Consortium. All rights reserved.
           The software is licensed under the MIT license.
           Please see <a href="https://github.com/concord-consortium/dat-cross-farm/blob/master/LICENSE"
               target="_blank" rel="noopener">license</a> for
-        other software and associated licensing included in this product.
-        Please provide attribution to the
-            Concord Consortium <a href="https://concord.org" target="_blank" rel="noopener">
-              https://concord.org</a>.</div>
+        other software and associated licensing included in this product.</div>
       </div>
     </div>
     </div>
