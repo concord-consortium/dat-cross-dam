@@ -2,7 +2,8 @@ import * as React from "react";
 
 import { BaseComponent, IBaseProps } from "../base";
 import { inject, observer, propTypes } from "mobx-react";
-import * as seedrandom from "seedrandom";
+
+import { rand } from "../../utilities/rand";
 
 import Scenery from "../../assets/imagery/scenery/scenery.svg";
 import Trees from "../../assets/imagery/scenery/trees.svg";
@@ -81,20 +82,6 @@ const innerStyle: React.CSSProperties = {
   left: 0
 };
 
-// A random number generator is used to mix up the locations of buildings
-// in the drawing list -- problem with that is that the built in Math.random()
-// does not support a seed. Thus, each time the building list is initialized,
-// the town's building layout changes. It seems a little odd to have the town
-// reorganize itself whenever the page is refreshed.
-//
-// To solve this, an NPM package, seedrandom, is used to make sure we can
-// regenerate the town's buildings, the same way each time.
-
-const randomNumberGenerator = seedrandom("12345");
-const rand = (low: number, high: number): number => {
-  return Math.floor(randomNumberGenerator() * (high - low + 1) + low);
-};
-
 const townFarmville: ITown = {
   x: 464,
   y: 94,
@@ -161,6 +148,17 @@ const buildingsAgriburg: IBuilding[] = [
   return (movedBldg);
 });
 
+// class FullSizeThing extends BaseComponent<{x: number, y: number, w: number, h: number, f: number}, {}> {
+//   public render() {
+//     const { x, y, w, h, f } = this.props;
+//     return(
+//       <div style={innerStyle}>
+//         <Dam width={25 * f} height={20 * f} transform={`translate: ${x * f} ${y * f}`} />
+//       </div>
+//     );
+//   }
+// }
+
 @inject("stores")
 @observer
 export class PictureArea extends BaseComponent<IProps, {}> {
@@ -189,6 +187,19 @@ export class PictureArea extends BaseComponent<IProps, {}> {
           </div>
           <div style={innerStyle}>
             <Trees width={width} height={height} />
+          </div>
+        </div>
+      );
+    };
+
+    const renderOrnamentation = (labels: boolean) => {
+      return (
+        <div style={innerStyle}>
+          <div style={innerStyle}>
+            <Frame width={width} height={height}/>
+          </div>
+          <div style={innerStyle}>
+            { labels === true ? <Labels width={width} height={height} /> : "" }
           </div>
         </div>
       );
@@ -282,19 +293,6 @@ export class PictureArea extends BaseComponent<IProps, {}> {
       return(
         <div style={innerStyle}>
           {dam}
-        </div>
-      );
-    };
-
-    const renderOrnamentation = (labels: boolean) => {
-      return (
-        <div style={innerStyle}>
-          <div style={innerStyle}>
-            <Frame width={width} height={height}/>
-          </div>
-          <div style={innerStyle}>
-            { labels === true ? <Labels width={width} height={height} /> : "" }
-          </div>
         </div>
       );
     };
@@ -570,6 +568,9 @@ export class PictureArea extends BaseComponent<IProps, {}> {
           { renderRivers(flowPercentage / 25) }
           { renderLake(currentLakeArea) }
           { renderDamn() }
+
+          {/* <FullSizeThing x={200} y={250} e_x={20} e_y={25} w={600} h={340} f={width / 600.0}/> */}
+
           { renderTown(populationFarmville, buildingsFarmville, townFarmville)}
           { renderCornFields(currentCropsFarmville, cornFieldsFarmville)}
           { renderFarms(currentCropsFarmville, barnsFarmville)}
