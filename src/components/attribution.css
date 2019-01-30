@@ -1,12 +1,12 @@
 .attribution .attribution-logo{
   background: url('../assets/cclogo.png');
-  background-size: 150px 63px;
+  background-size: 130px 55px;
   background-repeat: no-repeat;
   position: fixed;
   bottom: 0px;
-  right: 0px;
-  width:150px;
-  height:63px;
+  left: 0px;
+  width:130px;
+  height:55px;
 }
 
 .attribution-container-hidden{
