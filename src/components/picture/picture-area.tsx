@@ -148,17 +148,6 @@ const buildingsAgriburg: IBuilding[] = [
   return (movedBldg);
 });
 
-// class FullSizeThing extends BaseComponent<{x: number, y: number, w: number, h: number, f: number}, {}> {
-//   public render() {
-//     const { x, y, w, h, f } = this.props;
-//     return(
-//       <div style={innerStyle}>
-//         <Dam width={25 * f} height={20 * f} transform={`translate: ${x * f} ${y * f}`} />
-//       </div>
-//     );
-//   }
-// }
-
 @inject("stores")
 @observer
 export class PictureArea extends BaseComponent<IProps, {}> {
@@ -568,9 +557,6 @@ export class PictureArea extends BaseComponent<IProps, {}> {
           { renderRivers(flowPercentage / 25) }
           { renderLake(currentLakeArea) }
           { renderDamn() }
-
-          {/* <FullSizeThing x={200} y={250} e_x={20} e_y={25} w={600} h={340} f={width / 600.0}/> */}
-
           { renderTown(populationFarmville, buildingsFarmville, townFarmville)}
           { renderCornFields(currentCropsFarmville, cornFieldsFarmville)}
           { renderFarms(currentCropsFarmville, barnsFarmville)}
