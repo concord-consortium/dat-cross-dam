@@ -28,7 +28,7 @@ const defaultOptions: ChartOptions = {
   },
   legend: {
     display: true,
-    position: "bottom",
+    position: "top",
     labels: {
       usePointStyle: true,
       fontSize: 11

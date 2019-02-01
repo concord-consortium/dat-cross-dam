@@ -20,8 +20,12 @@ const visibleColumnsCorn = [
   "CornYieldAgriburg"];
 
 const lakeColumnHeaders = {
-  FarmLakeArea: "Start Season Area",
-  EndSeasonSurfaceArea: "End Season Area"
+  FarmLakeArea: "Start Season Area (acre)",
+  EndSeasonSurfaceArea: "End Season Area (acre)"
+};
+const cornColumnHeaders = {
+  CornYieldFarmville: "Corn Yield Farmville (bu/acre)",
+  CornYieldAgriburg: "Corn Yield Agriburg (bu/acre)"
 };
 
 const visibleColumnsLake = [
@@ -32,12 +36,11 @@ const visibleColumnsLake = [
 @inject("stores")
 @observer
 export class DamData extends BaseComponent<IProps, IState> {
-
   public render() {
     const { riverData } = this.stores;
     const { parentWidth, parentHeight } = this.props;
     const gridStyle: React.CSSProperties = {
-      width: parentWidth,
+      width: parentWidth && parentWidth > 300 ? parentWidth : 300,
       height: parentHeight,
       maxHeight: "300px"
     };
@@ -48,8 +51,8 @@ export class DamData extends BaseComponent<IProps, IState> {
     });
     return (
       <div className="dam-data-grid" style={gridStyle}>
-        <AgGridReact columnDefs={cols} rowData={tableData} headerHeight={24}
-          onGridReady={this.onGridReady} />
+        <AgGridReact columnDefs={cols} rowData={tableData} headerHeight={30} rowHeight={22}
+          onGridReady={this.onGridReady} onNewColumnsLoaded={this.onGridReady} />
       </div>
     );
   }
@@ -70,6 +73,12 @@ export class DamData extends BaseComponent<IProps, IState> {
         if (d === "EndSeasonSurfaceArea") {
           headerName = lakeColumnHeaders.EndSeasonSurfaceArea;
         }
+        if (d === "CornYieldAgriburg") {
+          headerName = cornColumnHeaders.CornYieldAgriburg;
+        }
+        if (d === "CornYieldFarmville") {
+          headerName = cornColumnHeaders.CornYieldFarmville;
+        }
         const c: ColDef = {
           headerName, field: d,
           valueFormatter: this.numberFormatter,
@@ -82,6 +91,11 @@ export class DamData extends BaseComponent<IProps, IState> {
           c.suppressSizeToFit = true;
           c.cellClass = "dam-year";
         }
+        if (visibleColumns.indexOf(d) !== 0) {
+          c.cellClass += " value" + visibleColumns.indexOf(d);
+        }
+        c.cellClass += " " + riverData.dataView;
+
         cols.push(c);
       }
     });
