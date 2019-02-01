@@ -24,7 +24,7 @@ const defaultOptions: ChartOptions = {
   },
   legend: {
     display: true,
-    position: "bottom",
+    position: "top",
     labels: {
       boxWidth: 12,
       fontSize: 11

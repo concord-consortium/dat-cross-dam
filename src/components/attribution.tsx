@@ -20,8 +20,7 @@ export class Attribution extends BaseComponent<IProps, IAttributionState> {
     <div className={attributionDisplayClass} onClick={this.toggleAttribution}>
       <div className="attribution-text">
         <div className="small-logo" onClick={this.toggleAttribution} />
-          <div>This interactive was created by the Concord Consortium in
-          collaboration with Indiana University and the Educational Testing Service.
+          <div>
           This simulation was developed by Concord Consortium in collaboration with Indiana University
           and Educational Testing Service under the grant: DAT-CROSS: Developing Assessments
           and Tools to Support the Teaching and Learning of Science Crosscutting Concepts
