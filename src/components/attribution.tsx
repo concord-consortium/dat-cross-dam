@@ -5,7 +5,7 @@ import "./attribution.css";
 interface IAttributionState {
   attributionVisible: boolean;
 }
-interface IProps {}
+interface IProps { }
 
 export class Attribution extends BaseComponent<IProps, IAttributionState> {
   public state: IAttributionState = {
@@ -15,26 +15,27 @@ export class Attribution extends BaseComponent<IProps, IAttributionState> {
   public render() {
     const { attributionVisible } = this.state;
     const attributionDisplayClass = attributionVisible ? "attribution-container" : "attribution-container-hidden";
-    return ( <div className="attribution">
-    <div className="attribution-logo" onClick={this.toggleAttribution} />
-    <div className={attributionDisplayClass} onClick={this.toggleAttribution}>
-      <div className="attribution-text">
-        <div className="small-logo" onClick={this.toggleAttribution} />
+    return (<div className="attribution">
+      <div className="attribution-logo" onClick={this.toggleAttribution} />
+      <div className={attributionDisplayClass} onClick={this.toggleAttribution}>
+        <div className="attribution-text">
+          <div className="small-logo" onClick={this.toggleAttribution} />
           <div>
-          This simulation was developed by Concord Consortium in collaboration with Indiana University
-          and Educational Testing Service under the grant: DAT-CROSS: Developing Assessments
-          and Tools to Support the Teaching and Learning of Science Crosscutting Concepts
-          funded by the U. S. Department of Education, Grant Number R305A170634.
-        </div>
-        <div>Copyright © 2019 The Concord Consortium. All rights reserved.
-          The software is licensed under the MIT license.
-          Please see <a href="https://github.com/concord-consortium/dat-cross-farm/blob/master/LICENSE"
+            The contents of this simulation were developed under a grant from the Department of Education.
+            However, those contents do not necessarily represent the policy of the Department of
+            Education, and you should not assume endorsement by the Federal government.
+            This simulation was developed by Concord Consortium in cooperation
+            with Indiana University and Educational Testing Service.
+          </div>
+          <div>Copyright © 2019 The Concord Consortium. All rights reserved.
+            The software is licensed under the MIT license.
+            Please see <a href="https://github.com/concord-consortium/dat-cross-farm/blob/master/LICENSE"
               target="_blank" rel="noopener">license</a> for
-        other software and associated licensing included in this product.</div>
+            other software and associated licensing included in this product.</div>
+        </div>
       </div>
     </div>
-    </div>
-   );
+    );
   }
   private toggleAttribution = () => {
     const visible = this.state.attributionVisible;
