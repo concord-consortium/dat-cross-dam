@@ -96,7 +96,7 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
       fixedMaxA2: 250,
       fixedMinA2: 0,
       a1AxisLabel: "Year",
-      a2AxisLabel: "Corn Yield (bu/acre)",
+      a2AxisLabel: "Corn Yield (bushels/acre)",
       maxPoints: 10
     });
 
@@ -109,7 +109,7 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
       fixedMaxA2: 250,
       fixedMinA2: 0,
       a1AxisLabel: "Year",
-      a2AxisLabel: "Corn Yield (bu/acre)",
+      a2AxisLabel: "Corn Yield (bushels/acre)",
       maxPoints: 10
     });
 
