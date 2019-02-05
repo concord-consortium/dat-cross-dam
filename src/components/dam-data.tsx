@@ -24,8 +24,8 @@ const lakeColumnHeaders = {
   EndSeasonSurfaceArea: "End Season Area (acre)"
 };
 const cornColumnHeaders = {
-  CornYieldFarmville: "Corn Yield Farmville (bu/acre)",
-  CornYieldAgriburg: "Corn Yield Agriburg (bu/acre)"
+  CornYieldFarmville: "Yield Farmville (bushels/acre)",
+  CornYieldAgriburg: "Yield Agriburg (bushels/acre)"
 };
 
 const visibleColumnsLake = [
