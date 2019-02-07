@@ -7,6 +7,7 @@
   right: 0
   bottom: 0
   width: 100%
+  max-width: 1600px
   height: 100%
   display: flex
   align-items: flex
@@ -68,8 +69,14 @@
           .subsection
             overflow: hidden
             &.table
+              border-left: 2px solid $color-nav-cinder-light3
+              border-top: 4px solid $color-nav-cinder-light2
+              border-top-left-radius: 10px
+              margin-top: -6px
+              z-index: 0
               overflow-y: auto
             &.chart
               position: relative
+              border-left: 2px solid $color-nav-cinder-light3
               overflow-y: auto
               padding-bottom: 16px

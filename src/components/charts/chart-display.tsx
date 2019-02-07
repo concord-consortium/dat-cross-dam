@@ -130,8 +130,8 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
 
     switch (riverData.dataView) {
       case "corn":
-        chartDataSets.push(cornAgriburgDataSet);
         chartDataSets.push(cornFarmvilleDataSet);
+        chartDataSets.push(cornAgriburgDataSet);
         break;
       case "lake":
         chartDataSets.push(lakeSurfaceAreaDataSet);
