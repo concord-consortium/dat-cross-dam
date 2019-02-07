@@ -3,8 +3,8 @@
   transform: scale(0.75);
   position: relative;
   float: left;
-  width: 52px;
-  height: 52px;
+  width: 32px;
+  height: 32px;
   padding: 5px;
   margin: 3px 3px;
   cursor: pointer;
@@ -32,8 +32,8 @@
 }
 .toolbar-button div {
   position: relative;
-  width: 48px;
-  height: 48px;
+  width: 28px;
+  height: 28px;
   top: 3px;
   left: 3px;
   background-repeat: no-repeat;

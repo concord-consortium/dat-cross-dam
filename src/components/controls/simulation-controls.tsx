@@ -51,12 +51,14 @@ export class SimulationControls extends BaseComponent<IProps, IState> {
           dots={true}
           value={riverData.currentYear}
         />
-        <div>Diversion percentage: {riverData.flowPercentage}%</div>
         <div className="flow-options">
-          {flowButton(0)}
-          {flowButton(25)}
-          {flowButton(50)}
-          {flowButton(75)}
+          <div>Diversion percentage:</div>
+          <div>
+            {flowButton(0)}
+            {flowButton(25)}
+            {flowButton(50)}
+            {flowButton(75)}
+          </div>
         </div>
         <div className="run-simulation-buttons">
           <div className="toolbar-button">
