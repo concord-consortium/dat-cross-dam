@@ -51,24 +51,25 @@ export class SimulationControls extends BaseComponent<IProps, IState> {
           dots={true}
           value={riverData.currentYear}
         />
-        <div className="flow-options">
-          <div>Diversion percentage:</div>
-          <div>
-            {flowButton(0)}
-            {flowButton(25)}
-            {flowButton(50)}
-            {flowButton(75)}
+        <div className="controls-container">
+          <div className="flow-options">
+            <div className="flow-label">Diversion percentage:</div>
+            <div className="flow-option-select">
+              {flowButton(0)}
+              {flowButton(25)}
+              {flowButton(50)}
+              {flowButton(75)}
+            </div>
+          </div>
+          <div className="run-simulation-buttons">
+            <div className="toolbar-button">
+              <div className={playButtonStyle} onClick={this.handleSimulationPlayToggle} />
+            </div>
+            <div className="toolbar-button">
+              <div className="reset-icon-button" onClick={this.handleSimulationReset} />
+            </div>
           </div>
         </div>
-        <div className="run-simulation-buttons">
-          <div className="toolbar-button">
-            <div className={playButtonStyle} onClick={this.handleSimulationPlayToggle} />
-          </div>
-          <div className="toolbar-button">
-            <div className="reset-icon-button" onClick={this.handleSimulationReset} />
-          </div>
-        </div>
-
         <div className="label-toggle">
           <label htmlFor="label-toggle">Labels</label>
           <input id="label-toggle" type="checkbox" checked={ui.showLabels} onChange={this.handleShowLabelsChange} />

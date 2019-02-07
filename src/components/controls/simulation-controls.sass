@@ -20,16 +20,27 @@
     cursor: pointer
     transition: 0.3s
 
-  .run-simulation-buttons
+  .controls-container
     display: flex
+    flex-wrap: wrap
+    align-items: center
+    justify-content: center
+
+  .run-simulation-buttons
+    order: 1
+    width: 100px
+    min-width: 100px
     align-items: center
     justify-content: center
 
   .flow-options
+    order: 0
     display: flex
     align-items: center
-    justify-content: center
-
+    .flow-label
+      min-width: 135px
+    .flow-option-select
+      min-width: 200px
     .flow-percentage-option
       width: 26px
       height: 16px
@@ -40,7 +51,7 @@
       line-height: 18px
       text-align: center
       padding: 5px
-      margin: 5px
+      margin: 2px
       &:hover
         background: $color-nav-cinder-light2
       &.selected
@@ -51,7 +62,7 @@
 
       label
         padding: 4px
-        padding-left: 2px
+        padding-left: 0
   .year-slider
     margin-top: 2px
 
