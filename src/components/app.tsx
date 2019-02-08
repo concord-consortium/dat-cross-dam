@@ -36,6 +36,7 @@ export class AppComponent extends BaseComponent<{}, {}> {
                     parentWidth={size.width ? size.width : 600} parentHeight={size.height ? size.height : 340} />
                 }
               </SizeMe>
+              <Attribution />
             </div>
             <div className="section chart-table">
               <div className="subsection header">
@@ -57,10 +58,9 @@ export class AppComponent extends BaseComponent<{}, {}> {
                   }
                 </SizeMe>
               </div>
-              <div className="subsection attribution">
-                <Attribution />
-              </div>
+
             </div>
+
           </div>
         </div>
       </div>

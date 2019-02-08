@@ -13,34 +13,45 @@
   text-align: center
 
   div
-    padding-top: 4px
+    padding-top: 2px
   .display-mode
     font-weight: 700
   .control
     cursor: pointer
     transition: 0.3s
 
-  .run-simulation-buttons
+  .controls-container
     display: flex
+    flex-wrap: wrap
+    align-items: center
+    justify-content: center
+
+  .run-simulation-buttons
+    order: 1
+    width: 100px
+    min-width: 100px
     align-items: center
     justify-content: center
 
   .flow-options
+    order: 0
     display: flex
     align-items: center
-    justify-content: center
-
+    .flow-label
+      min-width: 135px
+    .flow-option-select
+      min-width: 200px
     .flow-percentage-option
-      width: 30px
-      height: 20px
+      width: 26px
+      height: 16px
       border-radius: 4px
       border: 2px solid transparent
       background: $color-nav-cinder-light3
       float: left
-      line-height: 20px
+      line-height: 18px
       text-align: center
       padding: 5px
-      margin: 5px
+      margin: 2px
       &:hover
         background: $color-nav-cinder-light2
       &.selected
@@ -51,4 +62,24 @@
 
       label
         padding: 4px
-        padding-left: 3px
+        padding-left: 0
+  .year-slider
+    margin-top: 2px
+
+    .rc-slider-dot
+      border-color: silver
+      width: 12px
+      height: 12px
+      margin-left: -6px
+      top: -4px
+
+    .rc-slider-dot-active
+      background-color: #abe2fb
+      border-width: 1px
+
+    .rc-slider-handle
+      border-color: #57c5f7
+      width: 16px
+      height: 16px
+      margin-left: -8px
+      margin-top: -6px
