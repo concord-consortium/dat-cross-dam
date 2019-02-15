@@ -113,7 +113,7 @@ export class BarChart extends React.Component<IBarProps> {
           scaleLabel: {
             display: true,
             fontSize: 11,
-            labelString: chartData.a1AxisLabel
+            labelString: chartData.axisLabelA1
           },
           stacked: true
         }],
@@ -125,7 +125,7 @@ export class BarChart extends React.Component<IBarProps> {
           scaleLabel: {
             display: true,
             fontSize: 12,
-            labelString: chartData.a2AxisLabel
+            labelString: chartData.axisLabelA2
           },
           stacked: true
         }]

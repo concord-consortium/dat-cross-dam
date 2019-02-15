@@ -95,8 +95,8 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
       stack: "CornA",
       fixedMaxA2: 250,
       fixedMinA2: 0,
-      a1AxisLabel: "Year",
-      a2AxisLabel: "Corn Yield (bushels/acre)",
+      axisLabelA1: "Year",
+      axisLabelA2: "Corn Yield (bushels/acre)",
       maxPoints: 10
     });
 
@@ -108,8 +108,8 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
       stack: "CornF",
       fixedMaxA2: 250,
       fixedMinA2: 0,
-      a1AxisLabel: "Year",
-      a2AxisLabel: "Corn Yield (bushels/acre)",
+      axisLabelA1: "Year",
+      axisLabelA2: "Corn Yield (bushels/acre)",
       maxPoints: 10
     });
 
@@ -121,8 +121,8 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
       stack: "Lake",
       fixedMaxA2: 90000,
       fixedMinA2: 0,
-      a1AxisLabel: "Year",
-      a2AxisLabel: "Surface Area (acre)",
+      axisLabelA1: "Year",
+      axisLabelA2: "Surface Area (acre)",
       maxPoints: 10
     });
 

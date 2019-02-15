@@ -139,7 +139,7 @@ export class LineChart extends BaseComponent<ILineProps, ILineState> {
           scaleLabel: {
             display: true,
             fontSize: 12,
-            labelString: chartData.a2AxisLabel
+            labelString: chartData.axisLabelA2
           }
         }],
         xAxes: [{
@@ -153,7 +153,7 @@ export class LineChart extends BaseComponent<ILineProps, ILineState> {
           scaleLabel: {
             display: true,
             fontSize: 12,
-            labelString: chartData.a1AxisLabel
+            labelString: chartData.axisLabelA1
           }
         }]
       }

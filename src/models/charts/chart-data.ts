@@ -61,11 +61,11 @@ export const ChartDataModel = types
     get subsetIdx() {
       return self.dataSets[0].dataStartIdx;
     },
-    get a1AxisLabel() {
-      return self.dataSets[0].a1AxisLabel;
+    get axisLabelA1() {
+      return self.dataSets[0].axisLabelA1;
     },
-    get a2AxisLabel() {
-      return self.dataSets[0].a2AxisLabel;
+    get axisLabelA2() {
+      return self.dataSets[0].axisLabelA2;
     }
   }))
   .extend(self => {

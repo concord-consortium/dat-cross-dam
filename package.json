@@ -54,14 +54,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/concord-consortium/starter-projects.git"
+    "url": "git+https://github.com/concord-consortium/dat-cross-dam.git"
   },
   "author": "Concord Consortium",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/concord-consortium/starter-projects/issues"
+    "url": "https://github.com/concord-consortium/dat-cross-dam/issues"
   },
-  "homepage": "https://github.com/concord-consortium/starter-projects#readme",
+  "homepage": "https://github.com/concord-consortium/dat-cross-dam#readme",
   "devDependencies": {
     "@cypress/webpack-preprocessor": "^3.0.1",
     "@types/chart.js": "^2.7.42",
