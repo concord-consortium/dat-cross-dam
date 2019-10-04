@@ -27,7 +27,7 @@ const defaultOptions: ChartOptions = {
     position: "top",
     labels: {
       boxWidth: 12,
-      fontSize: 11
+      fontSize: 14
     }
   },
   maintainAspectRatio: false,
@@ -112,7 +112,7 @@ export class BarChart extends React.Component<IBarProps> {
           },
           scaleLabel: {
             display: true,
-            fontSize: 11,
+            fontSize: 14,
             labelString: chartData.axisLabelA1
           },
           stacked: true
@@ -124,7 +124,7 @@ export class BarChart extends React.Component<IBarProps> {
           },
           scaleLabel: {
             display: true,
-            fontSize: 12,
+            fontSize: 14,
             labelString: chartData.axisLabelA2
           },
           stacked: true

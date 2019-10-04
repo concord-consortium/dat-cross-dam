@@ -90,7 +90,7 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
     const cornAgriburgDataSet = ChartDataSetModel.create({
       name: "Agriburg",
       dataPoints: this.buildChart(sourceData, "Summer", "corna"),
-      color: ChartColors[3].hex,
+      color: ChartColors[4].hex,
       backgroundOpacity: 0.9,
       stack: "CornA",
       fixedMaxA2: 250,
@@ -103,7 +103,7 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
     const cornFarmvilleDataSet = ChartDataSetModel.create({
       name: "Farmville",
       dataPoints: this.buildChart(sourceData, "Summer", "cornf"),
-      color: ChartColors[1].hex,
+      color: ChartColors[10].hex,
       backgroundOpacity: 0.9,
       stack: "CornF",
       fixedMaxA2: 250,

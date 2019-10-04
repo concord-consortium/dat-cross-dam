@@ -31,7 +31,7 @@ const defaultOptions: ChartOptions = {
     position: "top",
     labels: {
       usePointStyle: true,
-      fontSize: 11
+      fontSize: 14
     }
   },
   maintainAspectRatio: false,
