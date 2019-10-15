@@ -116,7 +116,7 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
     });
 
     const lakeSurfaceAreaDataSet = ChartDataSetModel.create({
-      name: "End of Year Lake Surface Area",
+      name: "End Season Lake Surface Area",
       dataPoints: this.buildChart(sourceData, "Summer", "lake"),
       color: ChartColors[0].hex,
       backgroundOpacity: 0.9,
