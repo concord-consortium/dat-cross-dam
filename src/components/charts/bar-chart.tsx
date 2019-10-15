@@ -20,14 +20,14 @@ const defaultOptions: ChartOptions = {
   title: {
     display: false,
     text: "",
-    fontSize: 22
+    fontSize: 28
   },
   legend: {
     display: true,
     position: "top",
     labels: {
       boxWidth: 12,
-      fontSize: 11
+      fontSize: 16
     }
   },
   maintainAspectRatio: false,
@@ -108,11 +108,12 @@ export class BarChart extends React.Component<IBarProps> {
         xAxes: [{
           ticks: {
             min: 0,
-            max: chartData.minMaxAll.maxA2
+            max: chartData.minMaxAll.maxA2,
+            fontSize: 16
           },
           scaleLabel: {
             display: true,
-            fontSize: 11,
+            fontSize: 16,
             labelString: chartData.axisLabelA1
           },
           stacked: true
@@ -120,11 +121,12 @@ export class BarChart extends React.Component<IBarProps> {
         yAxes: [{
           ticks: {
             min: 0,
-            max: chartData.minMaxAll.maxA2
+            max: chartData.minMaxAll.maxA2,
+            fontSize: 16
           },
           scaleLabel: {
             display: true,
-            fontSize: 12,
+            fontSize: 16,
             labelString: chartData.axisLabelA2
           },
           stacked: true

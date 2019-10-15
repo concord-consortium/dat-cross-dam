@@ -90,31 +90,33 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
     const cornAgriburgDataSet = ChartDataSetModel.create({
       name: "Agriburg",
       dataPoints: this.buildChart(sourceData, "Summer", "corna"),
-      color: ChartColors[3].hex,
+      color: ChartColors[4].hex,
       backgroundOpacity: 0.9,
       stack: "CornA",
       fixedMaxA2: 250,
       fixedMinA2: 0,
       axisLabelA1: "Year",
       axisLabelA2: "Corn Yield (bushels/acre)",
-      maxPoints: 10
+      maxPoints: 10,
+      fixedLabelRotation: 0
     });
 
     const cornFarmvilleDataSet = ChartDataSetModel.create({
       name: "Farmville",
       dataPoints: this.buildChart(sourceData, "Summer", "cornf"),
-      color: ChartColors[1].hex,
+      color: ChartColors[10].hex,
       backgroundOpacity: 0.9,
       stack: "CornF",
       fixedMaxA2: 250,
       fixedMinA2: 0,
       axisLabelA1: "Year",
       axisLabelA2: "Corn Yield (bushels/acre)",
-      maxPoints: 10
+      maxPoints: 10,
+      fixedLabelRotation: 0
     });
 
     const lakeSurfaceAreaDataSet = ChartDataSetModel.create({
-      name: "Lake Surface Area",
+      name: "End Season Lake Surface Area",
       dataPoints: this.buildChart(sourceData, "Summer", "lake"),
       color: ChartColors[0].hex,
       backgroundOpacity: 0.9,
@@ -123,7 +125,8 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
       fixedMinA2: 0,
       axisLabelA1: "Year",
       axisLabelA2: "Surface Area (acre)",
-      maxPoints: 10
+      maxPoints: 10,
+      fixedLabelRotation: 0
     });
 
     const chartDataSets: ChartDataSetModelType[] = [];

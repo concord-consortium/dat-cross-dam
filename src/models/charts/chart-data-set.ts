@@ -22,7 +22,8 @@ export const ChartColors: Color[] = [
   { name: "cloud", hex: colors.chartDataColor7},
   { name: "gold", hex: colors.chartDataColor8},
   { name: "terra", hex: colors.chartDataColor9},
-  { name: "sky", hex: colors.chartDataColor10},
+  { name: "sky", hex: colors.chartDataColor10 },
+  { name: "sage2", hex: colors.chartDataColor11 },
 
   // backgrounds
   { name: "sage", hex: colors.chartColor5},

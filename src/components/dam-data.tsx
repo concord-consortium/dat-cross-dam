@@ -42,7 +42,7 @@ export class DamData extends BaseComponent<IProps, IState> {
     const gridStyle: React.CSSProperties = {
       width: parentWidth && parentWidth > 300 ? parentWidth : 300,
       height: parentHeight,
-      maxHeight: "300px"
+      maxHeight: "490px"
     };
     const cols = this.getDataColumns();
     const tableData = dataByFlowUpToYear(riverData.flowPercentage, riverData.currentYear).filter(d => {
@@ -51,7 +51,7 @@ export class DamData extends BaseComponent<IProps, IState> {
     });
     return (
       <div className="dam-data-grid" style={gridStyle}>
-        <AgGridReact columnDefs={cols} rowData={tableData} headerHeight={30} rowHeight={22}
+        <AgGridReact columnDefs={cols} rowData={tableData} headerHeight={30} rowHeight={30}
           onGridReady={this.onGridReady} onNewColumnsLoaded={this.onGridReady} />
       </div>
     );

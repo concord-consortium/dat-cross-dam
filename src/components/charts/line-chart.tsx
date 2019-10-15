@@ -24,14 +24,14 @@ const defaultOptions: ChartOptions = {
   title: {
     display: true,
     text: "Data",
-    fontSize: 22
+    fontSize: 26
   },
   legend: {
     display: true,
     position: "top",
     labels: {
       usePointStyle: true,
-      fontSize: 11
+      fontSize: 16
     }
   },
   maintainAspectRatio: false,
@@ -40,14 +40,16 @@ const defaultOptions: ChartOptions = {
     yAxes: [{
       ticks: {
         min: 0,
-        max: 100
+        max: 100,
+        autoSkip: false
       }
     }],
     xAxes: [{
       display: false,
       ticks: {
         min: 0,
-        max: 20
+        max: 10,
+        autoSkip: false
       }
     }]
   },
@@ -134,25 +136,31 @@ export class LineChart extends BaseComponent<ILineProps, ILineState> {
         yAxes: [{
           ticks: {
             min: minMaxValues.minA2,
-            max: minMaxValues.maxA2
+            max: minMaxValues.maxA2,
+            fontSize: 16
           },
           scaleLabel: {
             display: true,
-            fontSize: 12,
+            fontSize: 16,
             labelString: chartData.axisLabelA2
           }
         }],
         xAxes: [{
+          gridLines: {
+            autoSkip: false,
+            display: true
+          },
           display: true,
           ticks: {
+            autoSkip: false,
             min: minMaxValues.minA1,
             max: minMaxValues.maxA1,
-            minRotation: chartData.dataLabelRotation,
-            maxRotation: chartData.dataLabelRotation
+            fontSize: 16,
+            display: true
           },
           scaleLabel: {
             display: true,
-            fontSize: 12,
+            fontSize: 16,
             labelString: chartData.axisLabelA1
           }
         }]
