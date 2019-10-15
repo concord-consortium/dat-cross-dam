@@ -97,7 +97,8 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
       fixedMinA2: 0,
       axisLabelA1: "Year",
       axisLabelA2: "Corn Yield (bushels/acre)",
-      maxPoints: 10
+      maxPoints: 10,
+      fixedLabelRotation: 0
     });
 
     const cornFarmvilleDataSet = ChartDataSetModel.create({
@@ -110,11 +111,12 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
       fixedMinA2: 0,
       axisLabelA1: "Year",
       axisLabelA2: "Corn Yield (bushels/acre)",
-      maxPoints: 10
+      maxPoints: 10,
+      fixedLabelRotation: 0
     });
 
     const lakeSurfaceAreaDataSet = ChartDataSetModel.create({
-      name: "Lake Surface Area",
+      name: "End of Year Lake Surface Area",
       dataPoints: this.buildChart(sourceData, "Summer", "lake"),
       color: ChartColors[0].hex,
       backgroundOpacity: 0.9,
@@ -123,7 +125,8 @@ export class ChartDisplay extends BaseComponent<IProps, IState> {
       fixedMinA2: 0,
       axisLabelA1: "Year",
       axisLabelA2: "Surface Area (acre)",
-      maxPoints: 10
+      maxPoints: 10,
+      fixedLabelRotation: 0
     });
 
     const chartDataSets: ChartDataSetModelType[] = [];
