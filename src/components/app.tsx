@@ -43,10 +43,10 @@ export class AppComponent extends BaseComponent<{}, {}> {
                 <DataControls />
               </div>
               <div className="subsection table">
-                <SizeMe monitorHeight={true}>
+                <SizeMe monitorHeight={false}>
                   {({ size }: ISize) =>
                     <DamData parentWidth={size.width ? size.width : 0}
-                      parentHeight={size.height ? size.height : 1} />
+                      parentHeight={size.height ? size.height : 385} />
                   }
                 </SizeMe>
               </div>
